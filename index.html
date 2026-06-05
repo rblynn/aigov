@@ -1,401 +1,196 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Governance Navigator</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal: #0d7f6e;
-  --teal-light: #e0f4f0;
-  --teal-mid: #4aab97;
-  --amber: #c9600a;
-  --amber-light: #fef3e8;
-  --red: #b83232;
-  --red-light: #fdeaea;
-  --green: #2a7a3b;
-  --green-light: #eaf5ec;
-  --blue: #1a5fa8;
-  --blue-light: #e8f1fc;
-  --ink: #141414;
-  --ink2: #444;
-  --ink3: #888;
-  --line: #e2e2e2;
-  --bg: #fafaf8;
-  --white: #ffffff;
-  --radius: 10px;
+  --ink-1000:#0A0E1A; --ink-900:#11182A; --ink-700:#2B3447; --ink-500:#5C6478;
+  --ink-300:#9BA1B0; --ink-200:#C5C9D2; --ink-100:#E4E6EB;
+  --paper-50:#FBFAF6; --paper-100:#F4F1EA; --paper-200:#EBE6DB;
+  --paper-300:#DBD4C3; --paper-0:#FFFFFF;
+  --navy-900:#0B1F3A; --navy-700:#163556; --navy-500:#2A4F77; --navy-100:#DCE3EE;
+  --signal-600:#1B45E2; --signal-500:#3D63E8; --signal-100:#DDE4FB;
+  --ochre-600:#B68A2C; --ochre-100:#F2E9D1;
+  --risk-600:#B0282C; --risk-100:#F5DEDF;
+  --caution-600:#B07A1A; --caution-100:#F5E6CC;
+  --ok-600:#2A7A52; --ok-100:#DCEBE2;
+  --fg-1:var(--ink-1000); --fg-2:var(--ink-700); --fg-3:var(--ink-500); --fg-4:var(--ink-300);
+  --bg-page:var(--paper-50); --bg-card:var(--paper-0); --bg-canvas:var(--paper-100);
+  --border-faint:var(--ink-100); --border-default:var(--paper-300);
+  --font-display:'Instrument Sans','Geist',ui-sans-serif,sans-serif;
+  --font-body:'Geist',ui-sans-serif,system-ui,sans-serif;
+  --font-mono:'Geist Mono',ui-monospace,monospace;
+  --radius-sm:4px; --radius-md:6px; --radius-lg:10px; --radius-xl:14px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(11,31,58,0.06),0 1px 1px rgba(11,31,58,0.04);
+  --shadow-md:0 2px 4px rgba(11,31,58,0.06),0 4px 12px rgba(11,31,58,0.04);
+  --ring:0 0 0 3px rgba(27,69,226,0.20);
+  --dur-1:120ms; --dur-2:200ms; --dur-3:320ms;
+  --ease-quiet:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --line:var(--ink-100); --bg:var(--paper-50); --white:var(--paper-0);
+  --ink:var(--ink-1000); --ink2:var(--ink-700); --ink3:var(--ink-500);
+  --amber:#B07A1A; --amber-light:#F5E6CC;
+  --red:#B0282C; --red-light:#F5DEDF;
+  --blue:#1B45E2; --blue-light:#DDE4FB;
+  --radius:var(--radius-lg);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; }
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  min-height: 100vh;
-  font-size: 15px;
-  line-height: 1.6;
-}
-.shell {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  font-family:var(--font-body);
+  font-size:15px; line-height:1.5; letter-spacing:-0.012em;
+  color:var(--fg-2); background:var(--bg-page);
+  -webkit-font-smoothing:antialiased; min-height:100vh;
 }
 header {
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 1.5rem;
-  margin-bottom: 2rem;
+  background:var(--navy-900); padding:0 24px;
+  position:sticky; top:0; z-index:100; margin-bottom:0;
 }
-.logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  color: var(--ink);
-  letter-spacing: -0.02em;
+.header-inner {
+  max-width:680px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; height:52px;
 }
-.logo span { color: var(--teal); font-style: italic; }
-.tagline { font-size: 13px; color: var(--ink3); margin-top: 3px; }
-.prog-wrap { margin-bottom: 2rem; }
-.prog-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); margin-bottom: 8px; font-family: 'DM Mono', monospace; }
-.prog-bar { height: 3px; background: var(--line); border-radius: 2px; position: relative; }
-.prog-fill { height: 3px; background: var(--teal); border-radius: 2px; transition: width 0.4s ease; position: absolute; top: 0; left: 0; }
-.sec { display: none; }
-.sec.on { display: block; }
-.step-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--teal);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-.step-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 26px;
-  color: var(--ink);
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-.step-desc { font-size: 14px; color: var(--ink2); margin-bottom: 1.75rem; }
-.ql { display: block; font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 10px; margin-top: 1.5rem; }
+.logo { font-family:var(--font-display); font-size:17px; font-weight:600; color:#fff; letter-spacing:-0.02em; }
+.logo span { color:#6ecfbe; font-style:italic; }
+.tagline { font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.06em; text-transform:uppercase; }
+.hero { background:linear-gradient(135deg,#0B1F3A 0%,#163556 60%,#0e2a1e 100%); padding:0 24px; }
+.hero-inner { max-width:680px; margin:0 auto; padding:40px 0 36px; }
+.hero-eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#6ecfbe; margin-bottom:14px; }
+.hero h1 { font-family:var(--font-display); font-size:32px; font-weight:500; line-height:1.1; letter-spacing:-0.022em; color:#fff; margin-bottom:12px; text-wrap:balance; }
+.hero h1 em { font-style:italic; color:rgba(255,255,255,0.72); }
+.hero-desc { font-size:14px; line-height:1.6; color:rgba(255,255,255,0.65); max-width:50ch; margin-bottom:24px; }
+.hero-stats { display:flex; gap:28px; }
+.hero-stat-val { font-family:var(--font-display); font-size:20px; font-weight:500; color:#fff; letter-spacing:-0.02em; }
+.hero-stat-label { font-size:11px; color:rgba(255,255,255,0.5); margin-top:2px; font-family:var(--font-mono); letter-spacing:0.04em; }
+.shell { max-width:680px; margin:0 auto; padding:0 24px 80px; }
+.prog-wrap { padding:24px 0 0; }
+.prog-labels { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.prog-labels span { font-family:var(--font-mono); font-size:11px; color:var(--fg-3); letter-spacing:0.06em; text-transform:uppercase; }
+.prog-bar { height:2px; background:var(--border-faint); border-radius:2px; position:relative; }
+.prog-fill { height:2px; background:var(--navy-900); border-radius:2px; transition:width var(--dur-3) var(--ease-out); position:absolute; top:0; left:0; }
+.sec { display:none; padding-top:28px; }
+.sec.on { display:block; }
+.step-label { font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px; }
+.step-title { font-family:var(--font-display); font-size:26px; font-weight:500; line-height:1.12; letter-spacing:-0.02em; color:var(--fg-1); margin-bottom:8px; }
+.step-desc { font-size:14px; line-height:1.6; color:var(--fg-3); margin-bottom:24px; max-width:52ch; }
+.ql { display:block; font-size:14px; font-weight:600; color:var(--fg-1); margin-bottom:10px; margin-top:24px; letter-spacing:-0.01em; }
+.ql:first-of-type { margin-top:0; }
 textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 12px 14px;
-  font-size: 14px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--ink);
-  background: var(--white);
-  resize: vertical;
-  min-height: 80px;
-  transition: border-color 0.2s;
+  width:100%; min-height:80px; padding:12px 14px;
+  border:1.5px solid var(--border-default); border-radius:var(--radius-lg);
+  font-family:var(--font-body); font-size:14px; color:var(--fg-1); background:var(--bg-card);
+  resize:vertical; line-height:1.5; margin-top:10px;
+  transition:border-color var(--dur-1) var(--ease-quiet);
 }
-textarea:focus { outline: none; border-color: var(--teal); }
-.rg { display: flex; flex-direction: column; gap: 8px; margin-bottom: 0.5rem; }
+textarea:focus { outline:none; border-color:var(--navy-900); box-shadow:var(--ring); }
+textarea::placeholder { color:var(--ink-300); font-style:italic; }
+.rg { display:flex; flex-direction:column; gap:8px; }
 .ro {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-  background: var(--white);
+  display:flex; align-items:flex-start; gap:12px; padding:13px 16px;
+  border:1.5px solid var(--border-default); border-radius:var(--radius-lg);
+  background:var(--bg-card); cursor:pointer;
+  transition:border-color var(--dur-1) var(--ease-quiet),background var(--dur-1) var(--ease-quiet),box-shadow var(--dur-1) var(--ease-quiet);
 }
-.ro:hover { border-color: var(--teal-mid); background: var(--teal-light); }
-.ro.sel { border-color: var(--teal); background: var(--teal-light); }
-.ro input[type=radio] { margin-top: 3px; accent-color: var(--teal); flex-shrink: 0; }
-.rot { font-size: 14px; color: var(--ink); line-height: 1.4; }
-.ros { font-size: 12px; color: var(--ink3); margin-top: 2px; }
-.brow { display: flex; gap: 10px; margin-top: 2rem; }
-.btn {
-  padding: 10px 22px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--line);
-  background: var(--white);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.2s;
-}
-.btn:hover { background: var(--bg); border-color: #ccc; }
-.btn.pri { background: var(--teal); color: #fff; border-color: var(--teal); }
-.btn.pri:hover { background: #0a6a5c; }
-.divider { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
-.risk-result {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.risk-tier-badge {
-  display: inline-block;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-}
-.tier-low { background: var(--green-light); color: var(--green); }
-.tier-medium { background: var(--amber-light); color: var(--amber); }
-.tier-high { background: var(--red-light); color: var(--red); }
-.rmeter { display: flex; gap: 3px; margin: 1rem 0; }
-.rs { height: 6px; flex: 1; border-radius: 3px; background: var(--line); transition: background 0.4s; }
-.rs.g { background: #2a7a3b; }
-.rs.a { background: #c9600a; }
-.rs.r { background: #b83232; }
-.met-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 1.25rem 0; }
-.met {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 14px 12px;
-  text-align: center;
-}
-.mv { font-size: 22px; font-weight: 500; color: var(--ink); font-family: 'DM Serif Display', serif; }
-.ml { font-size: 11px; color: var(--ink3); margin-top: 3px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
-.ftag {
-  display: inline-block;
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  color: var(--ink2);
-  margin: 2px;
-  font-family: 'DM Mono', monospace;
-  background: var(--white);
-}
-.gap-item {
-  padding: 12px 14px;
-  border-left: 3px solid;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  margin-bottom: 10px;
-  background: var(--white);
-}
-.gap-h { border-color: var(--red); }
-.gap-m { border-color: var(--amber); }
-.gap-l { border-color: var(--teal); }
-.gap-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-.gap-desc { font-size: 13px; color: var(--ink2); line-height: 1.55; }
-.badge {
-  font-size: 10px;
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-weight: 500;
-}
-.bh { background: var(--red-light); color: var(--red); }
-.bm { background: var(--amber-light); color: var(--amber); }
-.bl { background: var(--teal-light); color: var(--teal); }
-.doc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
-.tab-btn {
-  padding: 7px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--line);
-  background: var(--white);
-  color: var(--ink2);
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.tab-btn:hover { border-color: var(--teal); color: var(--teal); }
-.tab-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
-.doc-out {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  font-size: 13px;
-  line-height: 1.8;
-  color: var(--ink);
-  white-space: pre-wrap;
-  font-family: 'DM Mono', monospace;
-  max-height: 400px;
-  overflow-y: auto;
-}
-.copy-row { display: flex; justify-content: flex-end; margin-top: 8px; }
-.copy-btn {
-  font-size: 12px;
-  font-family: 'DM Mono', monospace;
-  padding: 5px 12px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--white);
-  cursor: pointer;
-  color: var(--ink3);
-  transition: all 0.2s;
-}
-.copy-btn:hover { color: var(--teal); border-color: var(--teal); }
-.framework-map {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-.fw-row {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  border-bottom: 1px solid var(--line);
-  font-size: 13px;
-}
-.fw-row:last-child { border-bottom: none; }
-.fw-name {
-  padding: 10px 14px;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--teal);
-  border-right: 1px solid var(--line);
-  background: var(--teal-light);
-  display: flex;
-  align-items: center;
-}
-.fw-desc { padding: 10px 14px; color: var(--ink2); display: flex; align-items: center; }
-.gap-expand-btn {
-  font-size: 12px;
-  font-family: 'DM Mono', monospace;
-  color: var(--teal);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 500;
-}
-.gap-expand-btn:hover { color: #0a6a5c; background: none; border: none; }
-.gap-actions {
-  display: none;
-  margin-top: 12px;
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
-}
-.gap-actions.open { display: block; }
-.action-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
-}
-.action-row:last-child { border-bottom: none; padding-bottom: 0; }
-.action-step {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-}
-.action-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--white);
-  background: var(--teal);
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.action-meta {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-  margin-left: 26px;
-}
-.meta-tag {
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  padding: 2px 8px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  color: var(--ink3);
-  background: var(--bg);
-}
-.meta-owner { color: var(--blue); border-color: #b8d0ef; background: var(--blue-light); }
-.meta-time { color: var(--amber); border-color: #f0c89a; background: var(--amber-light); }
-.action-link {
-  font-size: 12px;
-  color: var(--teal);
-  text-decoration: none;
-  font-family: 'DM Mono', monospace;
-  margin-left: 26px;
-  margin-top: 4px;
-  display: inline-block;
-}
-.action-link:hover { text-decoration: underline; }
-.gap-progress {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
-}
-.gap-progress-label { font-size: 12px; color: var(--ink3); font-family: 'DM Mono', monospace; }
-.done-btn {
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--teal);
-  color: var(--teal);
-  background: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.done-btn:hover, .done-btn.marked { background: var(--teal); color: var(--white); border: none; }
-.deploy-gate {
-  background: var(--red-light);
-  border: 1.5px solid var(--red);
-  border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  display: none;
-}
-.deploy-gate.on { display: block; }
-.deploy-gate-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--red);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.deploy-gate-desc {
-  font-size: 13px;
-  color: var(--ink2);
-  line-height: 1.6;
-}
+.ro:hover { border-color:var(--ink-300); background:var(--paper-50); }
+.ro.sel { border-color:var(--navy-900); background:var(--navy-100); box-shadow:var(--shadow-sm); }
+.ro input[type=radio] { display:none; }
+.rot { font-size:14px; font-weight:500; color:var(--fg-1); line-height:1.4; }
+.ro.sel .rot { color:var(--navy-900); }
+.ros { font-size:12px; font-weight:400; color:var(--fg-3); margin-top:3px; line-height:1.4; }
+.brow { display:flex; gap:10px; justify-content:flex-end; margin-top:28px; padding-top:20px; border-top:1px solid var(--border-faint); }
+.btn { font-family:var(--font-body); font-size:14px; font-weight:600; padding:11px 22px; border-radius:var(--radius-lg); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-2); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); letter-spacing:-0.01em; }
+.btn:hover { border-color:var(--ink-300); background:var(--paper-100); }
+.btn.pri { background:var(--navy-900); color:#fff; border-color:var(--navy-900); }
+.btn.pri:hover { background:var(--navy-700); border-color:var(--navy-700); }
+.divider { border:none; border-top:1px solid var(--border-faint); margin:2rem 0; }
+.risk-result { background:var(--bg-card); border:1.5px solid var(--border-default); border-radius:var(--radius-xl); padding:20px; margin-bottom:20px; box-shadow:var(--shadow-sm); }
+.risk-tier-badge { display:inline-flex; align-items:center; gap:8px; padding:5px 13px; border-radius:var(--radius-pill); font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px; }
+.tier-low { background:var(--ok-100); color:var(--ok-600); }
+.tier-medium { background:var(--caution-100); color:var(--caution-600); }
+.tier-high { background:var(--risk-100); color:var(--risk-600); }
+.rmeter { display:flex; gap:4px; margin:12px 0 6px; }
+.rs { height:6px; flex:1; border-radius:3px; background:var(--border-faint); transition:background 0.4s; }
+.rs.g { background:var(--ok-600); }
+.rs.a { background:var(--caution-600); }
+.rs.r { background:var(--risk-600); }
+.met-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border-faint); border-radius:var(--radius-md); overflow:hidden; margin:14px 0; }
+.met { background:var(--bg-canvas); padding:12px 14px; text-align:center; }
+.mv { font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--fg-1); letter-spacing:-0.02em; }
+.ml { font-family:var(--font-mono); font-size:10px; color:var(--fg-3); text-transform:uppercase; letter-spacing:0.08em; margin-top:2px; }
+.ftag { display:inline-block; font-size:11px; font-family:var(--font-mono); font-weight:500; padding:4px 10px; border-radius:var(--radius-pill); background:var(--navy-100); color:var(--navy-700); border:1px solid var(--navy-100); margin:2px; letter-spacing:0.02em; }
+.framework-map { border:1.5px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; margin-bottom:20px; }
+.fw-row { display:grid; grid-template-columns:140px 1fr; border-bottom:1px solid var(--border-faint); font-size:13px; }
+.fw-row:last-child { border-bottom:none; }
+.fw-name { padding:10px 14px; font-family:var(--font-mono); font-size:11px; font-weight:500; color:var(--ink-700); border-right:1px solid var(--border-faint); background:var(--paper-100); display:flex; align-items:center; }
+.fw-desc { padding:10px 14px; color:var(--fg-2); font-size:13px; line-height:1.5; display:flex; align-items:center; background:var(--bg-card); }
+.gap-item { background:var(--bg-card); border:1.5px solid var(--border-default); border-radius:var(--radius-xl); padding:16px 18px; margin-bottom:10px; box-shadow:var(--shadow-sm); }
+.gap-h { border-left:3px solid var(--risk-600); }
+.gap-m { border-left:3px solid var(--caution-600); }
+.gap-l { border-left:3px solid var(--ink-300); }
+.gap-title { font-size:14px; font-weight:600; color:var(--fg-1); margin-bottom:6px; display:flex; align-items:center; gap:10px; letter-spacing:-0.01em; }
+.gap-desc { font-size:13px; color:var(--fg-2); line-height:1.6; }
+.badge { display:inline-flex; align-items:center; padding:3px 9px; border-radius:var(--radius-pill); font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; flex-shrink:0; }
+.bh { background:var(--risk-100); color:var(--risk-600); }
+.bm { background:var(--caution-100); color:var(--caution-600); }
+.bl { background:#f0f0ee; color:var(--ink-300); }
+.gap-expand-btn { font-family:var(--font-mono); font-size:11px; color:var(--signal-600); background:none; border:none; cursor:pointer; padding:0; margin-top:10px; display:flex; align-items:center; gap:4px; font-weight:500; transition:color var(--dur-1) var(--ease-quiet); }
+.gap-expand-btn:hover { color:var(--signal-500); }
+.gap-actions { display:none; margin-top:12px; border-top:1px solid var(--border-faint); padding-top:12px; }
+.gap-actions.open { display:block; }
+.done-btn { font-family:var(--font-mono); font-size:11px; padding:4px 12px; border-radius:var(--radius-pill); border:1px solid var(--border-default); color:var(--fg-3); background:var(--bg-card); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.done-btn:hover { border-color:var(--ok-600); color:var(--ok-600); }
+.done-btn.marked { background:var(--ok-100); color:var(--ok-600); border-color:var(--ok-600); }
+.action-row { display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid var(--border-faint); }
+.action-row:last-child { border-bottom:none; padding-bottom:0; }
+.action-step { font-size:13px; font-weight:500; color:var(--fg-1); display:flex; gap:8px; align-items:flex-start; }
+.action-num { font-family:var(--font-mono); font-size:10px; color:#fff; background:var(--navy-900); border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+.action-meta { display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; margin-left:26px; }
+.meta-tag { font-size:11px; font-family:var(--font-mono); padding:2px 8px; border-radius:var(--radius-pill); border:1px solid var(--border-faint); color:var(--fg-3); background:var(--bg-canvas); }
+.meta-owner { color:var(--signal-600); border-color:var(--signal-100); background:var(--signal-100); }
+.meta-time { color:var(--caution-600); border-color:var(--caution-100); background:var(--caution-100); }
+.action-link { font-family:var(--font-mono); font-size:12px; color:var(--signal-600); text-decoration:none; margin-left:26px; margin-top:4px; display:inline-block; }
+.action-link:hover { text-decoration:underline; }
+.doc-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+.tab-btn { font-family:var(--font-mono); font-size:11px; font-weight:500; padding:6px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.tab-btn:hover { border-color:var(--ink-300); color:var(--fg-2); }
+.tab-btn.active { background:var(--navy-900); color:#fff; border-color:var(--navy-900); }
+.doc-out { background:var(--bg-card); border:1.5px solid var(--border-default); border-radius:var(--radius-lg); padding:20px; font-family:var(--font-mono); font-size:12px; line-height:1.8; color:var(--fg-2); white-space:pre-wrap; max-height:420px; overflow-y:auto; box-shadow:var(--shadow-sm); }
+.copy-row { display:flex; justify-content:flex-end; margin-top:8px; }
+.copy-btn { font-family:var(--font-mono); font-size:11px; padding:5px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.copy-btn:hover { border-color:var(--navy-900); color:var(--navy-900); }
+footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px 24px; }
+.footer-inner { max-width:680px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+.footer-note { font-size:12px; color:var(--fg-4); line-height:1.5; max-width:40ch; }
+.footer-attr { font-family:var(--font-mono); font-size:11px; color:var(--fg-4); text-align:right; }
+.footer-attr a { color:var(--signal-600); text-decoration:none; }
+.footer-attr a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
-<div class="shell">
-  <header>
+<header>
+  <div class="header-inner">
     <div class="logo">ai<span>gov</span> navigator</div>
-    <div class="tagline">Assess risk · map frameworks · identify gaps · generate governance outputs</div>
-  </header>
-
+    <div class="tagline">Health &amp; MedTech · Australia</div>
+  </div>
+</header>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Health AI Governance · Australia 2026</div>
+    <h1>Assess your health AI<br><em>governance obligations.</em></h1>
+    <p class="hero-desc">TGA, ADHA, Privacy Act, OECD and more — mapped to your initiative in five questions. Walk away with a board brief, gap analysis and action plan.</p>
+    <div class="hero-stats">
+      <div><div class="hero-stat-val">5</div><div class="hero-stat-label">Questions</div></div>
+      <div><div class="hero-stat-val">7+</div><div class="hero-stat-label">Frameworks mapped</div></div>
+      <div><div class="hero-stat-val">3</div><div class="hero-stat-label">Board-ready outputs</div></div>
+    </div>
+  </div>
+</div>
+<div class="shell">
+ 
   <div class="prog-wrap">
     <div class="prog-labels">
       <span id="pl">Step 1 of 5</span>
@@ -403,13 +198,12 @@ textarea:focus { outline: none; border-color: var(--teal); }
     </div>
     <div class="prog-bar"><div class="prog-fill" id="pfill" style="width:20%"></div></div>
   </div>
-
+ 
   <!-- Step 0: Context -->
   <div class="sec on" id="s0">
     <div class="step-label">Step 1 — context</div>
     <div class="step-title">Tell us about your AI initiative</div>
     <div class="step-desc">We'll map it to relevant frameworks and surface your governance obligations.</div>
-
     <span class="ql">What type of organisation are you in?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'org','hp')"><input type="radio" name="org"><div class="rot">Health provider / hospital<div class="ros">Public or private health system, hospital network, aged care provider</div></div></label>
@@ -417,88 +211,65 @@ textarea:focus { outline: none; border-color: var(--teal); }
       <label class="ro" onclick="sel(this,'org','dh')"><input type="radio" name="org"><div class="rot">Digital health / health insurance<div class="ros">Digital platforms, PHI management, primary care, telehealth</div></div></label>
       <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org"><div class="rot">Government / public sector<div class="ros">State or federal health agencies, PHNs, policy bodies</div></div></label>
     </div>
-
     <span class="ql">Briefly describe what you are building or deploying</span>
     <textarea id="idesc" placeholder="e.g. An AI triage tool that reads patient intake forms and recommends urgency levels for ED nurses..."></textarea>
-
     <div class="brow"><button class="btn pri" onclick="gt(1)">Next →</button></div>
   </div>
-
+ 
   <!-- Step 1: Risk questions -->
   <div class="sec" id="s1">
     <div class="step-label">Step 2 — risk assessment</div>
     <div class="step-title">Assess the risk profile</div>
-    <div class="step-desc">Seven questions that determine your regulatory obligations and governance requirements.</div>
-
-    <span class="ql">1. What type of AI system is this?</span>
-    <div class="rg">
-      <label class="ro" onclick="sel(this,'qtype','pred')"><input type="radio" name="qtype"><div class="rot">Predictive / decision-support model<div class="ros">Risk scoring, triage, diagnosis support, outcome prediction — outputs a recommendation or probability</div></div></label>
-      <label class="ro" onclick="sel(this,'qtype','gen')"><input type="radio" name="qtype"><div class="rot">Generative AI (LLM / content generation)<div class="ros">Clinical note writing, patient communication drafting, summarisation, question answering</div></div></label>
-      <label class="ro" onclick="sel(this,'qtype','cv')"><input type="radio" name="qtype"><div class="rot">Computer vision / image analysis<div class="ros">Radiology, pathology, wound assessment, dermatology — interprets images or video</div></div></label>
-      <label class="ro" onclick="sel(this,'qtype','auto')"><input type="radio" name="qtype"><div class="rot">Automation / workflow AI<div class="ros">Scheduling, coding, billing, document routing — no direct clinical output</div></div></label>
-    </div>
-
-    <span class="ql">2. Does this AI directly influence clinical decisions or patient outcomes?</span>
+    <div class="step-desc">Five questions that determine your regulatory obligations and governance requirements.</div>
+ 
+    <span class="ql">1. Does this AI directly influence clinical decisions or patient outcomes?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q1',3)"><input type="radio" name="q1"><div class="rot">Yes — directly informs diagnosis, treatment, triage or care pathways</div></label>
       <label class="ro" onclick="sel(this,'q1',2)"><input type="radio" name="q1"><div class="rot">Partially — supports decisions but a clinician always reviews</div></label>
       <label class="ro" onclick="sel(this,'q1',1)"><input type="radio" name="q1"><div class="rot">No — admin, scheduling, documentation or back-office only</div></label>
     </div>
-
-    <span class="ql">3. Does it process personal health information (PHI)?</span>
+ 
+    <span class="ql">2. Does it process personal health information (PHI)?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q2',3)"><input type="radio" name="q2"><div class="rot">Yes — ingests or outputs identifiable patient data</div></label>
       <label class="ro" onclick="sel(this,'q2',2)"><input type="radio" name="q2"><div class="rot">Partially — de-identified or aggregated data only</div></label>
       <label class="ro" onclick="sel(this,'q2',1)"><input type="radio" name="q2"><div class="rot">No — no patient data involved</div></label>
     </div>
-
-    <span class="ql">4. Is this intended for use in a regulated medical context?</span>
+ 
+    <span class="ql">3. What does this AI output — and who acts on it?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'q3',3)"><input type="radio" name="q3"><div class="rot">Yes — meets the TGA definition of Software as a Medical Device (SaMD)</div></label>
-      <label class="ro" onclick="sel(this,'q3',2)"><input type="radio" name="q3"><div class="rot">Possibly — we haven't assessed TGA classification yet</div></label>
-      <label class="ro" onclick="sel(this,'q3',1)"><input type="radio" name="q3"><div class="rot">No — general enterprise or workflow tool</div></label>
+      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency — output influences a clinical decision</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Health information, guidance, or responses to health questions<div class="ros">e.g. AI chat that answers "should I take this medication?", symptom checkers, health advice tools — even if not branded as clinical</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Operational or administrative health output — TGA status not yet assessed<div class="ros">e.g. scheduling, coding, documentation, billing — but we haven't confirmed whether TGA applies</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',1);showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no health recommendations or clinical influence<div class="ros">e.g. rostering, HR, finance, supply chain — no output that informs a health decision</div></div></label>
     </div>
-
-    <span class="ql">5. Will it operate autonomously without human review of each output?</span>
+    <div id="q3warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;"></div>
+ 
+    <span class="ql">4. Will it operate autonomously without human review of each output?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q4',3)"><input type="radio" name="q4"><div class="rot">Yes — outputs are acted on automatically</div></label>
       <label class="ro" onclick="sel(this,'q4',2)"><input type="radio" name="q4"><div class="rot">Sometimes — human-in-the-loop for high-stakes outputs only</div></label>
       <label class="ro" onclick="sel(this,'q4',1)"><input type="radio" name="q4"><div class="rot">No — a human reviews every output before action is taken</div></label>
     </div>
-
-    <span class="ql">6. Does your organisation operate in or sell into international markets?</span>
+ 
+    <span class="ql">5. Does your organisation operate in or sell into international markets?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q5',3)"><input type="radio" name="q5"><div class="rot">Yes — Europe or US (EU AI Act and/or FDA obligations apply)</div></label>
       <label class="ro" onclick="sel(this,'q5',2)"><input type="radio" name="q5"><div class="rot">In consideration — international expansion is planned</div></label>
       <label class="ro" onclick="sel(this,'q5',1)"><input type="radio" name="q5"><div class="rot">No — Australia only</div></label>
     </div>
-
-    <span class="ql">7. If this AI makes an error, how severe are the consequences?</span>
-    <div class="rg">
-      <label class="ro" onclick="sel(this,'q6',3)"><input type="radio" name="q6"><div class="rot">Potentially irreversible — wrong diagnosis, missed condition, unsafe treatment recommendation<div class="ros">Harm may not be detectable until it has already occurred</div></div></label>
-      <label class="ro" onclick="sel(this,'q6',2)"><input type="radio" name="q6"><div class="rot">Recoverable — error would be caught and corrected before lasting harm<div class="ros">Clinical oversight or workflow design provides a safety net</div></div></label>
-      <label class="ro" onclick="sel(this,'q6',1)"><input type="radio" name="q6"><div class="rot">Low consequence — admin, scheduling or non-clinical errors only</div></label>
-    </div>
-
-    <span class="ql">8. Does this AI serve or was it trained on data from vulnerable patient populations?</span>
-    <div class="rg">
-      <label class="ro" onclick="sel(this,'q7',3)"><input type="radio" name="q7"><div class="rot">Yes — paediatric, mental health, aged care, First Nations, CALD or disability populations<div class="ros">Heightened obligations apply for data, consent, bias and cultural safety</div></div></label>
-      <label class="ro" onclick="sel(this,'q7',2)"><input type="radio" name="q7"><div class="rot">Possibly — mixed population, some vulnerable cohorts included</div></label>
-      <label class="ro" onclick="sel(this,'q7',1)"><input type="radio" name="q7"><div class="rot">No — general adult population, no specific vulnerable groups</div></label>
-    </div>
-
+ 
     <div class="brow">
       <button class="btn" onclick="gt(0)">← Back</button>
       <button class="btn pri" onclick="calc()">Assess risk →</button>
     </div>
   </div>
-
+ 
   <!-- Step 2: Risk profile -->
   <div class="sec" id="s2">
     <div class="step-label">Step 3 — risk profile</div>
     <div class="step-title" id="rhead">Risk profile</div>
     <div class="step-desc" id="rsum"></div>
-
     <div class="risk-result">
       <div id="tier-badge" class="risk-tier-badge"></div>
       <div class="rmeter" id="rmeter">
@@ -507,50 +278,41 @@ textarea:focus { outline: none; border-color: var(--teal); }
         <div class="rs" id="r4"></div><div class="rs" id="r5"></div>
         <div class="rs" id="r6"></div><div class="rs" id="r7"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:1rem">
-        <span>Lower risk</span><span>Higher risk</span>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--fg-3);font-family:var(--font-mono);margin-bottom:1rem">
+        <span>Lower complexity</span><span>Higher complexity</span>
       </div>
       <div class="met-row">
         <div class="met"><div class="mv" id="mv1">—</div><div class="ml">Risk tier</div></div>
         <div class="met"><div class="mv" id="mv2">—</div><div class="ml">Frameworks</div></div>
         <div class="met"><div class="mv" id="mv3">—</div><div class="ml">Gaps found</div></div>
-        <div class="met"><div class="mv" id="mv4" style="font-size:14px">—</div><div class="ml">AI type</div></div>
       </div>
     </div>
-
     <div class="step-label" style="margin-bottom:8px">Applicable frameworks</div>
     <div id="fwlist" style="margin-bottom:1.5rem"></div>
-
     <div id="fw-map" class="framework-map"></div>
-
     <div class="brow">
       <button class="btn" onclick="gt(1)">← Back</button>
       <button class="btn pri" onclick="gt(3)">See governance gaps →</button>
     </div>
   </div>
-
+ 
   <!-- Step 3: Gaps -->
   <div class="sec" id="s3">
     <div class="step-label">Step 4 — governance gaps</div>
     <div class="step-title">Gaps to address</div>
     <div class="step-desc">Prioritised by risk level. High-priority items should be resolved before deployment.</div>
-    <div class="deploy-gate" id="deploy-gate">
-      <div class="deploy-gate-title">⛔ Deployment blockers identified</div>
-      <div class="deploy-gate-desc" id="deploy-gate-desc"></div>
-    </div>
     <div id="glist"></div>
     <div class="brow">
       <button class="btn" onclick="gt(2)">← Back</button>
       <button class="btn pri" onclick="buildDocs();gt(4)">Generate outputs →</button>
     </div>
   </div>
-
+ 
   <!-- Step 4: Docs -->
   <div class="sec" id="s4">
     <div class="step-label">Step 5 — outputs</div>
     <div class="step-title">Governance documents</div>
     <div class="step-desc">Ready-to-use starting documents for your team, board, or regulatory submissions.</div>
-
     <div class="doc-tabs">
       <button class="tab-btn active" id="tb1" onclick="showDoc('d1')">Risk summary</button>
       <button class="tab-btn" id="tb2" onclick="showDoc('d2')">Board brief</button>
@@ -564,28 +326,56 @@ textarea:focus { outline: none; border-color: var(--teal); }
     <div class="copy-row">
       <button class="copy-btn" onclick="copyDoc()">Copy to clipboard</button>
     </div>
-
     <hr class="divider">
     <div class="step-label" style="margin-bottom:8px">What next?</div>
-    <p style="font-size:14px;color:var(--ink2);margin-bottom:1.25rem">Use these outputs to brief your team and board. For a full implementation roadmap — including timelines, workstreams and accountability mapping — restart the assessment with a different initiative or engage a governance specialist.</p>
+    <p style="font-size:14px;color:var(--fg-3);margin-bottom:1.25rem;line-height:1.65">Use these outputs to brief your team and board. For a full implementation roadmap — including timelines, workstreams and accountability mapping — restart the assessment or engage a governance specialist.</p>
     <div class="brow">
       <button class="btn" onclick="gt(3)">← Back</button>
       <button class="btn pri" onclick="restart()">New assessment →</button>
     </div>
   </div>
-</div>
-
+</div><!-- /shell -->
+ 
+<footer>
+  <div class="footer-inner">
+    <p class="footer-note">This tool is a governance prompt, not legal advice. Validate all obligations with your legal, regulatory and clinical governance teams before acting.</p>
+    <div class="footer-attr">
+      Built by <a href="https://linkedin.com/in/digitalrebecca" target="_blank">Rebecca Lynn</a><br>
+      <a href="https://linkedin.com/in/digitalrebecca" target="_blank">linkedin.com/in/digitalrebecca</a>
+    </div>
+  </div>
+</footer>
+ 
 <script>
-var ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '', aitype: '', blockers: [] };
+var ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
 var stepNames = ['Context','Risk','Profile','Gaps','Outputs'];
-
+ 
+function showQ3warn(v) {
+  var el = document.getElementById('q3warn');
+  if (v === 3) {
+    el.style.display = 'block';
+    el.style.background = '#F5DEDF';
+    el.style.border = '1px solid #B0282C';
+    el.style.color = '#B0282C';
+    el.innerHTML = '<strong>⚠ TGA exposure likely.</strong> The TGA defines Software as a Medical Device (SaMD) based on <em>intended purpose</em>, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be a medical device — even if not branded as one. An AI chat tool that recommends whether to take a medication, assesses symptoms, or guides a health decision is likely in scope. The "excluded goods" provisions do not protect software whose primary function generates health-related output. TGA classification assessment is required before deployment.';
+  } else if (v === 2) {
+    el.style.display = 'block';
+    el.style.background = '#F5E6CC';
+    el.style.border = '1px solid #B07A1A';
+    el.style.color = '#B07A1A';
+    el.innerHTML = '<strong>Note:</strong> Even administrative health software can cross into SaMD territory if it generates output that informs a clinical or personal health decision. Confirm TGA classification before assuming you are out of scope.';
+  } else {
+    el.style.display = 'none';
+  }
+}
+ 
 function sel(el, name, val) {
   document.querySelectorAll('input[name="'+name+'"]').forEach(function(i){ i.closest('.ro').classList.remove('sel'); });
   el.classList.add('sel');
   ST.sc[name] = val;
   if(name === 'org') ST.org = val;
 }
-
+ 
 function gt(n) {
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('on'); });
   document.getElementById('s'+n).classList.add('on');
@@ -595,88 +385,73 @@ function gt(n) {
   document.getElementById('pn').textContent = stepNames[n];
   window.scrollTo(0,0);
 }
-
+ 
 function calc() {
-  var qs = ['q1','q2','q3','q4','q5','q6','q7'];
-  var tot = 0;
-  qs.forEach(function(q){ tot += (ST.sc[q]||1); });
-  ST.desc = document.getElementById('idesc').value || 'AI initiative';
-  ST.aitype = ST.sc['qtype'] || 'pred';
-
-  // Scoring: 7 questions, range 7–21. Tiers: Low ≤11, Medium ≤15, High 16+
-  var tier, sum;
-  if(tot <= 11){ tier = 'Low'; sum = 'This initiative carries lower regulatory risk. Standard governance practices apply with lighter-touch TGA obligations likely. Focus on documentation and policy foundations.'; }
-  else if(tot <= 15){ tier = 'Medium'; sum = 'This initiative carries moderate risk. Clinical or data handling elements require structured governance, TGA assessment, and privacy obligations under Australian law.'; }
-  else { tier = 'High'; sum = 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.'; }
-  ST.tier = tier;
-
-  // Deployment gate: flag hard blockers
   var s = ST.sc;
-  var blockers = [];
-  if((s.q3||1)>=2 && (s.q1||1)>=2) blockers.push('AI appears to meet SaMD definition but TGA registration has not been confirmed');
-  if((s.q4||1)===3 && (s.q1||1)>=2) blockers.push('Fully autonomous AI influencing clinical decisions with no human review — not acceptable for deployment');
-  if((s.q6||1)===3 && (s.q4||1)>=2) blockers.push('Irreversible error consequences combined with insufficient human oversight — deployment blocker');
-  ST.blockers = blockers;
-
+  var qs = ['q1','q2','q3','q4','q5'];
+  var tot = 0;
+  qs.forEach(function(q){ tot += (s[q]||1); });
+  ST.desc = document.getElementById('idesc').value || 'AI initiative';
+ 
+  // FIX: s is now correctly defined before forceHigh uses it
+  var forceHigh = (s.q3||1) >= 2 || ((s.q4||1) === 3 && (s.q1||1) >= 2);
+  var tier, sum;
+  if (forceHigh) {
+    tier = 'High';
+    sum = (s.q3||1) >= 2
+      ? 'TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment. Formal registration, excluded goods analysis, and ongoing post-market obligations may apply.'
+      : 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.';
+  } else if (tot <= 8) {
+    tier = 'Low';
+    sum = 'This initiative carries lower regulatory risk. Standard governance practices apply. Focus on documentation, policy foundations, and Privacy Act obligations.';
+  } else if (tot <= 11) {
+    tier = 'Medium';
+    sum = 'This initiative carries moderate risk. Clinical or data handling elements require structured governance, privacy obligations, and a confirmed position on TGA applicability.';
+  } else {
+    tier = 'High';
+    sum = 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.';
+  }
+  ST.tier = tier;
+ 
   var badge = document.getElementById('tier-badge');
   badge.textContent = tier + ' risk';
   badge.className = 'risk-tier-badge tier-'+tier.toLowerCase();
-
-  var fill = Math.min(8, Math.round((tot-7)/14*8));
-  for(var i=0;i<8;i++){
+ 
+  var fill = Math.min(8, Math.round((tot-5)/10*8));
+  if (forceHigh) fill = Math.max(fill, 6);
+  for (var i=0; i<8; i++) {
     var el = document.getElementById('r'+i);
     el.className = 'rs';
-    if(i < fill){
-      if(i < 2) el.classList.add('g');
-      else if(i < 5) el.classList.add('a');
+    if (i < fill) {
+      if (i < 2) el.classList.add('g');
+      else if (i < 5) el.classList.add('a');
       else el.classList.add('r');
     }
   }
-
-  var s = ST.sc;
+ 
   var fws = [], fwDetails = [];
   if((s.q3||1)>=2){ fws.push('TGA SaMD'); fwDetails.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'}); }
   fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing health records and PHI. Requires lawful basis, data minimisation, and breach notification obligations.'});
   if((s.q1||1)>=2||(s.q3||1)>=2){ fws.push('OECD AI Principles'); fwDetails.push({n:'OECD AI Principles',d:'Internationally adopted by Australia. Covers human-centred values, transparency, robustness, accountability and inclusive growth.'}); }
-  if((s.q1||1)>=2||(s.q3||1)>=2){ fws.push('ADHA Clinical Safety'); fwDetails.push({n:'ADHA Clinical Safety',d:'National Clinical Safety Framework mandates a Clinical Safety Officer and clinical risk management file for any health IT system that could affect patient safety. Mandatory for Australian health organisations.'}); }
-  if((s.q1||1)>=2){ fws.push('ISO 42001'); fwDetails.push({n:'ISO 42001',d:'International standard for AI Management Systems (published 2023). Covers AI risk management, accountability, transparency and continual improvement. Increasingly referenced by Australian health regulators.'}); }
   if((s.q5||1)>=2){ fws.push('EU AI Act'); fwDetails.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare AI is explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'}); fws.push('GDPR'); fwDetails.push({n:'GDPR',d:'Health data is sensitive under GDPR. AI training on patient records requires lawful basis, data minimisation, and the right to explanation.'}); }
   if((s.q5||1)===3){ fws.push('FDA SaMD (US)'); fwDetails.push({n:'FDA SaMD (US)',d:'Regulates AI/ML-based SaMD under 510(k) and De Novo pathways. Published action plan for AI/ML requires post-market performance monitoring.'}); }
-  if(ST.org==='gv'){ fws.push('NSW AI Strategy'); fwDetails.push({n:'NSW AI Strategy',d:'Five ethical principles for NSW government AI: fairness, accountability, transparency, privacy, reliability. Mandatory for NSW public sector including health agencies.'}); }
-  fws.push('IEEE P7000'); fwDetails.push({n:'IEEE P7000',d:'Technical standards for ethically aligned AI design. Covers transparency, algorithmic bias, and data privacy. Increasingly referenced by regulators as a technical baseline.'});
+  if(ST.org==='gv'){ fws.push('AI in Government Policy'); fwDetails.push({n:'AI in Government Policy',d:'Australian Government AI in Government Policy v2.0. Requires ethical principles, transparency, accountability, and risk management for government AI deployments.'}); }
+  fws.push('ISO 42001'); fwDetails.push({n:'ISO 42001',d:'International standard for AI management systems. Provides a framework for responsible AI development, deployment, and governance — increasingly referenced by Australian regulators.'});
   ST.fws = fws; ST.fwDetails = fwDetails;
-
-  // Render deployment gate
-  var gate = document.getElementById('deploy-gate');
-  var gateDesc = document.getElementById('deploy-gate-desc');
-  if(ST.blockers && ST.blockers.length > 0){
-    gate.classList.add('on');
-    gateDesc.innerHTML = 'The following conditions are deployment blockers — these must be resolved before this AI system goes live:<ul style="margin-top:8px;padding-left:18px;display:flex;flex-direction:column;gap:6px">'
-      + ST.blockers.map(function(b){ return '<li style="font-size:13px;color:var(--ink2);line-height:1.5">'+b+'</li>'; }).join('')
-      + '</ul>';
-  } else {
-    gate.classList.remove('on');
-  }
-
+ 
   var gaps = [];
-  if((s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed',d:'You must determine whether your AI meets the SaMD definition. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk.',
+  if((s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be in scope — including AI chat tools. The "excluded goods" provisions apply to purely administrative software; they do not protect software whose primary function generates health-related output or recommendations. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk. Classification must be confirmed before deployment.',
     actions:[
-      {step:'Identify whether your AI meets the SaMD definition using the TGA decision tool',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},
+      {step:'Determine whether your AI\'s intended purpose brings it within the TGA SaMD definition — focus on what the output does, not what the technology is. Use the TGA\'s decision tool as a starting point.',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},
+      {step:'Specifically assess the excluded goods boundary: if your software provides health information, responds to health questions, or its output could reasonably inform a clinical or personal health decision, the excluded goods exemption is unlikely to apply.',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device-samd-regulatory-requirements',urlLabel:'TGA excluded goods guidance'},
       {step:'Engage a TGA regulatory consultant to confirm classification and risk tier (Class I–III)',owner:'Legal / Regulatory',time:'2–4 weeks',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'TGA application guide'},
       {step:'If registration is required, initiate ARTG (Australian Register of Therapeutic Goods) application',owner:'Legal / Regulatory + Product',time:'3–6 months',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'ARTG submission process'},
-      {step:'Document your SaMD classification rationale and store in your governance register',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}
-    ]});
-  if((s.q1||1)>=2||(s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'ADHA Clinical Safety Officer not appointed',d:'The Australian Digital Health Agency\'s National Clinical Safety Framework requires a Clinical Safety Officer (CSO) for any health IT system that could affect patient safety. This is mandatory for health organisations deploying clinical AI — not optional.',
-    actions:[
-      {step:'Confirm whether your organisation has a designated Clinical Safety Officer (CSO) for this initiative',owner:'Executive / Clinical Lead',time:'1 week',url:'https://www.digitalhealth.gov.au/about-the-agency/national-clinical-safety-framework',urlLabel:'ADHA National Clinical Safety Framework'},
-      {step:'If no CSO is appointed, identify a suitably qualified clinician and formalise the role — CSO must have appropriate clinical and IT governance competence',owner:'Executive / Board',time:'2–4 weeks',url:'https://www.digitalhealth.gov.au/about-the-agency/national-clinical-safety-framework',urlLabel:'ADHA CSO role requirements'},
-      {step:'Establish a clinical risk management file for this AI system — documenting hazards, mitigations and residual risk',owner:'CSO / Product',time:'4–6 weeks',url:null,urlLabel:null},
-      {step:'Schedule CSO sign-off as a pre-deployment gate — system should not go live without documented clinical safety review',owner:'CSO / Executive',time:'Before deployment',url:null,urlLabel:null}
+      {step:'Document your SaMD classification rationale — including excluded goods analysis — and store in your governance register regardless of outcome',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}
     ]});
   if((s.q4||1)===3) gaps.push({cls:'gap-h',lb:'high',t:'No human-in-the-loop oversight',d:'Fully autonomous AI in clinical contexts requires documented human oversight mechanisms — required under OECD principles, the EU AI Act, and TGA guidance for high-risk AI.',
     actions:[
       {step:'Map every AI output to a decision type and assign a human review requirement for each',owner:'Product / Clinical Lead',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Design a human review workflow — including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:'https://www.digitalhealth.gov.au/initiatives-and-programs/my-health-record',urlLabel:'ADHA clinical safety guidance'},
+      {step:'Design a human review workflow — including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:'https://www.digitalhealth.gov.au/',urlLabel:'ADHA clinical safety guidance'},
       {step:'Document the human-in-the-loop process in your AI governance policy and system design spec',owner:'Compliance / Product',time:'1 week',url:null,urlLabel:null},
       {step:'Review against OECD AI Principle 1.4 (human oversight) and EU AI Act Article 14',owner:'Legal',time:'1 week',url:'https://oecd.ai/en/ai-principles',urlLabel:'OECD AI Principles'}
     ]});
@@ -686,20 +461,6 @@ function calc() {
       {step:'Confirm lawful basis for collecting and processing health information under APPs 3 and 6',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'Privacy Act — Australian Privacy Principles'},
       {step:'Implement data minimisation: only collect the minimum PHI required for the AI function',owner:'Engineering / Product',time:'2–3 weeks',url:null,urlLabel:null},
       {step:'Establish a data breach response plan and register with OAIC notifiable data breaches scheme',owner:'Privacy Officer',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/notifiable-data-breaches',urlLabel:'OAIC Notifiable Data Breaches'}
-    ]});
-  if((s.q1||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Patient consent and disclosure not defined',d:'Patients receiving care influenced by AI have a right to know. This is an emerging obligation under Privacy Act reform proposals, state health legislation, and clinical ethics frameworks — and increasingly expected by courts and regulators when things go wrong.',
-    actions:[
-      {step:'Define your patient disclosure policy: will patients be informed that AI is being used in their care, and how?',owner:'Legal / Clinical Lead',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Review state-level health records legislation for your jurisdiction — some states have explicit AI disclosure requirements',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/privacy-act-reform',urlLabel:'OAIC Privacy Act reform — health provisions'},
-      {step:'Confirm whether the clinical consent form or patient registration process should reference AI use',owner:'Clinical Lead / Legal',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Document the consent and disclosure position in the AI governance policy, signed off by the executive',owner:'Compliance / Executive',time:'1–2 weeks',url:null,urlLabel:null}
-    ]});
-  if((s.q1||1)>=2||(s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Training data provenance and bias not assessed',d:'AI systems trained on historical health data may embed bias against First Nations, CALD, rural/remote, or other underrepresented populations. Deploying without assessing training data provenance and representativeness is a clinical safety and equity risk.',
-    actions:[
-      {step:'Request or document the training data sources for this AI — what populations, time periods, and health settings are represented?',owner:'Data Science / Product',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Assess whether First Nations, CALD, paediatric, aged care or rural/remote populations are adequately represented — if not, document the limitation',owner:'Clinical Lead / Data Science',time:'2–3 weeks',url:'https://aiatsis.gov.au/research/ethical-research/code-ethics',urlLabel:'AIATSIS Code of Ethics — health data'},
-      {step:'Run a pre-deployment bias audit against protected cohorts — compare model performance across demographic subgroups',owner:'Data Science',time:'2–4 weeks',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI RMF — bias evaluation'},
-      {step:'Document bias findings and mitigations in the clinical risk management file — if bias cannot be mitigated, consider whether deployment should proceed',owner:'CSO / Clinical Lead',time:'1–2 weeks',url:null,urlLabel:null}
     ]});
   if((s.q1||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'Clinical validation evidence needed',d:'AI influencing clinical decisions must have documented validation studies showing performance across diverse patient populations. Boards and regulators will require this evidence.',
     actions:[
@@ -737,33 +498,24 @@ function calc() {
       {step:'Complete AICD AI governance for directors module to uplift board-level AI literacy',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}
     ]});
   ST.gaps = gaps;
-
+ 
   document.getElementById('rhead').textContent = tier + ' risk';
   document.getElementById('rsum').textContent = sum;
   document.getElementById('mv1').textContent = tier;
   document.getElementById('mv2').textContent = fws.length;
   document.getElementById('mv3').textContent = gaps.length;
-  var aitypeLabels = {pred:'Predictive',gen:'Generative',cv:'Computer vision',auto:'Automation'};
-  document.getElementById('mv4').textContent = aitypeLabels[ST.aitype] || '—';
-
   document.getElementById('fwlist').innerHTML = fws.map(function(f){ return '<span class="ftag">'+f+'</span>'; }).join('');
-
   document.getElementById('fw-map').innerHTML = fwDetails.map(function(f){
     return '<div class="fw-row"><div class="fw-name">'+f.n+'</div><div class="fw-desc">'+f.d+'</div></div>';
   }).join('');
-
   document.getElementById('glist').innerHTML = gaps.map(function(g, gi){
     var bc = g.lb==='high'?'bh':g.lb==='medium'?'bm':'bl';
     var actionsHtml = g.actions.map(function(a, ai){
       var linkHtml = a.url ? '<a class="action-link" href="'+a.url+'" target="_blank">→ '+a.urlLabel+'</a>' : '';
       return '<div class="action-row">'+
         '<div class="action-step"><span class="action-num">'+(ai+1)+'</span>'+a.step+'</div>'+
-        '<div class="action-meta">'+
-          '<span class="meta-tag meta-owner">'+a.owner+'</span>'+
-          '<span class="meta-tag meta-time">'+a.time+'</span>'+
-        '</div>'+
-        linkHtml+
-      '</div>';
+        '<div class="action-meta"><span class="meta-tag meta-owner">'+a.owner+'</span><span class="meta-tag meta-time">'+a.time+'</span></div>'+
+        linkHtml+'</div>';
     }).join('');
     return '<div class="gap-item '+g.cls+'" id="gap-'+gi+'">'+
       '<div class="gap-title"><span class="badge '+bc+'">'+g.lb+'</span>'+g.t+'</div>'+
@@ -772,44 +524,35 @@ function calc() {
         '<button class="gap-expand-btn" id="gap-btn-'+gi+'" onclick="toggleGap('+gi+')">▸ Show action plan</button>'+
         '<button class="done-btn" id="done-'+gi+'" onclick="markDone('+gi+')">Mark complete</button>'+
       '</div>'+
-      '<div class="gap-actions" id="gap-actions-'+gi+'">'+actionsHtml+'</div>'+
-    '</div>';
+      '<div class="gap-actions" id="gap-actions-'+gi+'">'+actionsHtml+'</div></div>';
   }).join('');
-
   gt(2);
 }
-
+ 
 function buildDocs() {
   var d = new Date().toLocaleDateString('en-AU', {day:'2-digit',month:'long',year:'numeric'});
   var fwstr = ST.fws.join(', ');
   var hi = ST.gaps.filter(function(g){ return g.lb==='high'; });
   var md = ST.gaps.filter(function(g){ return g.lb==='medium'; });
   var lo = ST.gaps.filter(function(g){ return g.lb==='low'; });
-
-  var aitypeLabels = {pred:'Predictive / decision-support',gen:'Generative AI (LLM)',cv:'Computer vision / image analysis',auto:'Automation / workflow'};
-  var aitypeStr = aitypeLabels[ST.aitype] || 'Not specified';
-  var blockerStr = ST.blockers && ST.blockers.length > 0
-    ? '\nDEPLOYMENT BLOCKERS (must resolve before go-live)\n'+'─'.repeat(44)+'\n'+ST.blockers.map(function(b,i){ return (i+1)+'. '+b; }).join('\n')+'\n'
-    : '';
-
+  var attr = 'Prepared by: Rebecca Lynn | linkedin.com/in/digitalrebecca';
+ 
   document.getElementById('d1').textContent =
-'AI GOVERNANCE RISK SUMMARY\n'+'─'.repeat(44)+'\nGenerated: '+d+'\n\nInitiative: '+ST.desc+'\nOrganisation type: '+ST.org+'\nAI type: '+aitypeStr+'\nRisk tier: '+ST.tier+'\nFrameworks triggered: '+fwstr+'\n\n'+blockerStr+
-'HIGH PRIORITY GAPS ('+hi.length+')\n'+'─'.repeat(44)+'\n'+
-hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n')+'\n\n'+
-'MEDIUM PRIORITY GAPS ('+md.length+')\n'+'─'.repeat(44)+'\n'+
-md.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n')+'\n\n'+
-'LOW PRIORITY GAPS ('+lo.length+')\n'+'─'.repeat(44)+'\n'+
-lo.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n')+'\n\n'+
-'─'.repeat(44)+'\nNote: This document is a governance prompt, not legal advice.\nEngage your legal, regulatory and clinical governance teams\nto validate and act on these obligations.';
-
+'AI GOVERNANCE RISK SUMMARY\n'+'─'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\n\nInitiative: '+ST.desc+'\nOrganisation type: '+ST.org+'\nRisk tier: '+ST.tier+'\nFrameworks triggered: '+fwstr+'\n\n'+
+'HIGH PRIORITY GAPS ('+hi.length+')\n'+'─'.repeat(44)+'\n'+(hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
+'MEDIUM PRIORITY GAPS ('+md.length+')\n'+'─'.repeat(44)+'\n'+(md.length?md.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
+'LOW PRIORITY GAPS ('+lo.length+')\n'+'─'.repeat(44)+'\n'+(lo.length?lo.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
+'─'.repeat(44)+'\nNote: This document is a governance prompt, not legal advice.\nEngage your legal, regulatory and clinical governance teams\nto validate and act on these obligations.\naigov navigator · rblynn.github.io/aigov';
+ 
   document.getElementById('d2').textContent =
-'BOARD BRIEFING NOTE — AI GOVERNANCE\n'+'─'.repeat(44)+'\nDate: '+d+'\nFor: Board / Risk & Audit Committee\n\nPURPOSE\nThis note summarises the AI governance risk profile for\nthe following initiative and recommends board actions.\n\nINITIATIVE\n'+ST.desc+'\n\nRISK ASSESSMENT\nAI type: '+aitypeStr+'\nOverall risk tier: '+ST.tier+'\nRegulatory frameworks triggered: '+fwstr+'\n\nKEY RISKS REQUIRING BOARD ATTENTION\n'+
-hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n')+'\n\nRECOMMENDED BOARD ACTIONS\n1. Confirm a named executive accountable for AI governance\n   on this initiative\n2. Request TGA classification assessment from legal/\n   regulatory team (if clinical AI)\n3. Add AI risk as a standing item at the next Risk &\n   Audit Committee meeting\n4. Commission a privacy impact assessment before go-live\n5. Establish a post-deployment monitoring and review cadence\n6. Ensure the board has access to AI governance expertise\n   (consider AIGP-certified advisor or NED)\n\nNEXT REVIEW DATE: [to be confirmed]\nPrepared by: [author]';
-
+'BOARD BRIEFING NOTE — AI GOVERNANCE\n'+'─'.repeat(44)+'\nDate: '+d+'\nFor: Board / Risk & Audit Committee\n'+attr+'\n\nPURPOSE\nThis note summarises the AI governance risk profile for\nthe following initiative and recommends board actions.\n\nINITIATIVE\n'+ST.desc+'\n\nRISK ASSESSMENT\nOverall risk tier: '+ST.tier+'\nRegulatory frameworks triggered: '+fwstr+'\n\nKEY RISKS REQUIRING BOARD ATTENTION\n'+
+(hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'No high-priority gaps identified at this stage.')+
+'\n\nRECOMMENDED BOARD ACTIONS\n1. Confirm a named executive accountable for AI governance\n   on this initiative\n2. Request TGA classification assessment from legal/\n   regulatory team (if clinical AI)\n3. Add AI risk as a standing item at the next Risk &\n   Audit Committee meeting\n4. Commission a privacy impact assessment before go-live\n5. Establish a post-deployment monitoring and review cadence\n6. Ensure the board has access to AI governance expertise\n   (consider AIGP-certified advisor or NED)\n\nNEXT REVIEW DATE: [to be confirmed]\n\n─'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.';
+ 
   document.getElementById('d3').textContent =
-'AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with clinical stakeholders\n\nBUILD & VALIDATION\n[ ] Clinical validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] PHI security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] TGA registration complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (at minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place (TGA, EU AI Act updates)\n\n'+'─'.repeat(44)+'\nFrameworks: '+fwstr;
-
-  var actionLines = ST.gaps.map(function(g, gi){
+'AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n'+attr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with clinical stakeholders\n\nBUILD & VALIDATION\n[ ] Clinical validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] PHI security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] TGA registration complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (at minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place (TGA, EU AI Act updates)\n\n'+'─'.repeat(44)+'\nFrameworks: '+fwstr+'\naigov navigator · rblynn.github.io/aigov';
+ 
+  var actionLines = ST.gaps.map(function(g){
     var lines = g.t.toUpperCase()+'  ['+g.lb.toUpperCase()+']\n'+'─'.repeat(44)+'\n'+g.d+'\n\nACTIONS:\n';
     lines += g.actions.map(function(a, ai){
       var l = (ai+1)+'. '+a.step+'\n   Owner: '+a.owner+'  |  Timeframe: '+a.time;
@@ -818,48 +561,45 @@ hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n')+'\n\nRE
     }).join('\n\n');
     return lines;
   }).join('\n\n'+'═'.repeat(44)+'\n\n');
-
+ 
   document.getElementById('d4').textContent =
-'ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\nThis plan translates each identified governance gap into\nspecific actions, owners and timeframes. Work through\nhigh-priority items before proceeding to deployment.\n\n'+'═'.repeat(44)+'\n\n'+actionLines+'\n\n'+'═'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.\nEngage legal, regulatory and clinical governance teams\nto validate obligations before acting.\nFrameworks: '+fwstr;
+'ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\nThis plan translates each identified governance gap into\nspecific actions, owners and timeframes. Work through\nhigh-priority items before proceeding to deployment.\n\n'+'═'.repeat(44)+'\n\n'+actionLines+'\n\n'+'═'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.\nEngage legal, regulatory and clinical governance teams\nto validate obligations before acting.\nFrameworks: '+fwstr+'\naigov navigator · rblynn.github.io/aigov';
 }
-
+ 
 function showDoc(id) {
   ['d1','d2','d3','d4'].forEach(function(d){ document.getElementById(d).style.display = d===id?'block':'none'; });
   var map = {d1:'tb1',d2:'tb2',d3:'tb3',d4:'tb4'};
-  ['tb1','tb2','tb3','tb4'].forEach(function(t){
-    document.getElementById(t).classList.toggle('active', map[id]===t);
-  });
+  ['tb1','tb2','tb3','tb4'].forEach(function(t){ document.getElementById(t).classList.toggle('active', map[id]===t); });
 }
-
+ 
 function toggleGap(i) {
   var el = document.getElementById('gap-actions-'+i);
   var btn = document.getElementById('gap-btn-'+i);
   var isOpen = el.classList.toggle('open');
   btn.textContent = (isOpen ? '▾ Hide action plan' : '▸ Show action plan');
 }
-
+ 
 function markDone(i) {
   var btn = document.getElementById('done-'+i);
   btn.classList.toggle('marked');
   btn.textContent = btn.classList.contains('marked') ? 'Completed ✓' : 'Mark complete';
-  var gapEl = document.getElementById('gap-'+i);
-  gapEl.style.opacity = btn.classList.contains('marked') ? '0.5' : '1';
+  document.getElementById('gap-'+i).style.opacity = btn.classList.contains('marked') ? '0.5' : '1';
 }
-
+ 
 function copyDoc() {
   var active = document.querySelector('.doc-out:not([style*="none"])');
-  if(active){ navigator.clipboard.writeText(active.textContent).then(function(){ }); }
+  if(active){ navigator.clipboard.writeText(active.textContent).then(function(){}); }
 }
-
+ 
 function restart() {
-  ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '', aitype: '', blockers: [] };
+  ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
   document.querySelectorAll('.ro').forEach(function(r){ r.classList.remove('sel'); });
   document.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
   document.getElementById('idesc').value = '';
   document.getElementById('glist').innerHTML = '';
   document.getElementById('fwlist').innerHTML = '';
   document.getElementById('fw-map').innerHTML = '';
-  document.getElementById('deploy-gate').classList.remove('on');
+  document.getElementById('q3warn').style.display = 'none';
   showDoc('d1');
   gt(0);
 }
