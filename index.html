@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,7 +189,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
   </div>
 </div>
 <div class="shell">
- 
+
   <div class="prog-wrap">
     <div class="prog-labels">
       <span id="pl">Step 1 of 5</span>
@@ -198,7 +197,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     </div>
     <div class="prog-bar"><div class="prog-fill" id="pfill" style="width:20%"></div></div>
   </div>
- 
+
   <!-- Step 0: Context -->
   <div class="sec on" id="s0">
     <div class="step-label">Step 1 — context</div>
@@ -215,27 +214,27 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     <textarea id="idesc" placeholder="e.g. An AI triage tool that reads patient intake forms and recommends urgency levels for ED nurses..."></textarea>
     <div class="brow"><button class="btn pri" onclick="gt(1)">Next →</button></div>
   </div>
- 
+
   <!-- Step 1: Risk questions -->
   <div class="sec" id="s1">
     <div class="step-label">Step 2 — risk assessment</div>
     <div class="step-title">Assess the risk profile</div>
     <div class="step-desc">Five questions that determine your regulatory obligations and governance requirements.</div>
- 
+
     <span class="ql">1. Does this AI directly influence clinical decisions or patient outcomes?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q1',3)"><input type="radio" name="q1"><div class="rot">Yes — directly informs diagnosis, treatment, triage or care pathways</div></label>
       <label class="ro" onclick="sel(this,'q1',2)"><input type="radio" name="q1"><div class="rot">Partially — supports decisions but a clinician always reviews</div></label>
       <label class="ro" onclick="sel(this,'q1',1)"><input type="radio" name="q1"><div class="rot">No — admin, scheduling, documentation or back-office only</div></label>
     </div>
- 
+
     <span class="ql">2. Does it process personal health information (PHI)?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q2',3)"><input type="radio" name="q2"><div class="rot">Yes — ingests or outputs identifiable patient data</div></label>
       <label class="ro" onclick="sel(this,'q2',2)"><input type="radio" name="q2"><div class="rot">Partially — de-identified or aggregated data only</div></label>
       <label class="ro" onclick="sel(this,'q2',1)"><input type="radio" name="q2"><div class="rot">No — no patient data involved</div></label>
     </div>
- 
+
     <span class="ql">3. What does this AI output — and who acts on it?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency — output influences a clinical decision</div></div></label>
@@ -244,27 +243,27 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <label class="ro" onclick="sel(this,'q3',1);showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no health recommendations or clinical influence<div class="ros">e.g. rostering, HR, finance, supply chain — no output that informs a health decision</div></div></label>
     </div>
     <div id="q3warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;"></div>
- 
+
     <span class="ql">4. Will it operate autonomously without human review of each output?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q4',3)"><input type="radio" name="q4"><div class="rot">Yes — outputs are acted on automatically</div></label>
       <label class="ro" onclick="sel(this,'q4',2)"><input type="radio" name="q4"><div class="rot">Sometimes — human-in-the-loop for high-stakes outputs only</div></label>
       <label class="ro" onclick="sel(this,'q4',1)"><input type="radio" name="q4"><div class="rot">No — a human reviews every output before action is taken</div></label>
     </div>
- 
+
     <span class="ql">5. Does your organisation operate in or sell into international markets?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'q5',3)"><input type="radio" name="q5"><div class="rot">Yes — Europe or US (EU AI Act and/or FDA obligations apply)</div></label>
       <label class="ro" onclick="sel(this,'q5',2)"><input type="radio" name="q5"><div class="rot">In consideration — international expansion is planned</div></label>
       <label class="ro" onclick="sel(this,'q5',1)"><input type="radio" name="q5"><div class="rot">No — Australia only</div></label>
     </div>
- 
+
     <div class="brow">
       <button class="btn" onclick="gt(0)">← Back</button>
       <button class="btn pri" onclick="calc()">Assess risk →</button>
     </div>
   </div>
- 
+
   <!-- Step 2: Risk profile -->
   <div class="sec" id="s2">
     <div class="step-label">Step 3 — risk profile</div>
@@ -295,7 +294,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <button class="btn pri" onclick="gt(3)">See governance gaps →</button>
     </div>
   </div>
- 
+
   <!-- Step 3: Gaps -->
   <div class="sec" id="s3">
     <div class="step-label">Step 4 — governance gaps</div>
@@ -307,7 +306,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <button class="btn pri" onclick="buildDocs();gt(4)">Generate outputs →</button>
     </div>
   </div>
- 
+
   <!-- Step 4: Docs -->
   <div class="sec" id="s4">
     <div class="step-label">Step 5 — outputs</div>
@@ -335,21 +334,22 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     </div>
   </div>
 </div><!-- /shell -->
- 
+
 <footer>
   <div class="footer-inner">
-    <p class="footer-note">This tool is a governance prompt, not legal advice. Validate all obligations with your legal, regulatory and clinical governance teams before acting.</p>
+    <p class="footer-note">This tool is a governance prompt, not legal advice. Validate all obligations with your legal, regulatory and clinical governance teams before acting.<br>© 2025–2026 Rebecca Lynn. AIGovNav™ (TM application filed June 2026, ref: AMCZ-2615845484)</p>
     <div class="footer-attr">
       Built by <a href="https://linkedin.com/in/digitalrebecca" target="_blank">Rebecca Lynn</a><br>
-      <a href="https://linkedin.com/in/digitalrebecca" target="_blank">linkedin.com/in/digitalrebecca</a>
+      <a href="https://linkedin.com/in/digitalrebecca" target="_blank">linkedin.com/in/digitalrebecca</a><br>
+      <a href="https://aigovnav.com.au" target="_blank">aigovnav.com.au</a>
     </div>
   </div>
 </footer>
- 
+
 <script>
 var ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
 var stepNames = ['Context','Risk','Profile','Gaps','Outputs'];
- 
+
 function showQ3warn(v) {
   var el = document.getElementById('q3warn');
   if (v === 3) {
@@ -368,14 +368,14 @@ function showQ3warn(v) {
     el.style.display = 'none';
   }
 }
- 
+
 function sel(el, name, val) {
   document.querySelectorAll('input[name="'+name+'"]').forEach(function(i){ i.closest('.ro').classList.remove('sel'); });
   el.classList.add('sel');
   ST.sc[name] = val;
   if(name === 'org') ST.org = val;
 }
- 
+
 function gt(n) {
   document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('on'); });
   document.getElementById('s'+n).classList.add('on');
@@ -385,14 +385,14 @@ function gt(n) {
   document.getElementById('pn').textContent = stepNames[n];
   window.scrollTo(0,0);
 }
- 
+
 function calc() {
   var s = ST.sc;
   var qs = ['q1','q2','q3','q4','q5'];
   var tot = 0;
   qs.forEach(function(q){ tot += (s[q]||1); });
   ST.desc = document.getElementById('idesc').value || 'AI initiative';
- 
+
   // FIX: s is now correctly defined before forceHigh uses it
   var forceHigh = (s.q3||1) >= 2 || ((s.q4||1) === 3 && (s.q1||1) >= 2);
   var tier, sum;
@@ -412,11 +412,11 @@ function calc() {
     sum = 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.';
   }
   ST.tier = tier;
- 
+
   var badge = document.getElementById('tier-badge');
   badge.textContent = tier + ' risk';
   badge.className = 'risk-tier-badge tier-'+tier.toLowerCase();
- 
+
   var fill = Math.min(8, Math.round((tot-5)/10*8));
   if (forceHigh) fill = Math.max(fill, 6);
   for (var i=0; i<8; i++) {
@@ -428,7 +428,7 @@ function calc() {
       else el.classList.add('r');
     }
   }
- 
+
   var fws = [], fwDetails = [];
   if((s.q3||1)>=2){ fws.push('TGA SaMD'); fwDetails.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'}); }
   fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing health records and PHI. Requires lawful basis, data minimisation, and breach notification obligations.'});
@@ -438,7 +438,7 @@ function calc() {
   if(ST.org==='gv'){ fws.push('AI in Government Policy'); fwDetails.push({n:'AI in Government Policy',d:'Australian Government AI in Government Policy v2.0. Requires ethical principles, transparency, accountability, and risk management for government AI deployments.'}); }
   fws.push('ISO 42001'); fwDetails.push({n:'ISO 42001',d:'International standard for AI management systems. Provides a framework for responsible AI development, deployment, and governance — increasingly referenced by Australian regulators.'});
   ST.fws = fws; ST.fwDetails = fwDetails;
- 
+
   var gaps = [];
   if((s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be in scope — including AI chat tools. The "excluded goods" provisions apply to purely administrative software; they do not protect software whose primary function generates health-related output or recommendations. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk. Classification must be confirmed before deployment.',
     actions:[
@@ -498,7 +498,7 @@ function calc() {
       {step:'Complete AICD AI governance for directors module to uplift board-level AI literacy',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}
     ]});
   ST.gaps = gaps;
- 
+
   document.getElementById('rhead').textContent = tier + ' risk';
   document.getElementById('rsum').textContent = sum;
   document.getElementById('mv1').textContent = tier;
@@ -528,30 +528,30 @@ function calc() {
   }).join('');
   gt(2);
 }
- 
+
 function buildDocs() {
   var d = new Date().toLocaleDateString('en-AU', {day:'2-digit',month:'long',year:'numeric'});
   var fwstr = ST.fws.join(', ');
   var hi = ST.gaps.filter(function(g){ return g.lb==='high'; });
   var md = ST.gaps.filter(function(g){ return g.lb==='medium'; });
   var lo = ST.gaps.filter(function(g){ return g.lb==='low'; });
-  var attr = 'Prepared by: Rebecca Lynn | linkedin.com/in/digitalrebecca';
- 
+  var attr = 'Prepared by: Rebecca Lynn | linkedin.com/in/digitalrebecca | aigovnav.com.au';
+
   document.getElementById('d1').textContent =
 'AI GOVERNANCE RISK SUMMARY\n'+'─'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\n\nInitiative: '+ST.desc+'\nOrganisation type: '+ST.org+'\nRisk tier: '+ST.tier+'\nFrameworks triggered: '+fwstr+'\n\n'+
 'HIGH PRIORITY GAPS ('+hi.length+')\n'+'─'.repeat(44)+'\n'+(hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
 'MEDIUM PRIORITY GAPS ('+md.length+')\n'+'─'.repeat(44)+'\n'+(md.length?md.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
 'LOW PRIORITY GAPS ('+lo.length+')\n'+'─'.repeat(44)+'\n'+(lo.length?lo.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
-'─'.repeat(44)+'\nNote: This document is a governance prompt, not legal advice.\nEngage your legal, regulatory and clinical governance teams\nto validate and act on these obligations.\naigov navigator · rblynn.github.io/aigov';
- 
+'─'.repeat(44)+'\nNote: This document is a governance prompt, not legal advice.\nEngage your legal, regulatory and clinical governance teams\nto validate and act on these obligations.\nAIGovNav · aigovnav.com.au';
+
   document.getElementById('d2').textContent =
 'BOARD BRIEFING NOTE — AI GOVERNANCE\n'+'─'.repeat(44)+'\nDate: '+d+'\nFor: Board / Risk & Audit Committee\n'+attr+'\n\nPURPOSE\nThis note summarises the AI governance risk profile for\nthe following initiative and recommends board actions.\n\nINITIATIVE\n'+ST.desc+'\n\nRISK ASSESSMENT\nOverall risk tier: '+ST.tier+'\nRegulatory frameworks triggered: '+fwstr+'\n\nKEY RISKS REQUIRING BOARD ATTENTION\n'+
 (hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'No high-priority gaps identified at this stage.')+
 '\n\nRECOMMENDED BOARD ACTIONS\n1. Confirm a named executive accountable for AI governance\n   on this initiative\n2. Request TGA classification assessment from legal/\n   regulatory team (if clinical AI)\n3. Add AI risk as a standing item at the next Risk &\n   Audit Committee meeting\n4. Commission a privacy impact assessment before go-live\n5. Establish a post-deployment monitoring and review cadence\n6. Ensure the board has access to AI governance expertise\n   (consider AIGP-certified advisor or NED)\n\nNEXT REVIEW DATE: [to be confirmed]\n\n─'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.';
- 
+
   document.getElementById('d3').textContent =
-'AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n'+attr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with clinical stakeholders\n\nBUILD & VALIDATION\n[ ] Clinical validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] PHI security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] TGA registration complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (at minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place (TGA, EU AI Act updates)\n\n'+'─'.repeat(44)+'\nFrameworks: '+fwstr+'\naigov navigator · rblynn.github.io/aigov';
- 
+'AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n'+attr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with clinical stakeholders\n\nBUILD & VALIDATION\n[ ] Clinical validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] PHI security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] TGA registration complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (at minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place (TGA, EU AI Act updates)\n\n'+'─'.repeat(44)+'\nFrameworks: '+fwstr+'\nAIGovNav · aigovnav.com.au';
+
   var actionLines = ST.gaps.map(function(g){
     var lines = g.t.toUpperCase()+'  ['+g.lb.toUpperCase()+']\n'+'─'.repeat(44)+'\n'+g.d+'\n\nACTIONS:\n';
     lines += g.actions.map(function(a, ai){
@@ -561,36 +561,36 @@ function buildDocs() {
     }).join('\n\n');
     return lines;
   }).join('\n\n'+'═'.repeat(44)+'\n\n');
- 
+
   document.getElementById('d4').textContent =
-'ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\nThis plan translates each identified governance gap into\nspecific actions, owners and timeframes. Work through\nhigh-priority items before proceeding to deployment.\n\n'+'═'.repeat(44)+'\n\n'+actionLines+'\n\n'+'═'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.\nEngage legal, regulatory and clinical governance teams\nto validate obligations before acting.\nFrameworks: '+fwstr+'\naigov navigator · rblynn.github.io/aigov';
+'ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\nThis plan translates each identified governance gap into\nspecific actions, owners and timeframes. Work through\nhigh-priority items before proceeding to deployment.\n\n'+'═'.repeat(44)+'\n\n'+actionLines+'\n\n'+'═'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.\nEngage legal, regulatory and clinical governance teams\nto validate obligations before acting.\nFrameworks: '+fwstr+'\nAIGovNav · aigovnav.com.au';
 }
- 
+
 function showDoc(id) {
   ['d1','d2','d3','d4'].forEach(function(d){ document.getElementById(d).style.display = d===id?'block':'none'; });
   var map = {d1:'tb1',d2:'tb2',d3:'tb3',d4:'tb4'};
   ['tb1','tb2','tb3','tb4'].forEach(function(t){ document.getElementById(t).classList.toggle('active', map[id]===t); });
 }
- 
+
 function toggleGap(i) {
   var el = document.getElementById('gap-actions-'+i);
   var btn = document.getElementById('gap-btn-'+i);
   var isOpen = el.classList.toggle('open');
   btn.textContent = (isOpen ? '▾ Hide action plan' : '▸ Show action plan');
 }
- 
+
 function markDone(i) {
   var btn = document.getElementById('done-'+i);
   btn.classList.toggle('marked');
   btn.textContent = btn.classList.contains('marked') ? 'Completed ✓' : 'Mark complete';
   document.getElementById('gap-'+i).style.opacity = btn.classList.contains('marked') ? '0.5' : '1';
 }
- 
+
 function copyDoc() {
   var active = document.querySelector('.doc-out:not([style*="none"])');
   if(active){ navigator.clipboard.writeText(active.textContent).then(function(){}); }
 }
- 
+
 function restart() {
   ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
   document.querySelectorAll('.ro').forEach(function(r){ r.classList.remove('sel'); });
