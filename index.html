@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,18 +174,18 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
 <header>
   <div class="header-inner">
     <div class="logo">ai<span>gov</span> navigator</div>
-    <div class="tagline">Health &amp; MedTech · Australia</div>
+    <div class="tagline">Australian AI Governance · 2026</div>
   </div>
 </header>
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Health AI Governance · Australia 2026</div>
-    <h1>Assess your health AI<br><em>governance obligations.</em></h1>
-    <p class="hero-desc">TGA, ADHA, Privacy Act, OECD and more — mapped to your initiative in five questions. Walk away with a board brief, gap analysis and action plan.</p>
+    <div class="hero-eyebrow">Australian AI Governance · Health · Financial Services · Enterprise</div>
+    <h1>Six questions. Your AI<br><em>governance obligations mapped.</em></h1>
+    <p class="hero-desc">TGA, APRA CPS 230, Privacy Act ADM, OECD, EU AI Act and more — identify which governance frameworks your specific initiative triggers. Walk away with a board brief, gap analysis and action plan.</p>
     <div class="hero-stats">
-      <div><div class="hero-stat-val">5</div><div class="hero-stat-label">Questions</div></div>
-      <div><div class="hero-stat-val">7+</div><div class="hero-stat-label">Frameworks mapped</div></div>
-      <div><div class="hero-stat-val">3</div><div class="hero-stat-label">Board-ready outputs</div></div>
+      <div><div class="hero-stat-val">6</div><div class="hero-stat-label">Questions</div></div>
+      <div><div class="hero-stat-val">TGA · APRA · ADM</div><div class="hero-stat-label">Key frameworks</div></div>
+      <div><div class="hero-stat-val">4</div><div class="hero-stat-label">Board-ready outputs</div></div>
     </div>
   </div>
 </div>
@@ -202,16 +203,18 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
   <div class="sec on" id="s0">
     <div class="step-label">Step 1 — context</div>
     <div class="step-title">Tell us about your AI initiative</div>
-    <div class="step-desc">We'll map it to relevant frameworks and surface your governance obligations.</div>
+    <div class="step-desc">We'll map it to relevant Australian and international frameworks and surface your governance obligations.</div>
     <span class="ql">What type of organisation are you in?</span>
     <div class="rg">
       <label class="ro" onclick="sel(this,'org','hp')"><input type="radio" name="org"><div class="rot">Health provider / hospital<div class="ros">Public or private health system, hospital network, aged care provider</div></div></label>
       <label class="ro" onclick="sel(this,'org','ht')"><input type="radio" name="org"><div class="rot">HealthTech / MedTech company<div class="ros">Building AI-powered health products, SaMD, or clinical decision support tools</div></div></label>
       <label class="ro" onclick="sel(this,'org','dh')"><input type="radio" name="org"><div class="rot">Digital health / health insurance<div class="ros">Digital platforms, PHI management, primary care, telehealth</div></div></label>
-      <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org"><div class="rot">Government / public sector<div class="ros">State or federal health agencies, PHNs, policy bodies</div></div></label>
+      <label class="ro" onclick="sel(this,'org','fs')"><input type="radio" name="org"><div class="rot">Financial services / APRA-regulated entity<div class="ros">Bank, insurer, superannuation fund, or other APRA-regulated institution — CPS 230 and AI governance obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','en')"><input type="radio" name="org"><div class="rot">General enterprise / other industry<div class="ros">Retail, legal, education, logistics, professional services — Privacy Act ADM and general AI governance obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org"><div class="rot">Government / public sector<div class="ros">Federal or state agencies, regulators, policy bodies — AI in Government Policy obligations apply</div></div></label>
     </div>
     <span class="ql">Briefly describe what you are building or deploying</span>
-    <textarea id="idesc" placeholder="e.g. An AI triage tool that reads patient intake forms and recommends urgency levels for ED nurses..."></textarea>
+    <textarea id="idesc" placeholder="e.g. An AI tool that analyses customer data to recommend products, automate loan decisions, or support clinical triage..."></textarea>
     <div class="brow"><button class="btn pri" onclick="gt(1)">Next →</button></div>
   </div>
 
@@ -219,28 +222,29 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
   <div class="sec" id="s1">
     <div class="step-label">Step 2 — risk assessment</div>
     <div class="step-title">Assess the risk profile</div>
-    <div class="step-desc">Five questions that determine your regulatory obligations and governance requirements.</div>
+    <div class="step-desc">Six questions that determine your regulatory obligations and governance requirements.</div>
 
-    <span class="ql">1. Does this AI directly influence clinical decisions or patient outcomes?</span>
+    <span class="ql">1. Does this AI directly influence decisions about individuals — clinical, financial, or otherwise?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'q1',3)"><input type="radio" name="q1"><div class="rot">Yes — directly informs diagnosis, treatment, triage or care pathways</div></label>
-      <label class="ro" onclick="sel(this,'q1',2)"><input type="radio" name="q1"><div class="rot">Partially — supports decisions but a clinician always reviews</div></label>
+      <label class="ro" onclick="sel(this,'q1',3)"><input type="radio" name="q1"><div class="rot">Yes — directly informs diagnosis, credit decisions, benefit eligibility, triage or similar<div class="ros">Output influences a consequential decision about a person</div></div></label>
+      <label class="ro" onclick="sel(this,'q1',2)"><input type="radio" name="q1"><div class="rot">Partially — supports decisions but a human always reviews<div class="ros">AI is a factor but not the sole determinant</div></div></label>
       <label class="ro" onclick="sel(this,'q1',1)"><input type="radio" name="q1"><div class="rot">No — admin, scheduling, documentation or back-office only</div></label>
     </div>
 
-    <span class="ql">2. Does it process personal health information (PHI)?</span>
+    <span class="ql">2. Does it process personal information — health, financial, or other sensitive data?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'q2',3)"><input type="radio" name="q2"><div class="rot">Yes — ingests or outputs identifiable patient data</div></label>
+      <label class="ro" onclick="sel(this,'q2',3)"><input type="radio" name="q2"><div class="rot">Yes — ingests or outputs identifiable personal data (health records, financial data, biometrics)</div></label>
       <label class="ro" onclick="sel(this,'q2',2)"><input type="radio" name="q2"><div class="rot">Partially — de-identified or aggregated data only</div></label>
-      <label class="ro" onclick="sel(this,'q2',1)"><input type="radio" name="q2"><div class="rot">No — no patient data involved</div></label>
+      <label class="ro" onclick="sel(this,'q2',1)"><input type="radio" name="q2"><div class="rot">No — no personal data involved</div></label>
     </div>
 
     <span class="ql">3. What does this AI output — and who acts on it?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency — output influences a clinical decision</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Health information, guidance, or responses to health questions<div class="ros">e.g. AI chat that answers "should I take this medication?", symptom checkers, health advice tools — even if not branded as clinical</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Operational or administrative health output — TGA status not yet assessed<div class="ros">e.g. scheduling, coding, documentation, billing — but we haven't confirmed whether TGA applies</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',1);showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no health recommendations or clinical influence<div class="ros">e.g. rostering, HR, finance, supply chain — no output that informs a health decision</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Health information, guidance, or responses to health questions<div class="ros">e.g. symptom checkers, AI chat answering health questions — even if not branded as clinical</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Financial recommendation, credit assessment, or risk scoring<div class="ros">e.g. loan decisioning, fraud detection, investment recommendations, insurance pricing</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Operational or administrative output — regulatory status not yet assessed<div class="ros">e.g. scheduling, coding, documentation — confirm whether sector-specific obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',1);showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no consequential recommendations<div class="ros">e.g. rostering, supply chain, HR admin — no output that informs a decision about an individual</div></div></label>
     </div>
     <div id="q3warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;"></div>
 
@@ -256,6 +260,17 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <label class="ro" onclick="sel(this,'q5',3)"><input type="radio" name="q5"><div class="rot">Yes — Europe or US (EU AI Act and/or FDA obligations apply)</div></label>
       <label class="ro" onclick="sel(this,'q5',2)"><input type="radio" name="q5"><div class="rot">In consideration — international expansion is planned</div></label>
       <label class="ro" onclick="sel(this,'q5',1)"><input type="radio" name="q5"><div class="rot">No — Australia only</div></label>
+    </div>
+
+    <span class="ql">6. Does this AI make or substantially influence decisions that directly affect individuals?</span>
+    <div class="step-desc" style="margin-top:6px;margin-bottom:10px;font-size:13px">This question relates to the Privacy Act 1988 automated decision-making (ADM) transparency obligations effective <strong>10 December 2026</strong> — affecting all Australian organisations.</div>
+    <div class="rg">
+      <label class="ro" onclick="sel(this,'q6',3);showQ6warn(3)"><input type="radio" name="q6"><div class="rot">Yes — AI makes or substantially influences decisions about individuals<div class="ros">e.g. approving/rejecting applications, determining eligibility, pricing, triage, content moderation affecting individuals</div></div></label>
+      <label class="ro" onclick="sel(this,'q6',2);showQ6warn(2)"><input type="radio" name="q6"><div class="rot">Possibly — AI informs decisions but we haven't assessed ADM applicability<div class="ros">Disclosure obligations may apply — assessment recommended before December 2026</div></div></label>
+      <label class="ro" onclick="sel(this,'q6',1);showQ6warn(1)"><input type="radio" name="q6"><div class="rot">No — AI does not make or influence decisions about specific individuals</div></label>
+    </div>
+    <div id="q6warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;background:#F5E6CC;border:1px solid #B07A1A;color:#B07A1A;">
+      <strong>⚠ Privacy Act ADM obligations likely apply.</strong> From 10 December 2026, organisations must disclose when AI substantially influences decisions about individuals. This applies to all sectors. The OAIC is finalising guidance (consultation closed April 2026) — final obligations may include explaining the AI's role in decisions and providing individuals with avenues to seek review. Organisations should not wait for final guidance before beginning compliance preparation — the legislative deadline is fixed.
     </div>
 
     <div class="brow">
@@ -357,16 +372,21 @@ function showQ3warn(v) {
     el.style.background = '#F5DEDF';
     el.style.border = '1px solid #B0282C';
     el.style.color = '#B0282C';
-    el.innerHTML = '<strong>⚠ TGA exposure likely.</strong> The TGA defines Software as a Medical Device (SaMD) based on <em>intended purpose</em>, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be a medical device — even if not branded as one. An AI chat tool that recommends whether to take a medication, assesses symptoms, or guides a health decision is likely in scope. The "excluded goods" provisions do not protect software whose primary function generates health-related output. TGA classification assessment is required before deployment.';
+    el.innerHTML = '<strong>⚠ TGA exposure likely.</strong> The TGA defines Software as a Medical Device (SaMD) based on <em>intended purpose</em>, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be a medical device — even if not branded as one. The "excluded goods" provisions do not protect software whose primary function generates health-related output. TGA classification assessment is required before deployment.';
   } else if (v === 2) {
     el.style.display = 'block';
     el.style.background = '#F5E6CC';
     el.style.border = '1px solid #B07A1A';
     el.style.color = '#B07A1A';
-    el.innerHTML = '<strong>Note:</strong> Even administrative health software can cross into SaMD territory if it generates output that informs a clinical or personal health decision. Confirm TGA classification before assuming you are out of scope.';
+    el.innerHTML = '<strong>Note:</strong> Software generating financial recommendations, credit assessments or risk scores may trigger ASIC, APRA, and Privacy Act obligations. Confirm your regulatory classification — especially if APRA-regulated or if outputs influence decisions about individuals.';
   } else {
     el.style.display = 'none';
   }
+}
+
+function showQ6warn(v) {
+  var el = document.getElementById('q6warn');
+  el.style.display = (v >= 2) ? 'block' : 'none';
 }
 
 function sel(el, name, val) {
@@ -388,28 +408,36 @@ function gt(n) {
 
 function calc() {
   var s = ST.sc;
-  var qs = ['q1','q2','q3','q4','q5'];
+  var qs = ['q1','q2','q3','q4','q5','q6'];
   var tot = 0;
   qs.forEach(function(q){ tot += (s[q]||1); });
   ST.desc = document.getElementById('idesc').value || 'AI initiative';
 
-  // FIX: s is now correctly defined before forceHigh uses it
-  var forceHigh = (s.q3||1) >= 2 || ((s.q4||1) === 3 && (s.q1||1) >= 2);
+  var isHealth = ['hp','ht','dh'].indexOf(ST.org) >= 0;
+  var isFS = ST.org === 'fs';
+  var forceHigh = ((s.q3||1) >= 3 && isHealth) || (isFS && (s.q1||1) >= 2) || ((s.q4||1) === 3 && (s.q1||1) >= 2) || (s.q6||1) >= 3;
+
   var tier, sum;
   if (forceHigh) {
     tier = 'High';
-    sum = (s.q3||1) >= 2
-      ? 'TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment. Formal registration, excluded goods analysis, and ongoing post-market obligations may apply.'
-      : 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.';
-  } else if (tot <= 8) {
+    if ((s.q3||1) >= 3 && isHealth) {
+      sum = 'TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment.';
+    } else if (isFS && (s.q1||1) >= 2) {
+      sum = 'APRA CPS 230 obligations apply. As an APRA-regulated entity deploying AI that influences material decisions, you face formal operational risk management requirements including board oversight, third-party risk assessment, and documented AI governance.';
+    } else if ((s.q6||1) >= 3) {
+      sum = 'Privacy Act automated decision-making (ADM) obligations apply. From 10 December 2026, you must disclose AI use in decisions affecting individuals. This is a hard legislative deadline — assessment and implementation should begin now.';
+    } else {
+      sum = 'This initiative is high risk under Australian and international frameworks. Formal governance assessments, conformity reviews, and ongoing monitoring are required.';
+    }
+  } else if (tot <= 9) {
     tier = 'Low';
-    sum = 'This initiative carries lower regulatory risk. Standard governance practices apply. Focus on documentation, policy foundations, and Privacy Act obligations.';
-  } else if (tot <= 11) {
+    sum = 'This initiative carries lower regulatory complexity. Standard governance practices apply. Focus on documentation, policy foundations, Privacy Act obligations, and confirming ADM disclosure requirements.';
+  } else if (tot <= 14) {
     tier = 'Medium';
-    sum = 'This initiative carries moderate risk. Clinical or data handling elements require structured governance, privacy obligations, and a confirmed position on TGA applicability.';
+    sum = 'This initiative carries moderate regulatory complexity. Structured governance, privacy obligations, and sector-specific framework requirements need to be addressed before deployment.';
   } else {
     tier = 'High';
-    sum = 'This initiative is high risk under Australian and international frameworks. Formal TGA registration, conformity assessments, and ongoing post-market monitoring are very likely required.';
+    sum = 'This initiative is high risk under Australian and international frameworks. Multiple regulatory obligations apply — prioritise high-priority gaps before deployment.';
   }
   ST.tier = tier;
 
@@ -417,7 +445,7 @@ function calc() {
   badge.textContent = tier + ' risk';
   badge.className = 'risk-tier-badge tier-'+tier.toLowerCase();
 
-  var fill = Math.min(8, Math.round((tot-5)/10*8));
+  var fill = Math.min(8, Math.round((tot-6)/12*8));
   if (forceHigh) fill = Math.max(fill, 6);
   for (var i=0; i<8; i++) {
     var el = document.getElementById('r'+i);
@@ -430,64 +458,101 @@ function calc() {
   }
 
   var fws = [], fwDetails = [];
-  if((s.q3||1)>=2){ fws.push('TGA SaMD'); fwDetails.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'}); }
-  fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing health records and PHI. Requires lawful basis, data minimisation, and breach notification obligations.'});
+
+  // Health frameworks
+  if(isHealth && (s.q3||1)>=3){ fws.push('TGA SaMD'); fwDetails.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'}); }
+
+  // Financial services frameworks
+  if(isFS){ fws.push('APRA CPS 230'); fwDetails.push({n:'APRA CPS 230',d:'APRA\'s operational risk management standard. Requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers. APRA\'s April 2026 letter explicitly named AI governance failures as a supervisory concern.'}); }
+  if(isFS){ fws.push('APRA CPS 234'); fwDetails.push({n:'APRA CPS 234',d:'Information security standard applying to APRA-regulated entities. AI systems processing sensitive financial or customer data must meet CPS 234 information security requirements including testing, incident response, and third-party oversight.'}); }
+
+  // Universal frameworks
+  fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing personal information. Health information, financial data, and biometrics are sensitive information requiring higher protection. Breach notification, data minimisation, and lawful basis obligations apply.'});
+
+  // ADM — triggered by Q6
+  if((s.q6||1)>=2){ fws.push('Privacy Act — ADM'); fwDetails.push({n:'Privacy Act — ADM',d:'Automated Decision-Making transparency obligations effective 10 December 2026. Organisations must disclose when AI substantially influences decisions about individuals and explain the AI\'s role. Final OAIC guidance is under development (consultation closed April 2026) — organisations should begin compliance preparation now.'}); }
+
   if((s.q1||1)>=2||(s.q3||1)>=2){ fws.push('OECD AI Principles'); fwDetails.push({n:'OECD AI Principles',d:'Internationally adopted by Australia. Covers human-centred values, transparency, robustness, accountability and inclusive growth.'}); }
-  if((s.q5||1)>=2){ fws.push('EU AI Act'); fwDetails.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare AI is explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'}); fws.push('GDPR'); fwDetails.push({n:'GDPR',d:'Health data is sensitive under GDPR. AI training on patient records requires lawful basis, data minimisation, and the right to explanation.'}); }
-  if((s.q5||1)===3){ fws.push('FDA SaMD (US)'); fwDetails.push({n:'FDA SaMD (US)',d:'Regulates AI/ML-based SaMD under 510(k) and De Novo pathways. Published action plan for AI/ML requires post-market performance monitoring.'}); }
+  if((s.q5||1)>=2){ fws.push('EU AI Act'); fwDetails.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare and financial services AI may be explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'}); }
+  if((s.q5||1)>=2 && isHealth){ fws.push('GDPR'); fwDetails.push({n:'GDPR',d:'Health data is sensitive under GDPR. AI training on patient records requires lawful basis, data minimisation, and the right to explanation.'}); }
+  if((s.q5||1)===3 && isHealth){ fws.push('FDA SaMD (US)'); fwDetails.push({n:'FDA SaMD (US)',d:'Regulates AI/ML-based SaMD under 510(k) and De Novo pathways. Published action plan for AI/ML requires post-market performance monitoring.'}); }
   if(ST.org==='gv'){ fws.push('AI in Government Policy'); fwDetails.push({n:'AI in Government Policy',d:'Australian Government AI in Government Policy v2.0. Requires ethical principles, transparency, accountability, and risk management for government AI deployments.'}); }
   fws.push('ISO 42001'); fwDetails.push({n:'ISO 42001',d:'International standard for AI management systems. Provides a framework for responsible AI development, deployment, and governance — increasingly referenced by Australian regulators.'});
   ST.fws = fws; ST.fwDetails = fwDetails;
 
   var gaps = [];
-  if((s.q3||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be in scope — including AI chat tools. The "excluded goods" provisions apply to purely administrative software; they do not protect software whose primary function generates health-related output or recommendations. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk. Classification must be confirmed before deployment.',
+
+  // Health-specific gaps
+  if(isHealth && (s.q3||1)>=3) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software providing health information, answering health questions, or influencing a clinical decision may be in scope. The "excluded goods" provisions do not protect software whose primary function generates health-related output. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk.',
     actions:[
-      {step:'Determine whether your AI\'s intended purpose brings it within the TGA SaMD definition — focus on what the output does, not what the technology is. Use the TGA\'s decision tool as a starting point.',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},
-      {step:'Specifically assess the excluded goods boundary: if your software provides health information, responds to health questions, or its output could reasonably inform a clinical or personal health decision, the excluded goods exemption is unlikely to apply.',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device-samd-regulatory-requirements',urlLabel:'TGA excluded goods guidance'},
+      {step:'Determine whether your AI\'s intended purpose brings it within the TGA SaMD definition — focus on what the output does, not what the technology is',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},
+      {step:'Assess the excluded goods boundary: if your software provides health information or its output could inform a clinical or personal health decision, the excluded goods exemption is unlikely to apply',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device-samd-regulatory-requirements',urlLabel:'TGA excluded goods guidance'},
       {step:'Engage a TGA regulatory consultant to confirm classification and risk tier (Class I–III)',owner:'Legal / Regulatory',time:'2–4 weeks',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'TGA application guide'},
-      {step:'If registration is required, initiate ARTG (Australian Register of Therapeutic Goods) application',owner:'Legal / Regulatory + Product',time:'3–6 months',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'ARTG submission process'},
-      {step:'Document your SaMD classification rationale — including excluded goods analysis — and store in your governance register regardless of outcome',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}
+      {step:'If registration is required, initiate ARTG application',owner:'Legal / Regulatory + Product',time:'3–6 months',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'ARTG submission process'},
+      {step:'Document your SaMD classification rationale and store in your governance register regardless of outcome',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}
     ]});
-  if((s.q4||1)===3) gaps.push({cls:'gap-h',lb:'high',t:'No human-in-the-loop oversight',d:'Fully autonomous AI in clinical contexts requires documented human oversight mechanisms — required under OECD principles, the EU AI Act, and TGA guidance for high-risk AI.',
+
+  // CPS 230 gaps — financial services
+  if(isFS) gaps.push({cls:'gap-h',lb:'high',t:'APRA CPS 230 AI governance obligations not addressed',d:'APRA\'s CPS 230 Operational Risk Management standard requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers as material service arrangements. APRA\'s April 2026 supervisory letter explicitly named AI governance failures as an area of concern across the sector. Non-compliance with CPS 230 can trigger APRA supervisory action.',
     actions:[
-      {step:'Map every AI output to a decision type and assign a human review requirement for each',owner:'Product / Clinical Lead',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Design a human review workflow — including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:'https://www.digitalhealth.gov.au/',urlLabel:'ADHA clinical safety guidance'},
-      {step:'Document the human-in-the-loop process in your AI governance policy and system design spec',owner:'Compliance / Product',time:'1 week',url:null,urlLabel:null},
+      {step:'Map this AI initiative against CPS 230\'s definition of material operational risk — if AI failure could disrupt critical operations, CPS 230 obligations formally apply',owner:'Risk / Compliance',time:'1–2 weeks',url:'https://www.apra.gov.au/sites/default/files/2023-07/Prudential%20Standard%20CPS%20230%20Operational%20Risk%20Management.pdf',urlLabel:'CPS 230 — full standard'},
+      {step:'If the AI system is provided by a third party, assess whether it constitutes a material service arrangement under CPS 230 and document accordingly',owner:'Risk / Legal',time:'2–3 weeks',url:'https://hwlebsworth.com.au/not-so-fast-apra-issues-ai-reminder-ahead-of-cps-230-deadline/',urlLabel:'APRA AI governance reminder — April 2026'},
+      {step:'Prepare a board-level AI governance paper covering: risk identification, oversight accountability, third-party management, and incident response for this initiative',owner:'Executive / Board',time:'2–4 weeks',url:null,urlLabel:null},
+      {step:'Include AI governance as a standing item in your operational risk committee and board risk committee reporting',owner:'Risk / Company Secretary',time:'Next committee cycle',url:null,urlLabel:null},
+      {step:'Review AI system against CPS 234 information security requirements — particularly data handling, access controls, and incident response',owner:'CISO / Risk',time:'2–3 weeks',url:'https://www.apra.gov.au/cps-234-information-security',urlLabel:'CPS 234 — Information Security'}
+    ]});
+
+  // ADM gaps — triggered by Q6
+  if((s.q6||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Privacy Act ADM disclosure obligations — deadline 10 December 2026',d:'The Privacy Act 1988 automated decision-making amendments require organisations to disclose when AI substantially influences decisions about individuals. From 10 December 2026, affected entities must notify individuals when AI is used in decisions affecting them and explain the AI\'s role. The OAIC is finalising detailed guidance (consultation closed April 2026) — final obligations may include recordkeeping requirements and individual review mechanisms. The legislative deadline is fixed regardless of when final guidance is published. This applies to all sectors and all organisation sizes.',
+    actions:[
+      {step:'Conduct an AI inventory audit: identify every system that makes or substantially influences decisions about individuals',owner:'Privacy Officer / Legal',time:'2–3 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'OAIC Privacy Act guidance'},
+      {step:'For each identified system, document: what decisions it influences, what data it uses, how it works, and what human oversight exists',owner:'Privacy Officer / Product',time:'3–4 weeks',url:null,urlLabel:null},
+      {step:'Update your Privacy Policy to include ADM disclosure language — describe AI use in decision-making in plain language before final OAIC guidance is published',owner:'Legal / Communications',time:'2–3 weeks',url:'https://www.oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making',urlLabel:'OAIC ADM consultation — June 2026'},
+      {step:'Monitor OAIC for final ADM guidance and update internal processes accordingly — do not wait for guidance before beginning preparation',owner:'Privacy Officer / Legal',time:'Ongoing — deadline Dec 2026',url:'https://www.landers.com.au/legal-insights-news/australian-privacy-law-update-what-app-entities-need-to-know-in-2026',urlLabel:'Landers & Rogers — Privacy Act 2026 update'},
+      {step:'Implement disclosure and recordkeeping processes before 10 December 2026 — engage legal counsel to confirm final obligations once OAIC guidance is published',owner:'Executive / Legal',time:'Complete by Dec 2026',url:'https://niftycomputing.au/2026-compliance-deadlines/privacy-act-automated-decisions',urlLabel:'ADM compliance deadline guidance'}
+    ]});
+
+  // Universal gaps
+  if((s.q4||1)===3) gaps.push({cls:'gap-h',lb:'high',t:'No human-in-the-loop oversight',d:'Fully autonomous AI in high-stakes contexts requires documented human oversight mechanisms — required under OECD principles, the EU AI Act, APRA guidance, and Privacy Act ADM obligations.',
+    actions:[
+      {step:'Map every AI output to a decision type and assign a human review requirement for each',owner:'Product / Risk Lead',time:'1–2 weeks',url:null,urlLabel:null},
+      {step:'Design a human review workflow — including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:null,urlLabel:null},
+      {step:'Document the human-in-the-loop process in your AI governance policy',owner:'Compliance / Product',time:'1 week',url:null,urlLabel:null},
       {step:'Review against OECD AI Principle 1.4 (human oversight) and EU AI Act Article 14',owner:'Legal',time:'1 week',url:'https://oecd.ai/en/ai-principles',urlLabel:'OECD AI Principles'}
     ]});
-  if((s.q2||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'PHI handling policy required',d:'Processing personal health information requires lawful basis, a privacy impact assessment, and data minimisation controls under the Privacy Act 1988.',
+  if((s.q2||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Personal information handling policy required',d:'Processing personal information — health records, financial data, or other sensitive information — requires lawful basis, a privacy impact assessment, and data minimisation controls under the Privacy Act 1988.',
     actions:[
       {step:'Commission a Privacy Impact Assessment (PIA) before build or deployment',owner:'Privacy Officer / Legal',time:'2–4 weeks',url:'https://www.oaic.gov.au/privacy/guidance-and-advice/privacy-impact-assessments',urlLabel:'OAIC PIA guidance'},
-      {step:'Confirm lawful basis for collecting and processing health information under APPs 3 and 6',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'Privacy Act — Australian Privacy Principles'},
-      {step:'Implement data minimisation: only collect the minimum PHI required for the AI function',owner:'Engineering / Product',time:'2–3 weeks',url:null,urlLabel:null},
+      {step:'Confirm lawful basis for collecting and processing sensitive information under APPs 3 and 6',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'Privacy Act — Australian Privacy Principles'},
+      {step:'Implement data minimisation: only collect the minimum personal information required for the AI function',owner:'Engineering / Product',time:'2–3 weeks',url:null,urlLabel:null},
       {step:'Establish a data breach response plan and register with OAIC notifiable data breaches scheme',owner:'Privacy Officer',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/notifiable-data-breaches',urlLabel:'OAIC Notifiable Data Breaches'}
     ]});
-  if((s.q1||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'Clinical validation evidence needed',d:'AI influencing clinical decisions must have documented validation studies showing performance across diverse patient populations. Boards and regulators will require this evidence.',
+  if(isHealth && (s.q1||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'Clinical validation evidence needed',d:'AI influencing clinical decisions must have documented validation studies showing performance across diverse patient populations.',
     actions:[
-      {step:'Define clinical validation requirements with your clinical lead — including performance benchmarks and target population',owner:'Clinical Lead / Product',time:'2–3 weeks',url:null,urlLabel:null},
+      {step:'Define clinical validation requirements with your clinical lead',owner:'Clinical Lead / Product',time:'2–3 weeks',url:null,urlLabel:null},
       {step:'Design and run a validation study across a representative patient population',owner:'Clinical / Data Science',time:'1–6 months',url:'https://www.tga.gov.au/resources/resource/guidance/clinical-evidence-guidelines-medical-devices',urlLabel:'TGA clinical evidence guidelines'},
-      {step:'Document and publish validation results in a clinical evidence report',owner:'Clinical / Regulatory',time:'2–4 weeks',url:null,urlLabel:null},
+      {step:'Document validation results in a clinical evidence report',owner:'Clinical / Regulatory',time:'2–4 weeks',url:null,urlLabel:null},
       {step:'Establish a post-deployment monitoring plan to track ongoing clinical performance',owner:'Clinical / Product',time:'2 weeks',url:null,urlLabel:null}
     ]});
-  if((s.q5||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'EU AI Act conformity assessment',d:'Healthcare AI in EU markets is explicitly classified as high risk and requires conformity assessments, technical documentation, and post-market monitoring obligations.',
+  if((s.q5||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'EU AI Act conformity assessment',d:'Healthcare and financial services AI in EU markets is explicitly classified as high risk and requires conformity assessments, technical documentation, and post-market monitoring obligations.',
     actions:[
-      {step:'Confirm your AI system classification under the EU AI Act Annex III (healthcare is explicitly high risk)',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://artificialintelligenceact.eu/',urlLabel:'EU AI Act — full text'},
-      {step:'Prepare technical documentation per Article 11 — system description, design logic, validation data, risk management',owner:'Product / Legal',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/11/',urlLabel:'EU AI Act Article 11'},
-      {step:'Implement a post-market monitoring system per Article 72 and register in EU database',owner:'Compliance / Engineering',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/72/',urlLabel:'EU AI Act Article 72'},
+      {step:'Confirm your AI system classification under the EU AI Act Annex III',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://artificialintelligenceact.eu/',urlLabel:'EU AI Act — full text'},
+      {step:'Prepare technical documentation per Article 11',owner:'Product / Legal',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/11/',urlLabel:'EU AI Act Article 11'},
+      {step:'Implement a post-market monitoring system per Article 72',owner:'Compliance / Engineering',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/72/',urlLabel:'EU AI Act Article 72'},
       {step:'Appoint an EU authorised representative if your organisation is not EU-based',owner:'Legal',time:'2–4 weeks',url:null,urlLabel:null}
     ]});
   gaps.push({cls:'gap-m',lb:'medium',t:'AI governance policy not documented',d:'A formal AI governance policy covering accountability, transparency, explainability and bias monitoring should be in place and signed off before deployment.',
     actions:[
       {step:'Draft an AI governance policy using NIST AI RMF or ISO 42001 as a structural framework',owner:'Risk / Compliance',time:'2–4 weeks',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI Risk Management Framework'},
       {step:'Define accountability: name the executive owner of AI governance for this initiative',owner:'Executive / Board',time:'1 week',url:null,urlLabel:null},
-      {step:'Include explainability requirements — how will the AI explain its outputs to users and clinicians',owner:'Product / Legal',time:'1–2 weeks',url:null,urlLabel:null},
+      {step:'Include explainability requirements — how will the AI explain its outputs to users',owner:'Product / Legal',time:'1–2 weeks',url:null,urlLabel:null},
       {step:'Get policy signed off by executive and tabled at board level',owner:'Executive / Board',time:'2 weeks',url:null,urlLabel:null}
     ]});
   if((s.q4||1)>=2) gaps.push({cls:'gap-l',lb:'low',t:'Model monitoring cadence undefined',d:'Ongoing performance monitoring — including drift detection and bias audits — should be established and scheduled at the point of deployment.',
     actions:[
-      {step:'Define key model performance metrics to monitor post-deployment (accuracy, drift, bias indicators)',owner:'Data Science / Engineering',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Set alert thresholds and automated monitoring — flag when performance degrades below threshold',owner:'Engineering',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Schedule a bias audit at 3 months, 6 months, and annually',owner:'Data Science / Clinical',time:'1 week to schedule',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI RMF — measure function'},
+      {step:'Define key model performance metrics to monitor post-deployment',owner:'Data Science / Engineering',time:'1–2 weeks',url:null,urlLabel:null},
+      {step:'Set alert thresholds and automated monitoring',owner:'Engineering',time:'2–3 weeks',url:null,urlLabel:null},
+      {step:'Schedule a bias audit at 3 months, 6 months, and annually',owner:'Data Science',time:'1 week to schedule',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI RMF — measure function'},
       {step:'Document monitoring results and report to governance committee quarterly',owner:'Risk / Compliance',time:'Ongoing',url:null,urlLabel:null}
     ]});
   gaps.push({cls:'gap-l',lb:'low',t:'Board AI literacy and oversight',d:'Boards overseeing AI deployments should have documented AI governance capability, with AI risk as a standing agenda item at Risk and Audit Committee meetings.',
@@ -495,7 +560,7 @@ function calc() {
       {step:'Add AI risk as a standing agenda item at the next Risk and Audit Committee meeting',owner:'Company Secretary / Board Chair',time:'Next meeting cycle',url:null,urlLabel:null},
       {step:'Brief the board on this AI initiative using the Board Briefing Note from the outputs tab',owner:'Executive Sponsor',time:'1–2 weeks',url:null,urlLabel:null},
       {step:'Identify a board member or advisor with AI governance expertise (consider AIGP-certified)',owner:'Board Chair / Nominations Committee',time:'1–3 months',url:'https://iapp.org/certify/aigp/',urlLabel:'IAPP AIGP certification'},
-      {step:'Complete AICD AI governance for directors module to uplift board-level AI literacy',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}
+      {step:'Complete AICD AI governance for directors module',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}
     ]});
   ST.gaps = gaps;
 
@@ -600,6 +665,7 @@ function restart() {
   document.getElementById('fwlist').innerHTML = '';
   document.getElementById('fw-map').innerHTML = '';
   document.getElementById('q3warn').style.display = 'none';
+  document.getElementById('q6warn').style.display = 'none';
   showDoc('d1');
   gt(0);
 }
