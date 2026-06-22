@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,7 +208,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <label class="ro" onclick="sel(this,'org','hp')"><input type="radio" name="org"><div class="rot">Health provider / hospital<div class="ros">Public or private health system, hospital network, aged care provider</div></div></label>
       <label class="ro" onclick="sel(this,'org','ht')"><input type="radio" name="org"><div class="rot">HealthTech / MedTech company<div class="ros">Building AI-powered health products, SaMD, or clinical decision support tools</div></div></label>
       <label class="ro" onclick="sel(this,'org','dh')"><input type="radio" name="org"><div class="rot">Digital health / health insurance<div class="ros">Digital platforms, PHI management, primary care, telehealth</div></div></label>
-      <label class="ro" onclick="sel(this,'org','fs')"><input type="radio" name="org"><div class="rot">Financial services / APRA-regulated entity<div class="ros">Bank, insurer, superannuation fund, or other APRA-regulated institution — CPS 230 and AI governance obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','fs')"><input type="radio" name="org"><div class="rot">Financial services / APRA-regulated entity<div class="ros">Bank, insurer, superannuation fund, or other APRA-regulated institution — CPS 230 and AI governance obligations likely apply</div></div></label>
       <label class="ro" onclick="sel(this,'org','en')"><input type="radio" name="org"><div class="rot">General enterprise / other industry<div class="ros">Retail, legal, education, logistics, professional services — Privacy Act ADM and general AI governance obligations apply</div></div></label>
       <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org"><div class="rot">Government / public sector<div class="ros">Federal or state agencies, regulators, policy bodies — AI in Government Policy obligations apply</div></div></label>
     </div>
@@ -270,7 +269,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
       <label class="ro" onclick="sel(this,'q6',1);showQ6warn(1)"><input type="radio" name="q6"><div class="rot">No — AI does not make or influence decisions about specific individuals</div></label>
     </div>
     <div id="q6warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;background:#F5E6CC;border:1px solid #B07A1A;color:#B07A1A;">
-      <strong>⚠ Privacy Act ADM obligations likely apply.</strong> From 10 December 2026, organisations must disclose when AI substantially influences decisions about individuals. This applies to all sectors. The OAIC is finalising guidance (consultation closed April 2026) — final obligations may include explaining the AI's role in decisions and providing individuals with avenues to seek review. Organisations should not wait for final guidance before beginning compliance preparation — the legislative deadline is fixed.
+      <strong>⚠ Privacy Act ADM transparency obligations likely apply.</strong> From 10 December 2026, organisations using AI to substantially influence decisions about individuals are likely to face new disclosure requirements. The OAIC is finalising guidance (consultation closed April 2026) — final scope is not yet settled. Begin preparation now and engage legal counsel to confirm your specific obligations before the deadline.
     </div>
 
     <div class="brow">
@@ -423,9 +422,9 @@ function calc() {
     if ((s.q3||1) >= 3 && isHealth) {
       sum = 'TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment.';
     } else if (isFS && (s.q1||1) >= 2) {
-      sum = 'APRA CPS 230 obligations apply. As an APRA-regulated entity deploying AI that influences material decisions, you face formal operational risk management requirements including board oversight, third-party risk assessment, and documented AI governance.';
+      sum = 'APRA CPS 230 obligations are likely to apply. As an APRA-regulated entity deploying AI that influences material decisions, you may face operational risk management requirements including board oversight, third-party risk assessment, and documented AI governance. A materiality assessment is recommended.';
     } else if ((s.q6||1) >= 3) {
-      sum = 'Privacy Act automated decision-making (ADM) obligations apply. From 10 December 2026, you must disclose AI use in decisions affecting individuals. This is a hard legislative deadline — assessment and implementation should begin now.';
+      sum = 'Privacy Act automated decision-making (ADM) transparency obligations are likely to apply. From 10 December 2026, organisations that use AI to substantially influence decisions about individuals will need to meet new disclosure requirements. The legislative deadline is fixed — preparation should begin now regardless of when final OAIC guidance is published.';
     } else {
       sum = 'This initiative is high risk under Australian and international frameworks. Formal governance assessments, conformity reviews, and ongoing monitoring are required.';
     }
@@ -464,13 +463,13 @@ function calc() {
 
   // Financial services frameworks
   if(isFS){ fws.push('APRA CPS 230'); fwDetails.push({n:'APRA CPS 230',d:'APRA\'s operational risk management standard. Requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers. APRA\'s April 2026 letter explicitly named AI governance failures as a supervisory concern.'}); }
-  if(isFS){ fws.push('APRA CPS 234'); fwDetails.push({n:'APRA CPS 234',d:'Information security standard applying to APRA-regulated entities. AI systems processing sensitive financial or customer data must meet CPS 234 information security requirements including testing, incident response, and third-party oversight.'}); }
+  if(isFS){ fws.push('APRA CPS 234'); fwDetails.push({n:'APRA CPS 234',d:'Information security standard applying to APRA-regulated entities. AI systems processing sensitive financial or customer data may need to meet CPS 234 information security requirements including testing, incident response, and third-party oversight. Confirm applicability with legal and compliance advice.'}); }
 
   // Universal frameworks
   fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing personal information. Health information, financial data, and biometrics are sensitive information requiring higher protection. Breach notification, data minimisation, and lawful basis obligations apply.'});
 
   // ADM — triggered by Q6
-  if((s.q6||1)>=2){ fws.push('Privacy Act — ADM'); fwDetails.push({n:'Privacy Act — ADM',d:'Automated Decision-Making transparency obligations effective 10 December 2026. Organisations must disclose when AI substantially influences decisions about individuals and explain the AI\'s role. Final OAIC guidance is under development (consultation closed April 2026) — organisations should begin compliance preparation now.'}); }
+  if((s.q6||1)>=2){ fws.push('Privacy Act — ADM'); fwDetails.push({n:'Privacy Act — ADM',d:'Automated Decision-Making transparency requirements effective 10 December 2026. Organisations using AI to substantially influence decisions about individuals are likely to face new disclosure obligations. Final OAIC guidance is under development (consultation closed April 2026) — begin preparation now and engage legal counsel to confirm specific obligations.'}); }
 
   if((s.q1||1)>=2||(s.q3||1)>=2){ fws.push('OECD AI Principles'); fwDetails.push({n:'OECD AI Principles',d:'Internationally adopted by Australia. Covers human-centred values, transparency, robustness, accountability and inclusive growth.'}); }
   if((s.q5||1)>=2){ fws.push('EU AI Act'); fwDetails.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare and financial services AI may be explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'}); }
@@ -493,9 +492,9 @@ function calc() {
     ]});
 
   // CPS 230 gaps — financial services
-  if(isFS) gaps.push({cls:'gap-h',lb:'high',t:'APRA CPS 230 AI governance obligations not addressed',d:'APRA\'s CPS 230 Operational Risk Management standard requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers as material service arrangements. APRA\'s April 2026 supervisory letter explicitly named AI governance failures as an area of concern across the sector. Non-compliance with CPS 230 can trigger APRA supervisory action.',
+  if(isFS) gaps.push({cls:'gap-h',lb:'high',t:'APRA CPS 230 AI governance — materiality assessment recommended',d:'APRA\'s CPS 230 Operational Risk Management standard requires APRA-regulated entities to manage material operational risks. Where AI is deployed in ways that could materially affect operations, board oversight, third-party risk assessment, and documented AI governance are likely to be expected. APRA\'s April 2026 supervisory letter explicitly named AI governance as an area of concern across the sector. Whether CPS 230 applies to a specific AI initiative depends on a materiality assessment — legal and regulatory advice is recommended.',
     actions:[
-      {step:'Map this AI initiative against CPS 230\'s definition of material operational risk — if AI failure could disrupt critical operations, CPS 230 obligations formally apply',owner:'Risk / Compliance',time:'1–2 weeks',url:'https://www.apra.gov.au/sites/default/files/2023-07/Prudential%20Standard%20CPS%20230%20Operational%20Risk%20Management.pdf',urlLabel:'CPS 230 — full standard'},
+      {step:'Map this AI initiative against CPS 230\'s definition of material operational risk — if AI failure could materially disrupt critical operations, CPS 230 governance expectations are likely to apply. Seek legal advice to confirm.',owner:'Risk / Compliance',time:'1–2 weeks',url:'https://www.apra.gov.au/sites/default/files/2023-07/Prudential%20Standard%20CPS%20230%20Operational%20Risk%20Management.pdf',urlLabel:'CPS 230 — full standard'},
       {step:'If the AI system is provided by a third party, assess whether it constitutes a material service arrangement under CPS 230 and document accordingly',owner:'Risk / Legal',time:'2–3 weeks',url:'https://hwlebsworth.com.au/not-so-fast-apra-issues-ai-reminder-ahead-of-cps-230-deadline/',urlLabel:'APRA AI governance reminder — April 2026'},
       {step:'Prepare a board-level AI governance paper covering: risk identification, oversight accountability, third-party management, and incident response for this initiative',owner:'Executive / Board',time:'2–4 weeks',url:null,urlLabel:null},
       {step:'Include AI governance as a standing item in your operational risk committee and board risk committee reporting',owner:'Risk / Company Secretary',time:'Next committee cycle',url:null,urlLabel:null},
@@ -503,13 +502,13 @@ function calc() {
     ]});
 
   // ADM gaps — triggered by Q6
-  if((s.q6||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Privacy Act ADM disclosure obligations — deadline 10 December 2026',d:'The Privacy Act 1988 automated decision-making amendments require organisations to disclose when AI substantially influences decisions about individuals. From 10 December 2026, affected entities must notify individuals when AI is used in decisions affecting them and explain the AI\'s role. The OAIC is finalising detailed guidance (consultation closed April 2026) — final obligations may include recordkeeping requirements and individual review mechanisms. The legislative deadline is fixed regardless of when final guidance is published. This applies to all sectors and all organisation sizes.',
+  if((s.q6||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Privacy Act ADM transparency — deadline 10 December 2026',d:'The Privacy Act 1988 automated decision-making amendments introduce new transparency requirements effective 10 December 2026. Organisations that use AI to substantially influence decisions about individuals are likely to need to disclose this use and explain the AI\'s role. The OAIC is finalising detailed guidance (consultation closed April 2026) — final scope and obligations are not yet settled. The legislative deadline is fixed regardless of when final guidance is published. Legal advice is recommended to confirm your specific obligations before the deadline.',
     actions:[
       {step:'Conduct an AI inventory audit: identify every system that makes or substantially influences decisions about individuals',owner:'Privacy Officer / Legal',time:'2–3 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'OAIC Privacy Act guidance'},
       {step:'For each identified system, document: what decisions it influences, what data it uses, how it works, and what human oversight exists',owner:'Privacy Officer / Product',time:'3–4 weeks',url:null,urlLabel:null},
       {step:'Update your Privacy Policy to include ADM disclosure language — describe AI use in decision-making in plain language before final OAIC guidance is published',owner:'Legal / Communications',time:'2–3 weeks',url:'https://www.oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making',urlLabel:'OAIC ADM consultation — June 2026'},
       {step:'Monitor OAIC for final ADM guidance and update internal processes accordingly — do not wait for guidance before beginning preparation',owner:'Privacy Officer / Legal',time:'Ongoing — deadline Dec 2026',url:'https://www.landers.com.au/legal-insights-news/australian-privacy-law-update-what-app-entities-need-to-know-in-2026',urlLabel:'Landers & Rogers — Privacy Act 2026 update'},
-      {step:'Implement disclosure and recordkeeping processes before 10 December 2026 — engage legal counsel to confirm final obligations once OAIC guidance is published',owner:'Executive / Legal',time:'Complete by Dec 2026',url:'https://niftycomputing.au/2026-compliance-deadlines/privacy-act-automated-decisions',urlLabel:'ADM compliance deadline guidance'}
+      {step:'Begin compliance preparation now — do not wait for final OAIC guidance. The legislative deadline of 10 December 2026 is fixed. Engage legal counsel to confirm your specific obligations once final guidance is published.',owner:'Executive / Legal',time:'Complete by Dec 2026',url:'https://niftycomputing.au/2026-compliance-deadlines/privacy-act-automated-decisions',urlLabel:'ADM compliance deadline guidance'}
     ]});
 
   // Universal gaps
