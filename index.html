@@ -179,10 +179,10 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
 
 /* ── NEW: MODAL OVERLAY ── */
 .modal-overlay {
-  position:fixed; inset:0; background:rgba(11,31,58,0.88);
-  z-index:200; display:flex; align-items:center; justify-content:center; padding:16px;
+  position:fixed; top:0; right:0; bottom:0; left:0; background:rgba(11,31,58,0.88);
+  z-index:200; display:none; align-items:center; justify-content:center; padding:16px;
 }
-.modal-overlay[hidden] { display:none; }
+.modal-overlay.visible { display:flex; }
 .modal-box {
   background:var(--bg-card); max-width:520px; width:100%;
   border-radius:var(--radius-xl); overflow:hidden;
@@ -259,7 +259,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
 </div>
 
 <!-- MATTER INTAKE MODAL -->
-<div class="modal-overlay" id="matterModal" hidden role="dialog" aria-modal="true" aria-labelledby="matterHeading">
+<div class="modal-overlay" id="matterModal" role="dialog" aria-modal="true" aria-labelledby="matterHeading">
   <div class="modal-box">
     <div class="modal-stripe"></div>
     <div class="modal-inner">
@@ -511,13 +511,16 @@ var ST = { org:null, sc:{}, tier:'', fws:[], fwDetails:[], gaps:[], desc:'', q3t
   matter:{prefix:'',year:'2026',num:'',ref:'—'}, pract:{name:'',email:''} };
 var stepNames = ['Context','Risk','Profile','Gaps','Outputs'];
 
+// Show privacy modal on load
+document.getElementById('privacyModal').classList.add('visible');
+
 // ── MODAL CONTROLS ──
 function closePrivacy(){
-  document.getElementById('privacyModal').hidden=true;
+  document.getElementById('privacyModal').classList.remove('visible');
   document.getElementById('idesc').focus();
 }
-function openMatter(){ document.getElementById('matterModal').hidden=false; document.getElementById('mPfx').focus(); }
-function closeMatter(){ document.getElementById('matterModal').hidden=true; }
+function openMatter(){ document.getElementById('matterModal').classList.add('visible'); document.getElementById('mPfx').focus(); }
+function closeMatter(){ document.getElementById('matterModal').classList.remove('visible'); }
 
 // ── MATTER REFERENCE ──
 function updateRef(){
