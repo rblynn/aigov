@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -777,7 +775,7 @@ function generatePDF(){
     doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(gc[0],gc[1],gc[2]);doc.text(g.lb.toUpperCase(),ml+6,y+6.5);
     doc.setFont('helvetica','bold');doc.setFontSize(10);sc(C.navy);var tl=doc.splitTextToSize(g.t,cw-24);doc.text(tl,ml+24,y+4.5);y+=tl.length>1?13:12;
     cy(10);bt(g.d);y+=4;
-    if(g.actions){doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);cy(6);doc.text('ACTIONS',ml,y);y+=6;g.actions.forEach(function(a,ai){cy(12);sf(C.canvas);sd(C.border);doc.rect(ml,y,cw,9,'FD');doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text(''+(ai+1)+'.',ml+2,y+6);doc.setFont('helvetica','normal');sc(C.navy);var al=doc.splitTextToSize(a.step,cw-14);doc.text(al,ml+8,y+3.5);doc.setFont('helvetica','bold');doc.setFontSize(7.5);sc(C.mid);doc.text(''+a.owner+'   '+a.time,ml+8,y+7.5);y+=11;if(a.url){cy(5);doc.setFont('helvetica','italic');doc.setFontSize(7.5);sc([27,69,226]);doc.text('→ '+(a.urlLabel||a.url),ml+8,y);y+=5;}});}
+    if(g.actions){doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);cy(6);doc.text('ACTIONS',ml,y);y+=6;g.actions.forEach(function(a,ai){cy(12);sf(C.canvas);sd(C.border);doc.rect(ml,y,cw,9,'FD');doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text(''+(ai+1)+'.',ml+2,y+6);doc.setFont('helvetica','normal');sc(C.navy);var al=doc.splitTextToSize(a.step,cw-14);doc.text(al,ml+8,y+3.5);doc.setFont('helvetica','bold');doc.setFontSize(7.5);sc(C.mid);doc.text(''+a.owner+'   '+a.time,ml+8,y+7.5);y+=11;if(a.url){cy(5);doc.setFont('helvetica','italic');doc.setFontSize(7.5);sc([27,69,226]);doc.text('See: '+(a.urlLabel||a.url),ml+8,y);y+=5;}});}
     y+=8;
   });
   ftr();
@@ -797,7 +795,7 @@ function generatePDF(){
   // SECTION 5 — ACTION PLAN
   doc.addPage();pg++;hdr();sh('Action Plan',5);
   doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.mid);doc.text('Each governance gap translated into specific actions, owners, and timeframes. Work through High-priority items first.',ml,y);y+=10;
-  doc.autoTable({startY:y,margin:{left:ml,right:20},head:[['Priority','Gap','Action','Owner','Timeframe']],body:ST.gaps.reduce(function(rows,g){g.actions.forEach(function(a,ai){rows.push([ai===0?g.lb.toUpperCase():'',ai===0?g.t:'',a.step,a.owner,a.time]);});return rows;},[]),headStyles:{fillColor:C.navy,textColor:[255,255,255],fontSize:8.5,fontStyle:'bold'},bodyStyles:{fontSize:8,textColor:C.navy,lineColor:C.border,lineWidth:0.3,cellPadding:2.5},alternateRowStyles:{fillColor:C.canvas},columnStyles:{0:{cellWidth:15,fontStyle:'bold'},1:{cellWidth:36},2:{cellWidth:66},3:{cellWidth:31},4:{cellWidth:22}},didDrawPage:function(){hdr();}});ftr();
+  doc.autoTable({startY:y,margin:{left:ml,right:20},head:[['Priority','Gap','Action','Owner','Timeframe']],body:ST.gaps.reduce(function(rows,g){var pri=g.lb==='high'?'H':g.lb==='medium'?'M':'L';g.actions.forEach(function(a,ai){rows.push([ai===0?pri:'',ai===0?g.t:'',a.step,a.owner,a.time]);});return rows;},[]),headStyles:{fillColor:C.navy,textColor:[255,255,255],fontSize:8.5,fontStyle:'bold'},bodyStyles:{fontSize:8,textColor:C.navy,lineColor:C.border,lineWidth:0.3,cellPadding:2.5},alternateRowStyles:{fillColor:C.canvas},columnStyles:{0:{cellWidth:10,fontStyle:'bold'},1:{cellWidth:41},2:{cellWidth:66},3:{cellWidth:31},4:{cellWidth:22}},didDrawPage:function(){hdr();}});ftr();
 
   // SECTION 6 — CHECKLIST
   doc.addPage();pg++;hdr();sh('Technology Team Checklist',6);
