@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
 <title>AI Governance Navigator</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+/* ── EXACT LIVE SITE TOKENS ── */
 :root {
   --ink-1000:#0A0E1A; --ink-900:#11182A; --ink-700:#2B3447; --ink-500:#5C6478;
   --ink-300:#9BA1B0; --ink-200:#C5C9D2; --ink-100:#E4E6EB;
@@ -30,13 +32,9 @@
   --dur-1:120ms; --dur-2:200ms; --dur-3:320ms;
   --ease-quiet:cubic-bezier(0.4,0,0.2,1);
   --ease-out:cubic-bezier(0.16,1,0.3,1);
-  --line:var(--ink-100); --bg:var(--paper-50); --white:var(--paper-0);
-  --ink:var(--ink-1000); --ink2:var(--ink-700); --ink3:var(--ink-500);
-  --amber:#B07A1A; --amber-light:#F5E6CC;
-  --red:#B0282C; --red-light:#F5DEDF;
-  --blue:#1B45E2; --blue-light:#DDE4FB;
-  --radius:var(--radius-lg);
 }
+
+/* ── EXACT LIVE SITE CSS ── */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
 html { font-size:16px; }
 body {
@@ -101,10 +99,11 @@ textarea::placeholder { color:var(--ink-300); font-style:italic; }
 .ro.sel .rot { color:var(--navy-900); }
 .ros { font-size:12px; font-weight:400; color:var(--fg-3); margin-top:3px; line-height:1.4; }
 .brow { display:flex; gap:10px; justify-content:flex-end; margin-top:28px; padding-top:20px; border-top:1px solid var(--border-faint); }
-.btn { font-family:var(--font-body); font-size:14px; font-weight:600; padding:11px 22px; border-radius:var(--radius-lg); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-2); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); letter-spacing:-0.01em; }
+.btn { font-family:var(--font-body); font-size:14px; font-weight:600; padding:11px 22px; border-radius:var(--radius-lg); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-2); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); letter-spacing:-0.01em; min-height:44px; }
 .btn:hover { border-color:var(--ink-300); background:var(--paper-100); }
 .btn.pri { background:var(--navy-900); color:#fff; border-color:var(--navy-900); }
 .btn.pri:hover { background:var(--navy-700); border-color:var(--navy-700); }
+*:focus-visible { outline:3px solid var(--signal-600); outline-offset:2px; border-radius:2px; }
 .divider { border:none; border-top:1px solid var(--border-faint); margin:2rem 0; }
 .risk-result { background:var(--bg-card); border:1.5px solid var(--border-default); border-radius:var(--radius-xl); padding:20px; margin-bottom:20px; box-shadow:var(--shadow-sm); }
 .risk-tier-badge { display:inline-flex; align-items:center; gap:8px; padding:5px 13px; border-radius:var(--radius-pill); font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px; }
@@ -136,11 +135,11 @@ textarea::placeholder { color:var(--ink-300); font-style:italic; }
 .bh { background:var(--risk-100); color:var(--risk-600); }
 .bm { background:var(--caution-100); color:var(--caution-600); }
 .bl { background:#f0f0ee; color:var(--ink-300); }
-.gap-expand-btn { font-family:var(--font-mono); font-size:11px; color:var(--signal-600); background:none; border:none; cursor:pointer; padding:0; margin-top:10px; display:flex; align-items:center; gap:4px; font-weight:500; transition:color var(--dur-1) var(--ease-quiet); }
+.gap-expand-btn { font-family:var(--font-mono); font-size:11px; color:var(--signal-600); background:none; border:none; cursor:pointer; padding:0; margin-top:10px; display:flex; align-items:center; gap:4px; font-weight:500; transition:color var(--dur-1) var(--ease-quiet); min-height:44px; }
 .gap-expand-btn:hover { color:var(--signal-500); }
 .gap-actions { display:none; margin-top:12px; border-top:1px solid var(--border-faint); padding-top:12px; }
 .gap-actions.open { display:block; }
-.done-btn { font-family:var(--font-mono); font-size:11px; padding:4px 12px; border-radius:var(--radius-pill); border:1px solid var(--border-default); color:var(--fg-3); background:var(--bg-card); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.done-btn { font-family:var(--font-mono); font-size:11px; padding:4px 12px; border-radius:var(--radius-pill); border:1px solid var(--border-default); color:var(--fg-3); background:var(--bg-card); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); min-height:44px; }
 .done-btn:hover { border-color:var(--ok-600); color:var(--ok-600); }
 .done-btn.marked { background:var(--ok-100); color:var(--ok-600); border-color:var(--ok-600); }
 .action-row { display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid var(--border-faint); }
@@ -154,28 +153,172 @@ textarea::placeholder { color:var(--ink-300); font-style:italic; }
 .action-link { font-family:var(--font-mono); font-size:12px; color:var(--signal-600); text-decoration:none; margin-left:26px; margin-top:4px; display:inline-block; }
 .action-link:hover { text-decoration:underline; }
 .doc-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
-.tab-btn { font-family:var(--font-mono); font-size:11px; font-weight:500; padding:6px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.tab-btn { font-family:var(--font-mono); font-size:11px; font-weight:500; padding:6px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); min-height:44px; }
 .tab-btn:hover { border-color:var(--ink-300); color:var(--fg-2); }
 .tab-btn.active { background:var(--navy-900); color:#fff; border-color:var(--navy-900); }
 .doc-out { background:var(--bg-card); border:1.5px solid var(--border-default); border-radius:var(--radius-lg); padding:20px; font-family:var(--font-mono); font-size:12px; line-height:1.8; color:var(--fg-2); white-space:pre-wrap; max-height:420px; overflow-y:auto; box-shadow:var(--shadow-sm); }
-.copy-row { display:flex; justify-content:flex-end; margin-top:8px; }
-.copy-btn { font-family:var(--font-mono); font-size:11px; padding:5px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); }
+.copy-row { display:flex; justify-content:flex-end; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.copy-btn { font-family:var(--font-mono); font-size:11px; padding:5px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--border-default); background:var(--bg-card); color:var(--fg-3); cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); min-height:44px; }
 .copy-btn:hover { border-color:var(--navy-900); color:var(--navy-900); }
+.pdf-btn { font-family:var(--font-mono); font-size:11px; padding:5px 14px; border-radius:var(--radius-pill); border:1.5px solid var(--navy-900); background:var(--navy-900); color:#fff; cursor:pointer; transition:all var(--dur-1) var(--ease-quiet); min-height:44px; }
+.pdf-btn:hover { background:var(--navy-700); border-color:var(--navy-700); }
 footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px 24px; }
 .footer-inner { max-width:680px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
 .footer-note { font-size:12px; color:var(--fg-4); line-height:1.5; max-width:40ch; }
 .footer-attr { font-family:var(--font-mono); font-size:11px; color:var(--fg-4); text-align:right; }
 .footer-attr a { color:var(--signal-600); text-decoration:none; }
 .footer-attr a:hover { text-decoration:underline; }
+
+/* ── NEW: PRIVACY NOTICE BANNER ── */
+.privacy-banner {
+  background:var(--navy-900); border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:10px 24px; font-family:var(--font-mono); font-size:11px;
+  color:rgba(255,255,255,0.55); letter-spacing:0.04em; text-align:center;
+}
+.privacy-banner strong { color:#6ecfbe; }
+
+/* ── NEW: MODAL OVERLAY ── */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(11,31,58,0.88);
+  z-index:200; display:flex; align-items:center; justify-content:center; padding:16px;
+}
+.modal-overlay[hidden] { display:none; }
+.modal-box {
+  background:var(--bg-card); max-width:520px; width:100%;
+  border-radius:var(--radius-xl); overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+.modal-stripe { height:3px; background:linear-gradient(90deg,#6ecfbe,var(--signal-500)); }
+.modal-inner { padding:28px; }
+.modal-logo { font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--fg-1); letter-spacing:-0.02em; margin-bottom:14px; }
+.modal-logo span { color:#0e8a78; font-style:italic; }
+.modal-heading { font-family:var(--font-display); font-size:18px; font-weight:500; color:var(--fg-1); margin-bottom:14px; line-height:1.25; letter-spacing:-0.015em; }
+.modal-body { font-size:14px; color:var(--fg-2); line-height:1.65; margin-bottom:16px; }
+.modal-body p+p { margin-top:8px; }
+.modal-note { background:var(--bg-canvas); border-left:3px solid var(--navy-500); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:10px 14px; font-size:13px; color:var(--fg-3); line-height:1.6; margin-bottom:20px; }
+.modal-foot { display:flex; gap:8px; flex-wrap:wrap; }
+
+/* ── NEW: FORM FIELDS (matter modal) ── */
+.field-group { margin-bottom:16px; }
+.field-label { display:block; font-size:13px; font-weight:600; color:var(--fg-1); margin-bottom:5px; letter-spacing:-0.01em; }
+.field-hint { font-size:12px; color:var(--fg-3); font-family:var(--font-mono); margin-bottom:6px; line-height:1.5; }
+.field-input {
+  width:100%; padding:10px 13px; font-family:var(--font-body); font-size:14px;
+  color:var(--fg-1); background:var(--bg-card);
+  border:1.5px solid var(--border-default); border-radius:var(--radius-lg);
+  min-height:44px; transition:border-color var(--dur-1) var(--ease-quiet);
+  -webkit-appearance:none;
+}
+.field-input:focus { outline:none; border-color:var(--navy-900); box-shadow:var(--ring); }
+.field-input::placeholder { color:var(--ink-300); font-style:italic; }
+.matter-row { display:grid; grid-template-columns:90px 1fr 90px; gap:8px; }
+.matter-preview { font-family:var(--font-mono); font-size:12px; color:var(--fg-3); margin-top:6px; }
+.matter-preview strong { color:var(--navy-900); font-size:13px; }
+.field-error { font-size:12px; color:var(--risk-600); font-family:var(--font-mono); margin-top:4px; display:none; }
+.field-error.show { display:block; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px) {
+  .shell { padding:0 16px 64px; }
+  .hero-inner { padding:28px 0 24px; }
+  .hero h1 { font-size:24px; }
+  .fw-row { grid-template-columns:1fr; }
+  .fw-name { border-right:none; border-bottom:1px solid var(--border-faint); }
+  .hero-stats { gap:20px; flex-wrap:wrap; }
+  .matter-row { grid-template-columns:1fr 1fr; }
+  .matter-row .field-group:last-child { grid-column:1/-1; }
+  .modal-inner { padding:20px; }
+  .brow { flex-wrap:wrap; }
+  .brow .btn { flex:1; text-align:center; min-width:120px; }
+}
+@media(max-width:380px) {
+  .matter-row { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyHeading">
+  <div class="modal-box">
+    <div class="modal-stripe"></div>
+    <div class="modal-inner">
+      <div class="modal-logo">ai<span>gov</span> navigator</div>
+      <h1 class="modal-heading" id="privacyHeading">Before you begin — how this tool handles your information</h1>
+      <div class="modal-body">
+        <p>This tool runs entirely in your browser. No information you enter is sent to any server, stored, or shared with anyone.</p>
+        <p>When you close this browser tab, your assessment and all inputs are permanently deleted. Nothing is retained between sessions.</p>
+        <p>Outputs are governance prompts — not legal advice. They are starting documents to help frame the right questions before engaging legal, compliance, and regulatory counsel.</p>
+      </div>
+      <div class="modal-note"><strong>For internal or law firm use:</strong> Client matter information entered into this tool is not retained after your session ends. Download or copy outputs before closing the tab.</div>
+      <div class="modal-foot">
+        <button class="btn pri" onclick="closePrivacy()">I understand — begin assessment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MATTER INTAKE MODAL -->
+<div class="modal-overlay" id="matterModal" hidden role="dialog" aria-modal="true" aria-labelledby="matterHeading">
+  <div class="modal-box">
+    <div class="modal-stripe"></div>
+    <div class="modal-inner">
+      <h2 class="modal-heading" id="matterHeading">Enter matter details for the PDF report</h2>
+      <p style="font-size:13px;color:var(--fg-3);font-family:var(--font-mono);margin-bottom:20px;line-height:1.6">These details appear on the cover page and throughout the report. Not stored or transmitted.</p>
+
+      <div class="field-group">
+        <label class="field-label">Matter reference</label>
+        <div class="field-hint">Firm prefix / year / matter number — combined automatically.</div>
+        <div class="matter-row">
+          <div class="field-group">
+            <label class="field-label" for="mPfx" style="font-size:11px;font-family:var(--font-mono)">Prefix</label>
+            <input type="text" id="mPfx" class="field-input" placeholder="LR" maxlength="6" oninput="updateRef()" aria-describedby="refPrev">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="mYr" style="font-size:11px;font-family:var(--font-mono)">Year</label>
+            <input type="number" id="mYr" class="field-input" value="2026" min="2024" max="2035" oninput="updateRef()">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="mNo" style="font-size:11px;font-family:var(--font-mono)">No.</label>
+            <input type="text" id="mNo" class="field-input" placeholder="001" maxlength="8" oninput="updateRef()">
+          </div>
+        </div>
+        <div class="matter-preview" id="refPrev" aria-live="polite">Reference: <strong id="refDisp">—</strong></div>
+        <div class="field-error" id="refErr">Please complete all three parts of the matter reference.</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="pName">Practitioner name</label>
+        <input type="text" id="pName" class="field-input" placeholder="e.g. Matthew McMillan" autocomplete="name">
+        <div class="field-error" id="nameErr">Please enter the practitioner name.</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="pEmail">Practitioner email</label>
+        <input type="email" id="pEmail" class="field-input" placeholder="e.g. m.mcmillan@landers.com.au" autocomplete="email">
+        <div class="field-error" id="emailErr">Please enter a valid email address.</div>
+      </div>
+
+      <div class="modal-foot" style="margin-top:8px">
+        <button class="btn pri" onclick="validateMatter()">Generate PDF report</button>
+        <button class="btn" onclick="closeMatter()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY BANNER -->
+<div class="privacy-banner" role="note">
+  <strong>🔒 No data stored.</strong> Runs entirely in your browser. Session only — all inputs deleted when you close this tab.
+</div>
+
 <header>
   <div class="header-inner">
     <div class="logo">ai<span>gov</span> navigator</div>
     <div class="tagline">Australian AI Governance · 2026</div>
   </div>
 </header>
+
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Australian AI Governance · Health · Financial Services · Enterprise</div>
@@ -188,8 +331,8 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     </div>
   </div>
 </div>
-<div class="shell">
 
+<div class="shell">
   <div class="prog-wrap">
     <div class="prog-labels">
       <span id="pl">Step 1 of 5</span>
@@ -205,12 +348,12 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     <div class="step-desc">We'll map it to relevant Australian and international frameworks and surface your governance obligations.</div>
     <span class="ql">What type of organisation are you in?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'org','hp')"><input type="radio" name="org"><div class="rot">Health provider / hospital<div class="ros">Public or private health system, hospital network, aged care provider</div></div></label>
-      <label class="ro" onclick="sel(this,'org','ht')"><input type="radio" name="org"><div class="rot">HealthTech / MedTech company<div class="ros">Building AI-powered health products, SaMD, or clinical decision support tools</div></div></label>
-      <label class="ro" onclick="sel(this,'org','dh')"><input type="radio" name="org"><div class="rot">Digital health / health insurance<div class="ros">Digital platforms, PHI management, primary care, telehealth</div></div></label>
-      <label class="ro" onclick="sel(this,'org','fs')"><input type="radio" name="org"><div class="rot">Financial services / APRA-regulated entity<div class="ros">Bank, insurer, superannuation fund, or other APRA-regulated institution — CPS 230 and AI governance obligations likely apply</div></div></label>
-      <label class="ro" onclick="sel(this,'org','en')"><input type="radio" name="org"><div class="rot">General enterprise / other industry<div class="ros">Retail, legal, education, logistics, professional services — Privacy Act ADM and general AI governance obligations apply</div></div></label>
-      <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org"><div class="rot">Government / public sector<div class="ros">Federal or state agencies, regulators, policy bodies — AI in Government Policy obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','hp')"><input type="radio" name="org" aria-label="Health provider or hospital"><div class="rot">Health provider / hospital<div class="ros">Public or private health system, hospital network, aged care provider</div></div></label>
+      <label class="ro" onclick="sel(this,'org','ht')"><input type="radio" name="org" aria-label="HealthTech or MedTech company"><div class="rot">HealthTech / MedTech company<div class="ros">Building AI-powered health products, SaMD, or clinical decision support tools</div></div></label>
+      <label class="ro" onclick="sel(this,'org','dh')"><input type="radio" name="org" aria-label="Digital health or health insurance"><div class="rot">Digital health / health insurance<div class="ros">Digital platforms, PHI management, primary care, telehealth</div></div></label>
+      <label class="ro" onclick="sel(this,'org','fs')"><input type="radio" name="org" aria-label="Financial services or APRA-regulated entity"><div class="rot">Financial services / APRA-regulated entity<div class="ros">Bank, insurer, superannuation fund, or other APRA-regulated institution — CPS 230 and AI governance obligations likely apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','en')"><input type="radio" name="org" aria-label="General enterprise or other industry"><div class="rot">General enterprise / other industry<div class="ros">Retail, legal, education, logistics, professional services — Privacy Act ADM and general AI governance obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'org','gv')"><input type="radio" name="org" aria-label="Government or public sector"><div class="rot">Government / public sector<div class="ros">Federal or state agencies, regulators, policy bodies — AI in Government Policy obligations apply</div></div></label>
     </div>
     <span class="ql">Briefly describe what you are building or deploying</span>
     <textarea id="idesc" placeholder="e.g. An AI tool that analyses customer data to recommend products, automate loan decisions, or support clinical triage..."></textarea>
@@ -239,11 +382,11 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
 
     <span class="ql">3. What does this AI output — and who acts on it?</span>
     <div class="rg">
-      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',3);showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Health information, guidance, or responses to health questions<div class="ros">e.g. symptom checkers, AI chat answering health questions — even if not branded as clinical</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Financial recommendation, credit assessment, or risk scoring<div class="ros">e.g. loan decisioning, fraud detection, investment recommendations, insurance pricing</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',2);showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Operational or administrative output — regulatory status not yet assessed<div class="ros">e.g. scheduling, coding, documentation — confirm whether sector-specific obligations apply</div></div></label>
-      <label class="ro" onclick="sel(this,'q3',1);showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no consequential recommendations<div class="ros">e.g. rostering, supply chain, HR admin — no output that informs a decision about an individual</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',3);ST.q3txt='Clinical diagnosis, treatment recommendation, or triage decision';showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Clinical diagnosis, treatment recommendation, or triage decision<div class="ros">e.g. flagging a condition, recommending a medication, triaging urgency</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',3);ST.q3txt='Health information, guidance, or responses to health questions';showQ3warn(3)"><input type="radio" name="q3"><div class="rot">Health information, guidance, or responses to health questions<div class="ros">e.g. symptom checkers, AI chat answering health questions — even if not branded as clinical</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',2);ST.q3txt='Financial recommendation, credit assessment, or risk scoring';showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Financial recommendation, credit assessment, or risk scoring<div class="ros">e.g. loan decisioning, fraud detection, investment recommendations, insurance pricing</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',2);ST.q3txt='Operational or administrative output — regulatory status not yet assessed';showQ3warn(2)"><input type="radio" name="q3"><div class="rot">Operational or administrative output — regulatory status not yet assessed<div class="ros">e.g. scheduling, coding, documentation — confirm whether sector-specific obligations apply</div></div></label>
+      <label class="ro" onclick="sel(this,'q3',1);ST.q3txt='Purely administrative or workflow — no consequential recommendations';showQ3warn(1)"><input type="radio" name="q3"><div class="rot">Purely administrative or workflow — no consequential recommendations<div class="ros">e.g. rostering, supply chain, HR admin — no output that informs a decision about an individual</div></div></label>
     </div>
     <div id="q3warn" style="display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.6;"></div>
 
@@ -285,7 +428,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     <div class="step-desc" id="rsum"></div>
     <div class="risk-result">
       <div id="tier-badge" class="risk-tier-badge"></div>
-      <div class="rmeter" id="rmeter">
+      <div class="rmeter">
         <div class="rs" id="r0"></div><div class="rs" id="r1"></div>
         <div class="rs" id="r2"></div><div class="rs" id="r3"></div>
         <div class="rs" id="r4"></div><div class="rs" id="r5"></div>
@@ -325,7 +468,7 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
   <div class="sec" id="s4">
     <div class="step-label">Step 5 — outputs</div>
     <div class="step-title">Governance documents</div>
-    <div class="step-desc">Ready-to-use starting documents for your team, board, or regulatory submissions.</div>
+    <div class="step-desc">Ready-to-use starting documents for your team, board, or regulatory submissions. Download the full PDF report for your matter file — includes assessment record, risk profile, gap analysis, board brief, action plan, and technology checklist.</div>
     <div class="doc-tabs">
       <button class="tab-btn active" id="tb1" onclick="showDoc('d1')">Risk summary</button>
       <button class="tab-btn" id="tb2" onclick="showDoc('d2')">Board brief</button>
@@ -338,335 +481,297 @@ footer { border-top:1px solid var(--border-faint); margin-top:56px; padding:20px
     <div class="doc-out" id="d4" style="display:none"></div>
     <div class="copy-row">
       <button class="copy-btn" onclick="copyDoc()">Copy to clipboard</button>
+      <button class="pdf-btn" onclick="openMatter()">⬇ Download full PDF report</button>
     </div>
     <hr class="divider">
     <div class="step-label" style="margin-bottom:8px">What next?</div>
-    <p style="font-size:14px;color:var(--fg-3);margin-bottom:1.25rem;line-height:1.65">Use these outputs to brief your team and board. For a full implementation roadmap — including timelines, workstreams and accountability mapping — restart the assessment or engage a governance specialist.</p>
+    <p style="font-size:14px;color:var(--fg-3);margin-bottom:1.25rem;line-height:1.65">Use these outputs to brief your team and board. For a licensed or white-label version of this tool with matter management, audit trail, and versioned assessments, contact <a href="mailto:rebecca@aigovnav.com.au" style="color:var(--signal-600)">rebecca@aigovnav.com.au</a></p>
     <div class="brow">
       <button class="btn" onclick="gt(3)">← Back</button>
       <button class="btn pri" onclick="restart()">New assessment →</button>
     </div>
   </div>
-</div><!-- /shell -->
+</div>
 
 <footer>
   <div class="footer-inner">
     <p class="footer-note">This tool is a governance prompt, not legal advice. Validate all obligations with your legal, regulatory and clinical governance teams before acting.<br>© 2025–2026 Rebecca Lynn. AIGovNav™ (TM application filed June 2026, ref: AMCZ-2615845484)</p>
     <div class="footer-attr">
       Built by <a href="https://linkedin.com/in/digitalrebecca" target="_blank">Rebecca Lynn</a><br>
-      <a href="https://linkedin.com/in/digitalrebecca" target="_blank">linkedin.com/in/digitalrebecca</a><br>
       <a href="https://aigovnav.com.au" target="_blank">aigovnav.com.au</a>
     </div>
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script>
-var ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
+// ── STATE ── (same as live site + q3txt + matter/pract)
+var ST = { org:null, sc:{}, tier:'', fws:[], fwDetails:[], gaps:[], desc:'', q3txt:'',
+  matter:{prefix:'',year:'2026',num:'',ref:'—'}, pract:{name:'',email:''} };
 var stepNames = ['Context','Risk','Profile','Gaps','Outputs'];
 
-function showQ3warn(v) {
-  var el = document.getElementById('q3warn');
-  if (v === 3) {
-    el.style.display = 'block';
-    el.style.background = '#F5DEDF';
-    el.style.border = '1px solid #B0282C';
-    el.style.color = '#B0282C';
-    el.innerHTML = '<strong>⚠ TGA exposure likely.</strong> The TGA defines Software as a Medical Device (SaMD) based on <em>intended purpose</em>, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be a medical device — even if not branded as one. The "excluded goods" provisions do not protect software whose primary function generates health-related output. TGA classification assessment is required before deployment.';
-  } else if (v === 2) {
-    el.style.display = 'block';
-    el.style.background = '#F5E6CC';
-    el.style.border = '1px solid #B07A1A';
-    el.style.color = '#B07A1A';
-    el.innerHTML = '<strong>Note:</strong> Software generating financial recommendations, credit assessments or risk scores may trigger ASIC, APRA, and Privacy Act obligations. Confirm your regulatory classification — especially if APRA-regulated or if outputs influence decisions about individuals.';
-  } else {
-    el.style.display = 'none';
-  }
+// ── MODAL CONTROLS ──
+function closePrivacy(){
+  document.getElementById('privacyModal').hidden=true;
+  document.getElementById('idesc').focus();
+}
+function openMatter(){ document.getElementById('matterModal').hidden=false; document.getElementById('mPfx').focus(); }
+function closeMatter(){ document.getElementById('matterModal').hidden=true; }
+
+// ── MATTER REFERENCE ──
+function updateRef(){
+  var p=(document.getElementById('mPfx').value||'').toUpperCase();
+  var y=document.getElementById('mYr').value||'';
+  var n=document.getElementById('mNo').value||'';
+  ST.matter={prefix:p,year:y,num:n,ref:p&&y&&n?p+'-'+y+'-'+n:'—'};
+  document.getElementById('refDisp').textContent=ST.matter.ref;
 }
 
-function showQ6warn(v) {
-  var el = document.getElementById('q6warn');
-  el.style.display = (v >= 2) ? 'block' : 'none';
+function validateMatter(){
+  var p=document.getElementById('mPfx').value.trim();
+  var y=document.getElementById('mYr').value.trim();
+  var n=document.getElementById('mNo').value.trim();
+  var nm=document.getElementById('pName').value.trim();
+  var em=document.getElementById('pEmail').value.trim();
+  var ok=true;
+  function fe(id,show){document.getElementById(id).classList.toggle('show',show);if(show)ok=false;}
+  fe('refErr',!p||!y||!n);
+  fe('nameErr',!nm);
+  fe('emailErr',!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em));
+  if(!ok)return;
+  ST.pract={name:nm,email:em};
+  closeMatter();
+  generatePDF();
 }
 
-function sel(el, name, val) {
-  document.querySelectorAll('input[name="'+name+'"]').forEach(function(i){ i.closest('.ro').classList.remove('sel'); });
+// ── EXACT LIVE SITE JS ──
+function showQ3warn(v){
+  var el=document.getElementById('q3warn');
+  if(v===3){el.style.display='block';el.style.background='#F5DEDF';el.style.border='1px solid #B0282C';el.style.color='#B0282C';el.innerHTML='<strong>⚠ TGA exposure likely.</strong> The TGA defines Software as a Medical Device (SaMD) based on <em>intended purpose</em>, not technology type. Software that provides health information, answers health questions, or influences a clinical or personal health decision may be a medical device — even if not branded as one. The "excluded goods" provisions do not protect software whose primary function generates health-related output. TGA classification assessment is required before deployment.';}
+  else if(v===2){el.style.display='block';el.style.background='#F5E6CC';el.style.border='1px solid #B07A1A';el.style.color='#B07A1A';el.innerHTML='<strong>Note:</strong> Software generating financial recommendations, credit assessments or risk scores may trigger ASIC, APRA, and Privacy Act obligations. Confirm your regulatory classification — especially if APRA-regulated or if outputs influence decisions about individuals.';}
+  else{el.style.display='none';}
+}
+
+function showQ6warn(v){ document.getElementById('q6warn').style.display=(v>=2)?'block':'none'; }
+
+function sel(el,name,val){
+  document.querySelectorAll('input[name="'+name+'"]').forEach(function(i){i.closest('.ro').classList.remove('sel');});
   el.classList.add('sel');
-  ST.sc[name] = val;
-  if(name === 'org') ST.org = val;
+  ST.sc[name]=val;
+  if(name==='org')ST.org=val;
 }
 
-function gt(n) {
-  document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('on'); });
+function gt(n){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on');});
   document.getElementById('s'+n).classList.add('on');
-  var pct = ((n+1)/5*100).toFixed(0)+'%';
-  document.getElementById('pfill').style.width = pct;
-  document.getElementById('pl').textContent = 'Step '+(n+1)+' of 5';
-  document.getElementById('pn').textContent = stepNames[n];
+  document.getElementById('pfill').style.width=((n+1)/5*100).toFixed(0)+'%';
+  document.getElementById('pl').textContent='Step '+(n+1)+' of 5';
+  document.getElementById('pn').textContent=stepNames[n];
   window.scrollTo(0,0);
 }
 
-function calc() {
-  var s = ST.sc;
-  var qs = ['q1','q2','q3','q4','q5','q6'];
-  var tot = 0;
-  qs.forEach(function(q){ tot += (s[q]||1); });
-  ST.desc = document.getElementById('idesc').value || 'AI initiative';
+function calc(){
+  var s=ST.sc;
+  var qs=['q1','q2','q3','q4','q5','q6'];
+  var tot=0; qs.forEach(function(q){tot+=(s[q]||1);});
+  ST.desc=document.getElementById('idesc').value||'AI initiative';
+  var isHealth=['hp','ht','dh'].indexOf(ST.org)>=0;
+  var isFS=ST.org==='fs';
+  var forceHigh=((s.q3||1)>=3&&isHealth)||(isFS&&(s.q1||1)>=2)||((s.q4||1)===3&&(s.q1||1)>=2)||(s.q6||1)>=3;
+  var tier,sum;
+  if(forceHigh){
+    tier='High';
+    if((s.q3||1)>=3&&isHealth){sum='TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment.';}
+    else if(isFS&&(s.q1||1)>=2){sum='APRA CPS 230 obligations are likely to apply. As an APRA-regulated entity deploying AI that influences material decisions, you may face operational risk management requirements including board oversight, third-party risk assessment, and documented AI governance. A materiality assessment is recommended.';}
+    else if((s.q6||1)>=3){sum='Privacy Act automated decision-making (ADM) transparency obligations are likely to apply. From 10 December 2026, organisations that use AI to substantially influence decisions about individuals will need to meet new disclosure requirements. The legislative deadline is fixed — preparation should begin now regardless of when final OAIC guidance is published.';}
+    else{sum='This initiative is high risk under Australian and international frameworks. Formal governance assessments, conformity reviews, and ongoing monitoring are required.';}
+  } else if(tot<=9){tier='Low';sum='This initiative carries lower regulatory complexity. Standard governance practices apply. Focus on documentation, policy foundations, Privacy Act obligations, and confirming ADM disclosure requirements.';}
+  else if(tot<=14){tier='Medium';sum='This initiative carries moderate regulatory complexity. Structured governance, privacy obligations, and sector-specific framework requirements need to be addressed before deployment.';}
+  else{tier='High';sum='This initiative is high risk under Australian and international frameworks. Multiple regulatory obligations apply — prioritise high-priority gaps before deployment.';}
+  ST.tier=tier;
 
-  var isHealth = ['hp','ht','dh'].indexOf(ST.org) >= 0;
-  var isFS = ST.org === 'fs';
-  var forceHigh = ((s.q3||1) >= 3 && isHealth) || (isFS && (s.q1||1) >= 2) || ((s.q4||1) === 3 && (s.q1||1) >= 2) || (s.q6||1) >= 3;
+  var badge=document.getElementById('tier-badge');
+  badge.textContent=tier+' risk';
+  badge.className='risk-tier-badge tier-'+tier.toLowerCase();
 
-  var tier, sum;
-  if (forceHigh) {
-    tier = 'High';
-    if ((s.q3||1) >= 3 && isHealth) {
-      sum = 'TGA classification exposure has been identified. Regardless of other answers, this initiative is High complexity — TGA SaMD assessment is required before deployment.';
-    } else if (isFS && (s.q1||1) >= 2) {
-      sum = 'APRA CPS 230 obligations are likely to apply. As an APRA-regulated entity deploying AI that influences material decisions, you may face operational risk management requirements including board oversight, third-party risk assessment, and documented AI governance. A materiality assessment is recommended.';
-    } else if ((s.q6||1) >= 3) {
-      sum = 'Privacy Act automated decision-making (ADM) transparency obligations are likely to apply. From 10 December 2026, organisations that use AI to substantially influence decisions about individuals will need to meet new disclosure requirements. The legislative deadline is fixed — preparation should begin now regardless of when final OAIC guidance is published.';
-    } else {
-      sum = 'This initiative is high risk under Australian and international frameworks. Formal governance assessments, conformity reviews, and ongoing monitoring are required.';
-    }
-  } else if (tot <= 9) {
-    tier = 'Low';
-    sum = 'This initiative carries lower regulatory complexity. Standard governance practices apply. Focus on documentation, policy foundations, Privacy Act obligations, and confirming ADM disclosure requirements.';
-  } else if (tot <= 14) {
-    tier = 'Medium';
-    sum = 'This initiative carries moderate regulatory complexity. Structured governance, privacy obligations, and sector-specific framework requirements need to be addressed before deployment.';
-  } else {
-    tier = 'High';
-    sum = 'This initiative is high risk under Australian and international frameworks. Multiple regulatory obligations apply — prioritise high-priority gaps before deployment.';
-  }
-  ST.tier = tier;
+  var fill=Math.min(8,Math.round((tot-6)/12*8));
+  if(forceHigh)fill=Math.max(fill,6);
+  for(var i=0;i<8;i++){var el=document.getElementById('r'+i);el.className='rs';if(i<fill){if(i<2)el.classList.add('g');else if(i<5)el.classList.add('a');else el.classList.add('r');}}
 
-  var badge = document.getElementById('tier-badge');
-  badge.textContent = tier + ' risk';
-  badge.className = 'risk-tier-badge tier-'+tier.toLowerCase();
+  var fws=[],fwD=[];
+  if(isHealth&&(s.q3||1)>=3){fws.push('TGA SaMD');fwD.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'});}
+  if(isFS){fws.push('APRA CPS 230');fwD.push({n:'APRA CPS 230',d:'APRA\'s operational risk management standard. Requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers. APRA\'s April 2026 letter explicitly named AI governance failures as a supervisory concern.'});}
+  if(isFS){fws.push('APRA CPS 234');fwD.push({n:'APRA CPS 234',d:'Information security standard applying to APRA-regulated entities. AI systems processing sensitive financial or customer data may need to meet CPS 234 information security requirements including testing, incident response, and third-party oversight.'});}
+  fws.push('Privacy Act 1988');fwD.push({n:'Privacy Act 1988',d:'Australian privacy law governing personal information. Health information, financial data, and biometrics are sensitive information requiring higher protection. Breach notification, data minimisation, and lawful basis obligations apply.'});
+  if((s.q6||1)>=2){fws.push('Privacy Act — ADM');fwD.push({n:'Privacy Act — ADM',d:'Automated Decision-Making transparency requirements effective 10 December 2026. Organisations using AI to substantially influence decisions about individuals are likely to face new disclosure obligations. Final OAIC guidance is under development — begin preparation now and engage legal counsel to confirm specific obligations.'});}
+  if((s.q1||1)>=2||(s.q3||1)>=2){fws.push('OECD AI Principles');fwD.push({n:'OECD AI Principles',d:'Internationally adopted by Australia. Covers human-centred values, transparency, robustness, accountability and inclusive growth.'});}
+  if((s.q5||1)>=2){fws.push('EU AI Act');fwD.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare and financial services AI may be explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'});}
+  if((s.q5||1)>=2&&isHealth){fws.push('GDPR');fwD.push({n:'GDPR',d:'Health data is sensitive under GDPR. AI training on patient records requires lawful basis, data minimisation, and the right to explanation.'});}
+  if((s.q5||1)===3&&isHealth){fws.push('FDA SaMD (US)');fwD.push({n:'FDA SaMD (US)',d:'Regulates AI/ML-based SaMD under 510(k) and De Novo pathways. Published action plan for AI/ML requires post-market performance monitoring.'});}
+  if(ST.org==='gv'){fws.push('AI in Government Policy');fwD.push({n:'AI in Government Policy',d:'Australian Government AI in Government Policy v2.0. Requires ethical principles, transparency, accountability, and risk management for government AI deployments.'});}
+  fws.push('ISO 42001');fwD.push({n:'ISO 42001',d:'International standard for AI management systems. Provides a framework for responsible AI development, deployment, and governance — increasingly referenced by Australian regulators.'});
+  ST.fws=fws;ST.fwDetails=fwD;
 
-  var fill = Math.min(8, Math.round((tot-6)/12*8));
-  if (forceHigh) fill = Math.max(fill, 6);
-  for (var i=0; i<8; i++) {
-    var el = document.getElementById('r'+i);
-    el.className = 'rs';
-    if (i < fill) {
-      if (i < 2) el.classList.add('g');
-      else if (i < 5) el.classList.add('a');
-      else el.classList.add('r');
-    }
-  }
+  // Gaps (exact from live site)
+  var gaps=[];
+  if(isHealth&&(s.q3||1)>=3)gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software providing health information, answering health questions, or influencing a clinical decision may be in scope. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk.',actions:[{step:'Determine whether your AI\'s intended purpose brings it within the TGA SaMD definition',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},{step:'Assess the excluded goods boundary — if output could inform a clinical or personal health decision, exemption is unlikely to apply',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device-samd-regulatory-requirements',urlLabel:'TGA excluded goods guidance'},{step:'Engage a TGA regulatory consultant to confirm classification and risk tier (Class I–III)',owner:'Legal / Regulatory',time:'2–4 weeks',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'TGA application guide'},{step:'If registration is required, initiate ARTG application',owner:'Legal / Regulatory + Product',time:'3–6 months',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'ARTG submission process'},{step:'Document SaMD classification rationale in your governance register',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}]});
+  if(isFS)gaps.push({cls:'gap-h',lb:'high',t:'APRA CPS 230 AI governance — materiality assessment recommended',d:'APRA\'s CPS 230 Operational Risk Management standard requires APRA-regulated entities to manage material operational risks. APRA\'s April 2026 supervisory letter explicitly named AI governance as an area of concern. Whether CPS 230 applies to a specific AI initiative depends on a materiality assessment — legal and regulatory advice is recommended.',actions:[{step:'Map this AI initiative against CPS 230\'s definition of material operational risk',owner:'Risk / Compliance',time:'1–2 weeks',url:'https://www.apra.gov.au/sites/default/files/2023-07/Prudential%20Standard%20CPS%20230%20Operational%20Risk%20Management.pdf',urlLabel:'CPS 230 — full standard'},{step:'If the AI system is third-party, assess whether it constitutes a material service arrangement under CPS 230',owner:'Risk / Legal',time:'2–3 weeks',url:null,urlLabel:null},{step:'Prepare a board-level AI governance paper covering risk identification, oversight, third-party management, and incident response',owner:'Executive / Board',time:'2–4 weeks',url:null,urlLabel:null},{step:'Include AI governance as a standing item in operational risk and board risk committee reporting',owner:'Risk / Company Secretary',time:'Next committee cycle',url:null,urlLabel:null},{step:'Review AI system against CPS 234 information security requirements',owner:'CISO / Risk',time:'2–3 weeks',url:'https://www.apra.gov.au/cps-234-information-security',urlLabel:'CPS 234 — Information Security'}]});
+  if((s.q6||1)>=2)gaps.push({cls:'gap-h',lb:'high',t:'Privacy Act ADM transparency — deadline 10 December 2026',d:'The Privacy Act 1988 automated decision-making amendments introduce new transparency requirements effective 10 December 2026. The legislative deadline is fixed regardless of when final OAIC guidance is published. Legal advice is recommended to confirm specific obligations before the deadline.',actions:[{step:'Conduct an AI inventory audit — identify every system that makes or substantially influences decisions about individuals',owner:'Privacy Officer / Legal',time:'2–3 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'OAIC Privacy Act guidance'},{step:'Document what decisions each AI influences, what data it uses, how it works, and what human oversight exists',owner:'Privacy Officer / Product',time:'3–4 weeks',url:null,urlLabel:null},{step:'Update Privacy Policy to include ADM disclosure language before final OAIC guidance is published',owner:'Legal / Communications',time:'2–3 weeks',url:'https://www.oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making',urlLabel:'OAIC ADM consultation'},{step:'Monitor OAIC for final ADM guidance and update internal processes accordingly',owner:'Privacy Officer / Legal',time:'Ongoing — deadline Dec 2026',url:null,urlLabel:null},{step:'Engage legal counsel to confirm specific obligations — do not wait for final OAIC guidance',owner:'Executive / Legal',time:'ASAP',url:null,urlLabel:null}]});
+  if((s.q4||1)===3)gaps.push({cls:'gap-h',lb:'high',t:'No human-in-the-loop oversight',d:'Fully autonomous AI in high-stakes contexts requires documented human oversight mechanisms — required under OECD principles, the EU AI Act, APRA guidance, and Privacy Act ADM obligations.',actions:[{step:'Map every AI output to a decision type and assign a human review requirement',owner:'Product / Risk Lead',time:'1–2 weeks',url:null,urlLabel:null},{step:'Design a human review workflow including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:null,urlLabel:null},{step:'Document the human-in-the-loop process in your AI governance policy',owner:'Compliance / Product',time:'1 week',url:null,urlLabel:null},{step:'Review against OECD AI Principle 1.4 and EU AI Act Article 14',owner:'Legal',time:'1 week',url:'https://oecd.ai/en/ai-principles',urlLabel:'OECD AI Principles'}]});
+  if((s.q2||1)>=2)gaps.push({cls:'gap-h',lb:'high',t:'Personal information handling policy required',d:'Processing personal information — health records, financial data, or other sensitive information — requires lawful basis, a privacy impact assessment, and data minimisation controls under the Privacy Act 1988.',actions:[{step:'Commission a Privacy Impact Assessment (PIA) before build or deployment',owner:'Privacy Officer / Legal',time:'2–4 weeks',url:'https://www.oaic.gov.au/privacy/guidance-and-advice/privacy-impact-assessments',urlLabel:'OAIC PIA guidance'},{step:'Confirm lawful basis for collecting and processing sensitive information under APPs 3 and 6',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'Privacy Act — APPs'},{step:'Implement data minimisation — only collect the minimum personal information required',owner:'Engineering / Product',time:'2–3 weeks',url:null,urlLabel:null},{step:'Establish a data breach response plan and register with OAIC notifiable data breaches scheme',owner:'Privacy Officer',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/notifiable-data-breaches',urlLabel:'OAIC Notifiable Data Breaches'}]});
+  if(isHealth&&(s.q1||1)>=2)gaps.push({cls:'gap-m',lb:'medium',t:'Clinical validation evidence needed',d:'AI influencing clinical decisions must have documented validation studies showing performance across diverse patient populations.',actions:[{step:'Define clinical validation requirements with your clinical lead',owner:'Clinical Lead / Product',time:'2–3 weeks',url:null,urlLabel:null},{step:'Design and run a validation study across a representative patient population',owner:'Clinical / Data Science',time:'1–6 months',url:'https://www.tga.gov.au/resources/resource/guidance/clinical-evidence-guidelines-medical-devices',urlLabel:'TGA clinical evidence guidelines'},{step:'Document validation results in a clinical evidence report',owner:'Clinical / Regulatory',time:'2–4 weeks',url:null,urlLabel:null},{step:'Establish a post-deployment monitoring plan for ongoing clinical performance',owner:'Clinical / Product',time:'2 weeks',url:null,urlLabel:null}]});
+  if((s.q5||1)>=2)gaps.push({cls:'gap-m',lb:'medium',t:'EU AI Act conformity assessment',d:'Healthcare and financial services AI in EU markets is explicitly classified as high risk and requires conformity assessments, technical documentation, and post-market monitoring obligations.',actions:[{step:'Confirm AI system classification under the EU AI Act Annex III',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://artificialintelligenceact.eu/',urlLabel:'EU AI Act — full text'},{step:'Prepare technical documentation per Article 11',owner:'Product / Legal',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/11/',urlLabel:'EU AI Act Article 11'},{step:'Implement a post-market monitoring system per Article 72',owner:'Compliance / Engineering',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/72/',urlLabel:'EU AI Act Article 72'},{step:'Appoint an EU authorised representative if not EU-based',owner:'Legal',time:'2–4 weeks',url:null,urlLabel:null}]});
+  gaps.push({cls:'gap-m',lb:'medium',t:'AI governance policy not documented',d:'A formal AI governance policy covering accountability, transparency, explainability and bias monitoring should be in place and signed off before deployment.',actions:[{step:'Draft an AI governance policy using NIST AI RMF or ISO 42001 as a structural framework',owner:'Risk / Compliance',time:'2–4 weeks',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI Risk Management Framework'},{step:'Define accountability — name the executive owner of AI governance for this initiative',owner:'Executive / Board',time:'1 week',url:null,urlLabel:null},{step:'Include explainability requirements — how will the AI explain its outputs to users',owner:'Product / Legal',time:'1–2 weeks',url:null,urlLabel:null},{step:'Get policy signed off by executive and tabled at board level',owner:'Executive / Board',time:'2 weeks',url:null,urlLabel:null}]});
+  if((s.q4||1)>=2)gaps.push({cls:'gap-l',lb:'low',t:'Model monitoring cadence undefined',d:'Ongoing performance monitoring — including drift detection and bias audits — should be established and scheduled at the point of deployment.',actions:[{step:'Define key model performance metrics to monitor post-deployment',owner:'Data Science / Engineering',time:'1–2 weeks',url:null,urlLabel:null},{step:'Set alert thresholds and automated monitoring',owner:'Engineering',time:'2–3 weeks',url:null,urlLabel:null},{step:'Schedule a bias audit at 3 months, 6 months, and annually',owner:'Data Science',time:'1 week to schedule',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI RMF — measure function'},{step:'Document monitoring results and report to governance committee quarterly',owner:'Risk / Compliance',time:'Ongoing',url:null,urlLabel:null}]});
+  gaps.push({cls:'gap-l',lb:'low',t:'Board AI literacy and oversight',d:'Boards overseeing AI deployments should have documented AI governance capability, with AI risk as a standing agenda item at Risk and Audit Committee meetings.',actions:[{step:'Add AI risk as a standing agenda item at the next Risk and Audit Committee meeting',owner:'Company Secretary / Board Chair',time:'Next meeting cycle',url:null,urlLabel:null},{step:'Brief the board on this AI initiative using the Board Briefing Note from the outputs tab',owner:'Executive Sponsor',time:'1–2 weeks',url:null,urlLabel:null},{step:'Identify a board member or advisor with AI governance expertise (consider AIGP-certified)',owner:'Board Chair / Nominations Committee',time:'1–3 months',url:'https://iapp.org/certify/aigp/',urlLabel:'IAPP AIGP certification'},{step:'Complete AICD AI governance for directors module',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}]});
+  ST.gaps=gaps;
 
-  var fws = [], fwDetails = [];
-
-  // Health frameworks
-  if(isHealth && (s.q3||1)>=3){ fws.push('TGA SaMD'); fwDetails.push({n:'TGA SaMD',d:'Regulates software as a medical device. AI clinical decision support may require registration and applies EU MDR-aligned risk classification.'}); }
-
-  // Financial services frameworks
-  if(isFS){ fws.push('APRA CPS 230'); fwDetails.push({n:'APRA CPS 230',d:'APRA\'s operational risk management standard. Requires APRA-regulated entities to identify AI as a material operational risk, maintain board-level oversight, and manage third-party AI providers. APRA\'s April 2026 letter explicitly named AI governance failures as a supervisory concern.'}); }
-  if(isFS){ fws.push('APRA CPS 234'); fwDetails.push({n:'APRA CPS 234',d:'Information security standard applying to APRA-regulated entities. AI systems processing sensitive financial or customer data may need to meet CPS 234 information security requirements including testing, incident response, and third-party oversight. Confirm applicability with legal and compliance advice.'}); }
-
-  // Universal frameworks
-  fws.push('Privacy Act 1988'); fwDetails.push({n:'Privacy Act 1988',d:'Australian privacy law governing personal information. Health information, financial data, and biometrics are sensitive information requiring higher protection. Breach notification, data minimisation, and lawful basis obligations apply.'});
-
-  // ADM — triggered by Q6
-  if((s.q6||1)>=2){ fws.push('Privacy Act — ADM'); fwDetails.push({n:'Privacy Act — ADM',d:'Automated Decision-Making transparency requirements effective 10 December 2026. Organisations using AI to substantially influence decisions about individuals are likely to face new disclosure obligations. Final OAIC guidance is under development (consultation closed April 2026) — begin preparation now and engage legal counsel to confirm specific obligations.'}); }
-
-  if((s.q1||1)>=2||(s.q3||1)>=2){ fws.push('OECD AI Principles'); fwDetails.push({n:'OECD AI Principles',d:'Internationally adopted by Australia. Covers human-centred values, transparency, robustness, accountability and inclusive growth.'}); }
-  if((s.q5||1)>=2){ fws.push('EU AI Act'); fwDetails.push({n:'EU AI Act',d:'First binding AI regulation globally. Healthcare and financial services AI may be explicitly high risk — requiring conformity assessments, technical documentation and ongoing monitoring.'}); }
-  if((s.q5||1)>=2 && isHealth){ fws.push('GDPR'); fwDetails.push({n:'GDPR',d:'Health data is sensitive under GDPR. AI training on patient records requires lawful basis, data minimisation, and the right to explanation.'}); }
-  if((s.q5||1)===3 && isHealth){ fws.push('FDA SaMD (US)'); fwDetails.push({n:'FDA SaMD (US)',d:'Regulates AI/ML-based SaMD under 510(k) and De Novo pathways. Published action plan for AI/ML requires post-market performance monitoring.'}); }
-  if(ST.org==='gv'){ fws.push('AI in Government Policy'); fwDetails.push({n:'AI in Government Policy',d:'Australian Government AI in Government Policy v2.0. Requires ethical principles, transparency, accountability, and risk management for government AI deployments.'}); }
-  fws.push('ISO 42001'); fwDetails.push({n:'ISO 42001',d:'International standard for AI management systems. Provides a framework for responsible AI development, deployment, and governance — increasingly referenced by Australian regulators.'});
-  ST.fws = fws; ST.fwDetails = fwDetails;
-
-  var gaps = [];
-
-  // Health-specific gaps
-  if(isHealth && (s.q3||1)>=3) gaps.push({cls:'gap-h',lb:'high',t:'TGA classification not confirmed — SaMD and excluded goods assessment required',d:'The TGA classifies software as a medical device (SaMD) based on intended purpose, not technology type. Software providing health information, answering health questions, or influencing a clinical decision may be in scope. The "excluded goods" provisions do not protect software whose primary function generates health-related output. Unregistered SaMD in Australia is non-compliant and carries significant regulatory and liability risk.',
-    actions:[
-      {step:'Determine whether your AI\'s intended purpose brings it within the TGA SaMD definition — focus on what the output does, not what the technology is',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device',urlLabel:'TGA SaMD guidance'},
-      {step:'Assess the excluded goods boundary: if your software provides health information or its output could inform a clinical or personal health decision, the excluded goods exemption is unlikely to apply',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://www.tga.gov.au/resources/resource/guidance/software-medical-device-samd-regulatory-requirements',urlLabel:'TGA excluded goods guidance'},
-      {step:'Engage a TGA regulatory consultant to confirm classification and risk tier (Class I–III)',owner:'Legal / Regulatory',time:'2–4 weeks',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'TGA application guide'},
-      {step:'If registration is required, initiate ARTG application',owner:'Legal / Regulatory + Product',time:'3–6 months',url:'https://www.tga.gov.au/products/medical-devices/how-prepare-and-submit-medical-device-application',urlLabel:'ARTG submission process'},
-      {step:'Document your SaMD classification rationale and store in your governance register regardless of outcome',owner:'Product / Compliance',time:'1 week',url:null,urlLabel:null}
-    ]});
-
-  // CPS 230 gaps — financial services
-  if(isFS) gaps.push({cls:'gap-h',lb:'high',t:'APRA CPS 230 AI governance — materiality assessment recommended',d:'APRA\'s CPS 230 Operational Risk Management standard requires APRA-regulated entities to manage material operational risks. Where AI is deployed in ways that could materially affect operations, board oversight, third-party risk assessment, and documented AI governance are likely to be expected. APRA\'s April 2026 supervisory letter explicitly named AI governance as an area of concern across the sector. Whether CPS 230 applies to a specific AI initiative depends on a materiality assessment — legal and regulatory advice is recommended.',
-    actions:[
-      {step:'Map this AI initiative against CPS 230\'s definition of material operational risk — if AI failure could materially disrupt critical operations, CPS 230 governance expectations are likely to apply. Seek legal advice to confirm.',owner:'Risk / Compliance',time:'1–2 weeks',url:'https://www.apra.gov.au/sites/default/files/2023-07/Prudential%20Standard%20CPS%20230%20Operational%20Risk%20Management.pdf',urlLabel:'CPS 230 — full standard'},
-      {step:'If the AI system is provided by a third party, assess whether it constitutes a material service arrangement under CPS 230 and document accordingly',owner:'Risk / Legal',time:'2–3 weeks',url:'https://hwlebsworth.com.au/not-so-fast-apra-issues-ai-reminder-ahead-of-cps-230-deadline/',urlLabel:'APRA AI governance reminder — April 2026'},
-      {step:'Prepare a board-level AI governance paper covering: risk identification, oversight accountability, third-party management, and incident response for this initiative',owner:'Executive / Board',time:'2–4 weeks',url:null,urlLabel:null},
-      {step:'Include AI governance as a standing item in your operational risk committee and board risk committee reporting',owner:'Risk / Company Secretary',time:'Next committee cycle',url:null,urlLabel:null},
-      {step:'Review AI system against CPS 234 information security requirements — particularly data handling, access controls, and incident response',owner:'CISO / Risk',time:'2–3 weeks',url:'https://www.apra.gov.au/cps-234-information-security',urlLabel:'CPS 234 — Information Security'}
-    ]});
-
-  // ADM gaps — triggered by Q6
-  if((s.q6||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Privacy Act ADM transparency — deadline 10 December 2026',d:'The Privacy Act 1988 automated decision-making amendments introduce new transparency requirements effective 10 December 2026. Organisations that use AI to substantially influence decisions about individuals are likely to need to disclose this use and explain the AI\'s role. The OAIC is finalising detailed guidance (consultation closed April 2026) — final scope and obligations are not yet settled. The legislative deadline is fixed regardless of when final guidance is published. Legal advice is recommended to confirm your specific obligations before the deadline.',
-    actions:[
-      {step:'Conduct an AI inventory audit: identify every system that makes or substantially influences decisions about individuals',owner:'Privacy Officer / Legal',time:'2–3 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'OAIC Privacy Act guidance'},
-      {step:'For each identified system, document: what decisions it influences, what data it uses, how it works, and what human oversight exists',owner:'Privacy Officer / Product',time:'3–4 weeks',url:null,urlLabel:null},
-      {step:'Update your Privacy Policy to include ADM disclosure language — describe AI use in decision-making in plain language before final OAIC guidance is published',owner:'Legal / Communications',time:'2–3 weeks',url:'https://www.oaic.gov.au/engage-with-us/consultations/consultation-on-guidance-for-transparency-in-automated-decision-making',urlLabel:'OAIC ADM consultation — June 2026'},
-      {step:'Monitor OAIC for final ADM guidance and update internal processes accordingly — do not wait for guidance before beginning preparation',owner:'Privacy Officer / Legal',time:'Ongoing — deadline Dec 2026',url:'https://www.landers.com.au/legal-insights-news/australian-privacy-law-update-what-app-entities-need-to-know-in-2026',urlLabel:'Landers & Rogers — Privacy Act 2026 update'},
-      {step:'Begin compliance preparation now — do not wait for final OAIC guidance. The legislative deadline of 10 December 2026 is fixed. Engage legal counsel to confirm your specific obligations once final guidance is published.',owner:'Executive / Legal',time:'Complete by Dec 2026',url:'https://niftycomputing.au/2026-compliance-deadlines/privacy-act-automated-decisions',urlLabel:'ADM compliance deadline guidance'}
-    ]});
-
-  // Universal gaps
-  if((s.q4||1)===3) gaps.push({cls:'gap-h',lb:'high',t:'No human-in-the-loop oversight',d:'Fully autonomous AI in high-stakes contexts requires documented human oversight mechanisms — required under OECD principles, the EU AI Act, APRA guidance, and Privacy Act ADM obligations.',
-    actions:[
-      {step:'Map every AI output to a decision type and assign a human review requirement for each',owner:'Product / Risk Lead',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Design a human review workflow — including escalation paths and override mechanisms',owner:'Product / UX',time:'2–4 weeks',url:null,urlLabel:null},
-      {step:'Document the human-in-the-loop process in your AI governance policy',owner:'Compliance / Product',time:'1 week',url:null,urlLabel:null},
-      {step:'Review against OECD AI Principle 1.4 (human oversight) and EU AI Act Article 14',owner:'Legal',time:'1 week',url:'https://oecd.ai/en/ai-principles',urlLabel:'OECD AI Principles'}
-    ]});
-  if((s.q2||1)>=2) gaps.push({cls:'gap-h',lb:'high',t:'Personal information handling policy required',d:'Processing personal information — health records, financial data, or other sensitive information — requires lawful basis, a privacy impact assessment, and data minimisation controls under the Privacy Act 1988.',
-    actions:[
-      {step:'Commission a Privacy Impact Assessment (PIA) before build or deployment',owner:'Privacy Officer / Legal',time:'2–4 weeks',url:'https://www.oaic.gov.au/privacy/guidance-and-advice/privacy-impact-assessments',urlLabel:'OAIC PIA guidance'},
-      {step:'Confirm lawful basis for collecting and processing sensitive information under APPs 3 and 6',owner:'Legal',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/the-privacy-act/rights-and-responsibilities',urlLabel:'Privacy Act — Australian Privacy Principles'},
-      {step:'Implement data minimisation: only collect the minimum personal information required for the AI function',owner:'Engineering / Product',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Establish a data breach response plan and register with OAIC notifiable data breaches scheme',owner:'Privacy Officer',time:'1–2 weeks',url:'https://www.oaic.gov.au/privacy/notifiable-data-breaches',urlLabel:'OAIC Notifiable Data Breaches'}
-    ]});
-  if(isHealth && (s.q1||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'Clinical validation evidence needed',d:'AI influencing clinical decisions must have documented validation studies showing performance across diverse patient populations.',
-    actions:[
-      {step:'Define clinical validation requirements with your clinical lead',owner:'Clinical Lead / Product',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Design and run a validation study across a representative patient population',owner:'Clinical / Data Science',time:'1–6 months',url:'https://www.tga.gov.au/resources/resource/guidance/clinical-evidence-guidelines-medical-devices',urlLabel:'TGA clinical evidence guidelines'},
-      {step:'Document validation results in a clinical evidence report',owner:'Clinical / Regulatory',time:'2–4 weeks',url:null,urlLabel:null},
-      {step:'Establish a post-deployment monitoring plan to track ongoing clinical performance',owner:'Clinical / Product',time:'2 weeks',url:null,urlLabel:null}
-    ]});
-  if((s.q5||1)>=2) gaps.push({cls:'gap-m',lb:'medium',t:'EU AI Act conformity assessment',d:'Healthcare and financial services AI in EU markets is explicitly classified as high risk and requires conformity assessments, technical documentation, and post-market monitoring obligations.',
-    actions:[
-      {step:'Confirm your AI system classification under the EU AI Act Annex III',owner:'Legal / Regulatory',time:'1–2 weeks',url:'https://artificialintelligenceact.eu/',urlLabel:'EU AI Act — full text'},
-      {step:'Prepare technical documentation per Article 11',owner:'Product / Legal',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/11/',urlLabel:'EU AI Act Article 11'},
-      {step:'Implement a post-market monitoring system per Article 72',owner:'Compliance / Engineering',time:'4–8 weeks',url:'https://artificialintelligenceact.eu/article/72/',urlLabel:'EU AI Act Article 72'},
-      {step:'Appoint an EU authorised representative if your organisation is not EU-based',owner:'Legal',time:'2–4 weeks',url:null,urlLabel:null}
-    ]});
-  gaps.push({cls:'gap-m',lb:'medium',t:'AI governance policy not documented',d:'A formal AI governance policy covering accountability, transparency, explainability and bias monitoring should be in place and signed off before deployment.',
-    actions:[
-      {step:'Draft an AI governance policy using NIST AI RMF or ISO 42001 as a structural framework',owner:'Risk / Compliance',time:'2–4 weeks',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI Risk Management Framework'},
-      {step:'Define accountability: name the executive owner of AI governance for this initiative',owner:'Executive / Board',time:'1 week',url:null,urlLabel:null},
-      {step:'Include explainability requirements — how will the AI explain its outputs to users',owner:'Product / Legal',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Get policy signed off by executive and tabled at board level',owner:'Executive / Board',time:'2 weeks',url:null,urlLabel:null}
-    ]});
-  if((s.q4||1)>=2) gaps.push({cls:'gap-l',lb:'low',t:'Model monitoring cadence undefined',d:'Ongoing performance monitoring — including drift detection and bias audits — should be established and scheduled at the point of deployment.',
-    actions:[
-      {step:'Define key model performance metrics to monitor post-deployment',owner:'Data Science / Engineering',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Set alert thresholds and automated monitoring',owner:'Engineering',time:'2–3 weeks',url:null,urlLabel:null},
-      {step:'Schedule a bias audit at 3 months, 6 months, and annually',owner:'Data Science',time:'1 week to schedule',url:'https://www.nist.gov/artificial-intelligence',urlLabel:'NIST AI RMF — measure function'},
-      {step:'Document monitoring results and report to governance committee quarterly',owner:'Risk / Compliance',time:'Ongoing',url:null,urlLabel:null}
-    ]});
-  gaps.push({cls:'gap-l',lb:'low',t:'Board AI literacy and oversight',d:'Boards overseeing AI deployments should have documented AI governance capability, with AI risk as a standing agenda item at Risk and Audit Committee meetings.',
-    actions:[
-      {step:'Add AI risk as a standing agenda item at the next Risk and Audit Committee meeting',owner:'Company Secretary / Board Chair',time:'Next meeting cycle',url:null,urlLabel:null},
-      {step:'Brief the board on this AI initiative using the Board Briefing Note from the outputs tab',owner:'Executive Sponsor',time:'1–2 weeks',url:null,urlLabel:null},
-      {step:'Identify a board member or advisor with AI governance expertise (consider AIGP-certified)',owner:'Board Chair / Nominations Committee',time:'1–3 months',url:'https://iapp.org/certify/aigp/',urlLabel:'IAPP AIGP certification'},
-      {step:'Complete AICD AI governance for directors module',owner:'All Directors',time:'Self-paced',url:'https://www.aicd.com.au/',urlLabel:'AICD AI governance resources'}
-    ]});
-  ST.gaps = gaps;
-
-  document.getElementById('rhead').textContent = tier + ' risk';
-  document.getElementById('rsum').textContent = sum;
-  document.getElementById('mv1').textContent = tier;
-  document.getElementById('mv2').textContent = fws.length;
-  document.getElementById('mv3').textContent = gaps.length;
-  document.getElementById('fwlist').innerHTML = fws.map(function(f){ return '<span class="ftag">'+f+'</span>'; }).join('');
-  document.getElementById('fw-map').innerHTML = fwDetails.map(function(f){
-    return '<div class="fw-row"><div class="fw-name">'+f.n+'</div><div class="fw-desc">'+f.d+'</div></div>';
-  }).join('');
-  document.getElementById('glist').innerHTML = gaps.map(function(g, gi){
-    var bc = g.lb==='high'?'bh':g.lb==='medium'?'bm':'bl';
-    var actionsHtml = g.actions.map(function(a, ai){
-      var linkHtml = a.url ? '<a class="action-link" href="'+a.url+'" target="_blank">→ '+a.urlLabel+'</a>' : '';
-      return '<div class="action-row">'+
-        '<div class="action-step"><span class="action-num">'+(ai+1)+'</span>'+a.step+'</div>'+
-        '<div class="action-meta"><span class="meta-tag meta-owner">'+a.owner+'</span><span class="meta-tag meta-time">'+a.time+'</span></div>'+
-        linkHtml+'</div>';
-    }).join('');
-    return '<div class="gap-item '+g.cls+'" id="gap-'+gi+'">'+
-      '<div class="gap-title"><span class="badge '+bc+'">'+g.lb+'</span>'+g.t+'</div>'+
-      '<div class="gap-desc">'+g.d+'</div>'+
-      '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">'+
-        '<button class="gap-expand-btn" id="gap-btn-'+gi+'" onclick="toggleGap('+gi+')">▸ Show action plan</button>'+
-        '<button class="done-btn" id="done-'+gi+'" onclick="markDone('+gi+')">Mark complete</button>'+
-      '</div>'+
-      '<div class="gap-actions" id="gap-actions-'+gi+'">'+actionsHtml+'</div></div>';
+  document.getElementById('rhead').textContent=tier+' risk';
+  document.getElementById('rsum').textContent=sum;
+  document.getElementById('mv1').textContent=tier;
+  document.getElementById('mv2').textContent=fws.length;
+  document.getElementById('mv3').textContent=gaps.length;
+  document.getElementById('fwlist').innerHTML=fws.map(function(f){return'<span class="ftag">'+f+'</span>';}).join('');
+  document.getElementById('fw-map').innerHTML=fwD.map(function(f){return'<div class="fw-row"><div class="fw-name">'+f.n+'</div><div class="fw-desc">'+f.d+'</div></div>';}).join('');
+  document.getElementById('glist').innerHTML=gaps.map(function(g,gi){
+    var bc=g.lb==='high'?'bh':g.lb==='medium'?'bm':'bl';
+    var actHtml=g.actions.map(function(a,ai){var lk=a.url?'<a class="action-link" href="'+a.url+'" target="_blank" rel="noopener">→ '+a.urlLabel+'</a>':'';return'<div class="action-row"><div class="action-step"><span class="action-num">'+(ai+1)+'</span>'+a.step+'</div><div class="action-meta"><span class="meta-tag meta-owner">'+a.owner+'</span><span class="meta-tag meta-time">'+a.time+'</span></div>'+lk+'</div>';}).join('');
+    return'<div class="gap-item '+g.cls+'" id="gap-'+gi+'"><div class="gap-title"><span class="badge '+bc+'">'+g.lb+'</span>'+g.t+'</div><div class="gap-desc">'+g.d+'</div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"><button class="gap-expand-btn" id="gap-btn-'+gi+'" onclick="toggleGap('+gi+')" aria-expanded="false" aria-controls="gap-actions-'+gi+'">▸ Show action plan</button><button class="done-btn" id="done-'+gi+'" onclick="markDone('+gi+')">Mark complete</button></div><div class="gap-actions" id="gap-actions-'+gi+'">'+actHtml+'</div></div>';
   }).join('');
   gt(2);
 }
 
-function buildDocs() {
-  var d = new Date().toLocaleDateString('en-AU', {day:'2-digit',month:'long',year:'numeric'});
-  var fwstr = ST.fws.join(', ');
-  var hi = ST.gaps.filter(function(g){ return g.lb==='high'; });
-  var md = ST.gaps.filter(function(g){ return g.lb==='medium'; });
-  var lo = ST.gaps.filter(function(g){ return g.lb==='low'; });
-  var attr = 'Prepared by: Rebecca Lynn | linkedin.com/in/digitalrebecca | aigovnav.com.au';
-
-  document.getElementById('d1').textContent =
-'AI GOVERNANCE RISK SUMMARY\n'+'─'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\n\nInitiative: '+ST.desc+'\nOrganisation type: '+ST.org+'\nRisk tier: '+ST.tier+'\nFrameworks triggered: '+fwstr+'\n\n'+
-'HIGH PRIORITY GAPS ('+hi.length+')\n'+'─'.repeat(44)+'\n'+(hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
-'MEDIUM PRIORITY GAPS ('+md.length+')\n'+'─'.repeat(44)+'\n'+(md.length?md.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
-'LOW PRIORITY GAPS ('+lo.length+')\n'+'─'.repeat(44)+'\n'+(lo.length?lo.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'None identified.')+'\n\n'+
-'─'.repeat(44)+'\nNote: This document is a governance prompt, not legal advice.\nEngage your legal, regulatory and clinical governance teams\nto validate and act on these obligations.\nAIGovNav · aigovnav.com.au';
-
-  document.getElementById('d2').textContent =
-'BOARD BRIEFING NOTE — AI GOVERNANCE\n'+'─'.repeat(44)+'\nDate: '+d+'\nFor: Board / Risk & Audit Committee\n'+attr+'\n\nPURPOSE\nThis note summarises the AI governance risk profile for\nthe following initiative and recommends board actions.\n\nINITIATIVE\n'+ST.desc+'\n\nRISK ASSESSMENT\nOverall risk tier: '+ST.tier+'\nRegulatory frameworks triggered: '+fwstr+'\n\nKEY RISKS REQUIRING BOARD ATTENTION\n'+
-(hi.length?hi.map(function(g,i){ return (i+1)+'. '+g.t+'\n   '+g.d; }).join('\n\n'):'No high-priority gaps identified at this stage.')+
-'\n\nRECOMMENDED BOARD ACTIONS\n1. Confirm a named executive accountable for AI governance\n   on this initiative\n2. Request TGA classification assessment from legal/\n   regulatory team (if clinical AI)\n3. Add AI risk as a standing item at the next Risk &\n   Audit Committee meeting\n4. Commission a privacy impact assessment before go-live\n5. Establish a post-deployment monitoring and review cadence\n6. Ensure the board has access to AI governance expertise\n   (consider AIGP-certified advisor or NED)\n\nNEXT REVIEW DATE: [to be confirmed]\n\n─'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.';
-
-  document.getElementById('d3').textContent =
-'AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n'+attr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with clinical stakeholders\n\nBUILD & VALIDATION\n[ ] Clinical validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] PHI security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] TGA registration complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (at minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place (TGA, EU AI Act updates)\n\n'+'─'.repeat(44)+'\nFrameworks: '+fwstr+'\nAIGovNav · aigovnav.com.au';
-
-  var actionLines = ST.gaps.map(function(g){
-    var lines = g.t.toUpperCase()+'  ['+g.lb.toUpperCase()+']\n'+'─'.repeat(44)+'\n'+g.d+'\n\nACTIONS:\n';
-    lines += g.actions.map(function(a, ai){
-      var l = (ai+1)+'. '+a.step+'\n   Owner: '+a.owner+'  |  Timeframe: '+a.time;
-      if(a.url) l += '\n   Resource: '+a.urlLabel+' — '+a.url;
-      return l;
-    }).join('\n\n');
-    return lines;
-  }).join('\n\n'+'═'.repeat(44)+'\n\n');
-
-  document.getElementById('d4').textContent =
-'ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\nThis plan translates each identified governance gap into\nspecific actions, owners and timeframes. Work through\nhigh-priority items before proceeding to deployment.\n\n'+'═'.repeat(44)+'\n\n'+actionLines+'\n\n'+'═'.repeat(44)+'\nNote: This is a governance prompt, not legal advice.\nEngage legal, regulatory and clinical governance teams\nto validate obligations before acting.\nFrameworks: '+fwstr+'\nAIGovNav · aigovnav.com.au';
+// ── EXACT LIVE SITE DOC BUILDER ──
+function buildDocs(){
+  var d=new Date().toLocaleDateString('en-AU',{day:'2-digit',month:'long',year:'numeric'});
+  var fwstr=ST.fws.join(', ');
+  var hi=ST.gaps.filter(function(g){return g.lb==='high';});
+  var md=ST.gaps.filter(function(g){return g.lb==='medium';});
+  var lo=ST.gaps.filter(function(g){return g.lb==='low';});
+  var attr='Prepared by: AIGovNav | aigovnav.com.au';
+  document.getElementById('d1').textContent='AI GOVERNANCE RISK SUMMARY\n'+'─'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\n\nInitiative: '+ST.desc+'\nOrganisation type: '+ST.org+'\nRisk tier: '+ST.tier+'\nFrameworks triggered: '+fwstr+'\n\nHIGH PRIORITY GAPS ('+hi.length+')\n'+'─'.repeat(44)+'\n'+(hi.length?hi.map(function(g,i){return(i+1)+'. '+g.t+'\n   '+g.d;}).join('\n\n'):'None identified.')+'\n\nMEDIUM PRIORITY GAPS ('+md.length+')\n'+'─'.repeat(44)+'\n'+(md.length?md.map(function(g,i){return(i+1)+'. '+g.t+'\n   '+g.d;}).join('\n\n'):'None identified.')+'\n\nLOW PRIORITY GAPS ('+lo.length+')\n'+'─'.repeat(44)+'\n'+(lo.length?lo.map(function(g,i){return(i+1)+'. '+g.t+'\n   '+g.d;}).join('\n\n'):'None identified.')+'\n\n'+'─'.repeat(44)+'\nThis document is a governance prompt, not legal advice.\nAIGovNav · aigovnav.com.au';
+  document.getElementById('d2').textContent='BOARD BRIEFING NOTE — AI GOVERNANCE\n'+'─'.repeat(44)+'\nDate: '+d+'\nFor: Board / Risk & Audit Committee\n'+attr+'\n\nPURPOSE\nThis note summarises the AI governance risk profile for the following initiative and recommends board actions.\n\nINITIATIVE\n'+ST.desc+'\n\nRISK ASSESSMENT\nOverall risk tier: '+ST.tier+'\nRegulatory frameworks triggered: '+fwstr+'\n\nKEY RISKS REQUIRING BOARD ATTENTION\n'+(hi.length?hi.map(function(g,i){return(i+1)+'. '+g.t+'\n   '+g.d;}).join('\n\n'):'No high-priority gaps identified at this stage.')+'\n\nRECOMMENDED BOARD ACTIONS\n1. Confirm a named executive accountable for AI governance on this initiative\n2. Commission a privacy impact assessment before go-live\n3. Add AI risk as a standing item at the next Risk & Audit Committee meeting\n4. Ensure ADM disclosure process is in place before 10 December 2026\n5. Establish a post-deployment monitoring and review cadence\n6. Ensure the board has access to AI governance expertise\n\nNEXT REVIEW DATE: [to be confirmed]\n\n'+'─'.repeat(44)+'\nThis is a governance prompt, not legal advice.';
+  document.getElementById('d3').textContent='AI GOVERNANCE CHECKLIST — TECHNOLOGY TEAM\n'+'─'.repeat(44)+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\nFrameworks: '+fwstr+'\n'+attr+'\n\nPRE-BUILD\n[ ] AI use case registered in organisational AI inventory\n[ ] TGA SaMD classification determined (if clinical)\n[ ] Privacy impact assessment initiated\n[ ] Data minimisation principles applied to model design\n[ ] Bias and fairness requirements documented\n[ ] Explainability requirements agreed with stakeholders\n[ ] ADM obligations assessed — 10 December 2026 deadline\n\nBUILD & VALIDATION\n[ ] Validation study planned or completed\n[ ] Model performance benchmarks defined and tested\n[ ] Human-in-the-loop review process designed and documented\n[ ] Data security and access controls confirmed\n[ ] Incident response plan for AI failure or unexpected output\n\nPRE-DEPLOYMENT\n[ ] AI governance policy reviewed and signed off\n[ ] Regulatory registrations complete (if required)\n[ ] Staff training on AI tool and governance obligations completed\n[ ] Escalation process documented\n[ ] Board / governance committee sign-off obtained\n[ ] Privacy policy updated with ADM disclosures\n\nPOST-DEPLOYMENT\n[ ] Model monitoring cadence established\n[ ] Drift detection and alert thresholds set\n[ ] Bias audit schedule confirmed (minimum annually)\n[ ] Annual full review date set\n[ ] Regulatory change tracking in place\n\n'+'─'.repeat(44)+'\nAIGovNav · aigovnav.com.au';
+  var alines=ST.gaps.map(function(g){var l=g.t.toUpperCase()+'  ['+g.lb.toUpperCase()+']\n'+'─'.repeat(44)+'\n'+g.d+'\n\nACTIONS:\n';l+=g.actions.map(function(a,ai){var r=(ai+1)+'. '+a.step+'\n   Owner: '+a.owner+'  |  Timeframe: '+a.time;if(a.url)r+='\n   Resource: '+a.urlLabel+' — '+a.url;return r;}).join('\n\n');return l;}).join('\n\n'+'═'.repeat(44)+'\n\n');
+  document.getElementById('d4').textContent='ACTION PLAN — AI GOVERNANCE\n'+'═'.repeat(44)+'\nGenerated: '+d+'\n'+attr+'\nInitiative: '+ST.desc+'\nRisk tier: '+ST.tier+'\n\n'+'═'.repeat(44)+'\n\n'+alines+'\n\n'+'═'.repeat(44)+'\nThis is a governance prompt, not legal advice.\nAIGovNav · aigovnav.com.au';
 }
 
-function showDoc(id) {
-  ['d1','d2','d3','d4'].forEach(function(d){ document.getElementById(d).style.display = d===id?'block':'none'; });
-  var map = {d1:'tb1',d2:'tb2',d3:'tb3',d4:'tb4'};
-  ['tb1','tb2','tb3','tb4'].forEach(function(t){ document.getElementById(t).classList.toggle('active', map[id]===t); });
+function showDoc(id){
+  ['d1','d2','d3','d4'].forEach(function(d){document.getElementById(d).style.display=d===id?'block':'none';});
+  var m={d1:'tb1',d2:'tb2',d3:'tb3',d4:'tb4'};
+  ['tb1','tb2','tb3','tb4'].forEach(function(t){document.getElementById(t).classList.toggle('active',m[id]===t);});
 }
 
-function toggleGap(i) {
-  var el = document.getElementById('gap-actions-'+i);
-  var btn = document.getElementById('gap-btn-'+i);
-  var isOpen = el.classList.toggle('open');
-  btn.textContent = (isOpen ? '▾ Hide action plan' : '▸ Show action plan');
-}
+function toggleGap(i){var el=document.getElementById('gap-actions-'+i),btn=document.getElementById('gap-btn-'+i);var o=el.classList.toggle('open');btn.textContent=(o?'▾ Hide action plan':'▸ Show action plan');btn.setAttribute('aria-expanded',o);}
+function markDone(i){var btn=document.getElementById('done-'+i);btn.classList.toggle('marked');btn.textContent=btn.classList.contains('marked')?'Completed ✓':'Mark complete';document.getElementById('gap-'+i).style.opacity=btn.classList.contains('marked')?'0.5':'1';}
+function copyDoc(){var a=document.querySelector('.doc-out:not([style*="none"])');if(a)navigator.clipboard.writeText(a.textContent).then(function(){});}
+function restart(){ST={org:null,sc:{},tier:'',fws:[],fwDetails:[],gaps:[],desc:'',q3txt:'',matter:ST.matter,pract:ST.pract};document.querySelectorAll('.ro').forEach(function(r){r.classList.remove('sel');});document.querySelectorAll('input[type=radio]').forEach(function(r){r.checked=false;});document.getElementById('idesc').value='';document.getElementById('glist').innerHTML='';document.getElementById('fwlist').innerHTML='';document.getElementById('fw-map').innerHTML='';document.getElementById('q3warn').style.display='none';document.getElementById('q6warn').style.display='none';showDoc('d1');gt(0);}
 
-function markDone(i) {
-  var btn = document.getElementById('done-'+i);
-  btn.classList.toggle('marked');
-  btn.textContent = btn.classList.contains('marked') ? 'Completed ✓' : 'Mark complete';
-  document.getElementById('gap-'+i).style.opacity = btn.classList.contains('marked') ? '0.5' : '1';
-}
+// ── PDF GENERATION ──
+function generatePDF(){
+  if(typeof window.jspdf==='undefined'){alert('PDF library not loaded. Please check your connection and try again.');return;}
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({unit:'mm',format:'a4',orientation:'portrait'});
+  var W=210,ml=20,cw=170,pg=1,y=0;
+  var dt=new Date().toLocaleDateString('en-AU',{day:'2-digit',month:'long',year:'numeric'});
+  var ref=ST.matter.ref||'—';
+  var pn=ST.pract.name||'—';
+  var pe=ST.pract.email||'—';
+  var C={navy:[11,31,58],navyMid:[22,53,86],teal:[0,138,120],mid:[92,100,120],red:[176,40,44],redLt:[245,222,223],amber:[176,122,26],amberLt:[245,230,204],green:[42,122,82],greenLt:[220,235,226],paper:[251,250,246],canvas:[244,241,234],border:[228,230,235],white:[255,255,255],navy100:[220,227,238]};
+  function sc(arr){doc.setTextColor(arr[0],arr[1],arr[2]);}
+  function sf(arr){doc.setFillColor(arr[0],arr[1],arr[2]);}
+  function sd(arr){doc.setDrawColor(arr[0],arr[1],arr[2]);}
+  function hdr(){sf(C.navy);doc.rect(0,0,W,13,'F');doc.setFont('helvetica','bold');doc.setFontSize(11);sc(C.white);doc.text('AIGovNav',ml,8.5);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(110,207,190);doc.text('Australian AI Governance Navigator · aigovnav.com.au',ml+22,8.5);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(150,180,200);doc.text(ref,W-ml,8.5,{align:'right'});y=22;}
+  function ftr(){sd(C.border);doc.line(ml,281,W-ml,281);doc.setFont('helvetica','normal');doc.setFontSize(7.5);sc(C.mid);doc.text('AI Governance Assessment Report · '+ref+' · Assessed by: '+pn+' · CONFIDENTIAL',ml,286);doc.text(''+pg,W-ml,286,{align:'right'});doc.setFont('helvetica','italic');doc.text('Governance prompt only — not legal advice. Validate obligations with legal and regulatory counsel.',ml,290);}
+  function np(){ftr();doc.addPage();pg++;hdr();}
+  function cy(n){if(y+(n||10)>276)np();}
+  function sh(t,n){cy(14);sf(C.canvas);sd(C.border);doc.rect(ml,y,cw,9,'FD');doc.setFont('helvetica','bold');doc.setFontSize(8);sc(C.mid);doc.text('SECTION '+n,ml+3,y+6);doc.setFont('helvetica','bold');doc.setFontSize(11);sc(C.navy);doc.text(t,ml+30,y+6.5);y+=14;}
+  function lv(lbl,val){doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.mid);doc.text(lbl+':',ml,y);doc.setFont('helvetica','normal');sc(C.navy);var ls=doc.splitTextToSize(val||'—',cw-36);doc.text(ls,ml+36,y);y+=ls.length*5+2;}
+  function bt(txt,x){doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.navy);var ls=doc.splitTextToSize(txt,cw);ls.forEach(function(l){cy(5.5);doc.text(l,x||ml,y);y+=5.5;});}
 
-function copyDoc() {
-  var active = document.querySelector('.doc-out:not([style*="none"])');
-  if(active){ navigator.clipboard.writeText(active.textContent).then(function(){}); }
-}
+  // COVER
+  hdr();
+  sf(C.teal);doc.rect(ml,y,cw,1.5,'F');y+=6;
+  doc.setFont('helvetica','bold');doc.setFontSize(19);sc(C.navy);doc.text('AI Governance Assessment Report',ml,y);y+=8;
+  doc.setFont('helvetica','normal');doc.setFontSize(9.5);sc(C.mid);doc.text('Prepared using AIGovNav · Australian AI Governance Navigator · aigovnav.com.au',ml,y);y+=12;
+  sd(C.border);doc.line(ml,y,W-ml,y);y+=10;
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text('MATTER DETAILS',ml,y);y+=7;
+  lv('Matter reference',ref);lv('Date generated',dt);lv('Assessed by',pn);lv('Practitioner email',pe);y+=4;
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text('INITIATIVE',ml,y);y+=7;
+  var orgMap={hp:'Health provider / hospital',ht:'HealthTech / MedTech company',dh:'Digital health / health insurance',fs:'Financial services / APRA-regulated entity',en:'General enterprise / other industry',gv:'Government / public sector'};
+  lv('Organisation',orgMap[ST.org]||ST.org||'—');
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.mid);doc.text('Description:',ml,y);doc.setFont('helvetica','normal');sc(C.navy);var dl=doc.splitTextToSize(ST.desc,cw-36);doc.text(dl,ml+36,y);y+=dl.length*5+10;
+  var tc=ST.tier==='High'?C.red:ST.tier==='Medium'?C.amber:C.green;
+  var tbg=ST.tier==='High'?C.redLt:ST.tier==='Medium'?C.amberLt:C.greenLt;
+  sf(tbg);sd(tc);doc.rect(ml,y,cw,20,'FD');
+  doc.setFont('helvetica','bold');doc.setFontSize(8);sc(C.mid);doc.text('OVERALL RISK TIER',ml+4,y+5.5);
+  doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(tc[0],tc[1],tc[2]);doc.text(ST.tier,ml+4,y+16);
+  doc.setFont('helvetica','normal');doc.setFontSize(8.5);sc(C.navy);doc.text('Frameworks: '+ST.fws.length+'   |   Gaps: '+ST.gaps.length,ml+40,y+10);
+  var td=ST.tier==='High'?'High regulatory complexity — formal governance and regulatory assessments required.':ST.tier==='Medium'?'Moderate complexity — structured governance and assessments required.':'Lower complexity — standard governance practices apply.';
+  var tdl=doc.splitTextToSize(td,cw-44);doc.setFontSize(8);sc(C.mid);doc.text(tdl,ml+40,y+16);y+=26;
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text('FRAMEWORKS TRIGGERED',ml,y);y+=7;
+  var fpr=3,fw2=cw/fpr;ST.fws.forEach(function(f,i){var col=i%fpr;if(col===0&&i>0)y+=8;sf(C.navy100);sd(C.border);doc.rect(ml+col*fw2,y-5,fw2-2,7,'FD');doc.setFont('helvetica','bold');doc.setFontSize(7.5);sc(C.navyMid);doc.text(f,ml+col*fw2+2,y-0.5);});y+=Math.ceil(ST.fws.length/fpr)*4+10;
+  sf([236,242,252]);sd(C.teal);doc.rect(ml,y,cw,14,'FD');
+  doc.setFont('helvetica','bold');doc.setFontSize(8);sc(C.teal);doc.text('DATA PRIVACY NOTICE',ml+3,y+5);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);sc(C.navy);var pvl=doc.splitTextToSize('This assessment ran entirely in the browser. No data was transmitted to any server or stored externally. This report was generated at the end of a single browser session.',cw-6);doc.text(pvl,ml+3,y+10);y+=18;
+  ftr();
 
-function restart() {
-  ST = { org: null, sc: {}, tier: '', fws: [], fwDetails: [], gaps: [], desc: '' };
-  document.querySelectorAll('.ro').forEach(function(r){ r.classList.remove('sel'); });
-  document.querySelectorAll('input[type=radio]').forEach(function(r){ r.checked = false; });
-  document.getElementById('idesc').value = '';
-  document.getElementById('glist').innerHTML = '';
-  document.getElementById('fwlist').innerHTML = '';
-  document.getElementById('fw-map').innerHTML = '';
-  document.getElementById('q3warn').style.display = 'none';
-  document.getElementById('q6warn').style.display = 'none';
-  showDoc('d1');
-  gt(0);
+  // SECTION 1
+  doc.addPage();pg++;hdr();sh('Assessment Record',1);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.mid);doc.text('Complete record of questions asked and answers selected at the time of assessment.',ml,y);y+=10;
+  var qls=['Q1 — Decision influence','Q2 — Personal information','Q3 — AI output type','Q4 — Autonomy level','Q5 — International markets','Q6 — ADM applicability'];
+  var amap={q1:{3:'Yes — directly informs consequential decisions',2:'Partially — supports decisions, human reviews',1:'No — admin/back-office only'},q2:{3:'Yes — identifiable personal data',2:'Partially — de-identified data only',1:'No — no personal data'},q3:ST.q3txt||'—',q4:{3:'Yes — automated',2:'Sometimes — HITL for high-stakes',1:'No — human reviews each output'},q5:{3:'Yes — EU or US',2:'In consideration',1:'No — Australia only'},q6:{3:'Yes — substantially influences decisions',2:'Possibly — ADM not yet assessed',1:'No'}};
+  doc.autoTable({startY:y,margin:{left:ml,right:20},head:[['Question','Answer selected']],body:[[qls[0],amap.q1[ST.sc.q1]||'—'],[qls[1],amap.q2[ST.sc.q2]||'—'],[qls[2],amap.q3],[qls[3],amap.q4[ST.sc.q4]||'—'],[qls[4],amap.q5[ST.sc.q5]||'—'],[qls[5],amap.q6[ST.sc.q6]||'—']],headStyles:{fillColor:C.navy,textColor:[255,255,255],fontSize:9,fontStyle:'bold'},bodyStyles:{fontSize:9,textColor:C.navy,lineColor:C.border,lineWidth:0.3},alternateRowStyles:{fillColor:C.canvas},columnStyles:{0:{cellWidth:52,fontStyle:'bold'},1:{cellWidth:118}},didDrawPage:function(){hdr();}});
+  y=doc.lastAutoTable.finalY+12;cy(12);doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.mid);doc.text('METADATA',ml,y);y+=7;lv('Timestamp',new Date().toLocaleString('en-AU'));lv('Tool version','AIGovNav 2026 · aigovnav.com.au');ftr();
+
+  // SECTION 2
+  doc.addPage();pg++;hdr();sh('Risk Profile',2);
+  cy(20);var tc2=ST.tier==='High'?C.red:ST.tier==='Medium'?C.amber:C.green;var tbg2=ST.tier==='High'?C.redLt:ST.tier==='Medium'?C.amberLt:C.greenLt;
+  sf(tbg2);sd(tc2);doc.rect(ml,y,cw,13,'FD');doc.setFont('helvetica','bold');doc.setFontSize(15);doc.setTextColor(tc2[0],tc2[1],tc2[2]);doc.text(ST.tier+' Risk',ml+4,y+9.5);
+  var ts=ST.tier==='High'?'High regulatory complexity. Formal governance and regulatory assessments required before deployment.':ST.tier==='Medium'?'Moderate complexity. Structured governance and sector-specific assessments required.':'Lower complexity. Standard governance practices apply.';
+  var tsl=doc.splitTextToSize(ts,cw-52);doc.setFont('helvetica','normal');doc.setFontSize(8.5);sc(C.navy);doc.text(tsl,ml+44,y+6);y+=18;
+  doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text('APPLICABLE FRAMEWORKS',ml,y);y+=8;
+  doc.autoTable({startY:y,margin:{left:ml,right:20},head:[['Framework','Why triggered']],body:ST.fwDetails.map(function(f){return[f.n,f.d];}),headStyles:{fillColor:C.navyMid,textColor:[255,255,255],fontSize:9,fontStyle:'bold'},bodyStyles:{fontSize:8.5,textColor:C.navy,lineColor:C.border,lineWidth:0.3},alternateRowStyles:{fillColor:C.canvas},columnStyles:{0:{cellWidth:40,fontStyle:'bold'},1:{cellWidth:130}},didDrawPage:function(){hdr();}});
+  ftr();
+
+  // SECTION 3
+  doc.addPage();pg++;hdr();sh('Governance Gaps',3);
+  var hi2=ST.gaps.filter(function(g){return g.lb==='high';});var md2=ST.gaps.filter(function(g){return g.lb==='medium';});var lo2=ST.gaps.filter(function(g){return g.lb==='low';});
+  doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.mid);doc.text(hi2.length+' High · '+md2.length+' Medium · '+lo2.length+' Low · Total: '+ST.gaps.length,ml,y);y+=10;
+  ST.gaps.forEach(function(g){
+    var gc=g.lb==='high'?C.red:g.lb==='medium'?C.amber:C.green;var gbg=g.lb==='high'?C.redLt:g.lb==='medium'?C.amberLt:C.greenLt;
+    cy(22);sf(gbg);sd(gc);doc.rect(ml,y,cw,10,'FD');sf(gc);doc.rect(ml,y,3,10,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(gc[0],gc[1],gc[2]);doc.text(g.lb.toUpperCase(),ml+6,y+6.5);
+    doc.setFont('helvetica','bold');doc.setFontSize(10);sc(C.navy);var tl=doc.splitTextToSize(g.t,cw-24);doc.text(tl,ml+24,y+4.5);y+=tl.length>1?13:12;
+    cy(10);bt(g.d);y+=4;
+    if(g.actions){doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);cy(6);doc.text('ACTIONS',ml,y);y+=6;g.actions.forEach(function(a,ai){cy(12);sf(C.canvas);sd(C.border);doc.rect(ml,y,cw,9,'FD');doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.teal);doc.text(''+(ai+1)+'.',ml+2,y+6);doc.setFont('helvetica','normal');sc(C.navy);var al=doc.splitTextToSize(a.step,cw-14);doc.text(al,ml+8,y+3.5);doc.setFont('helvetica','bold');doc.setFontSize(7.5);sc(C.mid);doc.text(''+a.owner+'   '+a.time,ml+8,y+7.5);y+=11;if(a.url){cy(5);doc.setFont('helvetica','italic');doc.setFontSize(7.5);sc([27,69,226]);doc.text('→ '+(a.urlLabel||a.url),ml+8,y);y+=5;}});}
+    y+=8;
+  });
+  ftr();
+
+  // SECTION 4 — BOARD BRIEF
+  doc.addPage();pg++;hdr();sh('Board Briefing Note',4);
+  cy(8);doc.setFont('helvetica','bold');doc.setFontSize(8.5);sc(C.mid);doc.text('DATE',ml,y);doc.setFont('helvetica','normal');sc(C.navy);doc.text(dt,ml+25,y);y+=6;
+  doc.setFont('helvetica','bold');sc(C.mid);doc.text('FOR',ml,y);doc.setFont('helvetica','normal');sc(C.navy);doc.text('Board / Risk and Audit Committee',ml+25,y);y+=6;
+  doc.setFont('helvetica','bold');sc(C.mid);doc.text('MATTER',ml,y);doc.setFont('helvetica','normal');sc(C.navy);doc.text(ref,ml+25,y);y+=10;
+  [{h:'PURPOSE',t:'This note summarises the AI governance risk profile for the following initiative and recommends board actions.'},{h:'INITIATIVE',t:ST.desc},{h:'RISK ASSESSMENT',t:'Overall risk tier: '+ST.tier+'\nFrameworks triggered: '+ST.fws.join(', ')}].forEach(function(b){cy(14);doc.setFont('helvetica','bold');doc.setFontSize(9);sc(C.teal);doc.text(b.h,ml,y);y+=6;bt(b.t);y+=5;});
+  var hg=ST.gaps.filter(function(g){return g.lb==='high';});
+  if(hg.length){cy(10);doc.setFont('helvetica','bold');doc.setFontSize(9);sc(C.teal);doc.text('KEY RISKS REQUIRING BOARD ATTENTION',ml,y);y+=7;hg.forEach(function(g,i){cy(14);sf(C.red);doc.rect(ml,y-3.5,3.5,5,'F');doc.setFont('helvetica','bold');doc.setFontSize(9);sc(C.red);doc.text((i+1)+'.',ml+5,y);sc(C.navy);doc.text(g.t,ml+11,y);y+=5.5;doc.setFont('helvetica','normal');sc(C.mid);var gl=doc.splitTextToSize(g.d,cw-8);gl.forEach(function(l){cy(5.5);doc.text(l,ml+6,y);y+=5.5;});y+=3;});}
+  cy(40);doc.setFont('helvetica','bold');doc.setFontSize(9);sc(C.teal);doc.text('RECOMMENDED BOARD ACTIONS',ml,y);y+=7;
+  ['Confirm a named executive accountable for AI governance on this initiative','Commission a Privacy Impact Assessment and AI inventory audit before go-live','Add AI risk as a standing agenda item at the next Risk and Audit Committee meeting','Ensure ADM transparency disclosure process is in place before 10 December 2026','Request legal and regulatory confirmation of all framework obligations','Confirm board has access to AI governance expertise — consider AIGP-certified advisor'].forEach(function(a,i){cy(10);sf(C.navyMid);doc.rect(ml,y-3.5,3.5,5,'F');doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.navy);var al=doc.splitTextToSize((i+1)+'. '+a,cw-8);al.forEach(function(l){cy(5.5);doc.text(l,ml+6,y);y+=5.5;});y+=2;});
+  cy(10);y+=4;sd(C.border);doc.line(ml,y,W-ml,y);y+=6;doc.setFont('helvetica','italic');doc.setFontSize(8);sc(C.mid);doc.text('Prepared using AIGovNav · aigovnav.com.au · Governance prompt only — not legal advice.',ml,y);ftr();
+
+  // SECTION 5 — ACTION PLAN
+  doc.addPage();pg++;hdr();sh('Action Plan',5);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.mid);doc.text('Each governance gap translated into specific actions, owners, and timeframes. Work through High-priority items first.',ml,y);y+=10;
+  doc.autoTable({startY:y,margin:{left:ml,right:20},head:[['Priority','Gap','Action','Owner','Timeframe']],body:ST.gaps.reduce(function(rows,g){g.actions.forEach(function(a,ai){rows.push([ai===0?g.lb.toUpperCase():'',ai===0?g.t:'',a.step,a.owner,a.time]);});return rows;},[]),headStyles:{fillColor:C.navy,textColor:[255,255,255],fontSize:8.5,fontStyle:'bold'},bodyStyles:{fontSize:8,textColor:C.navy,lineColor:C.border,lineWidth:0.3,cellPadding:2.5},alternateRowStyles:{fillColor:C.canvas},columnStyles:{0:{cellWidth:15,fontStyle:'bold'},1:{cellWidth:36},2:{cellWidth:66},3:{cellWidth:31},4:{cellWidth:22}},didDrawPage:function(){hdr();}});ftr();
+
+  // SECTION 6 — CHECKLIST
+  doc.addPage();pg++;hdr();sh('Technology Team Checklist',6);
+  [{ph:'Pre-Build',items:['AI use case registered in organisational AI inventory','Sector regulator classification confirmed (TGA / APRA / ASIC as applicable)','Privacy impact assessment initiated','Data minimisation principles applied to model design','Bias and fairness requirements documented','Explainability requirements agreed with stakeholders','ADM obligations assessed — 10 December 2026 deadline']},{ph:'Build and Validation',items:['Validation study planned or completed','Model performance benchmarks defined and tested','Human-in-the-loop review process designed and documented','Data security and access controls confirmed','Incident response plan for AI failure documented']},{ph:'Pre-Deployment',items:['AI governance policy reviewed and signed off by executive and board','Regulatory registrations complete (if required)','Staff training completed','Escalation process documented','Privacy policy updated with ADM disclosures (before 10 December 2026)']},{ph:'Post-Deployment',items:['Model monitoring cadence established','Drift detection and alert thresholds set','Bias audit scheduled (minimum annually)','Annual full review date confirmed','Regulatory change tracking in place']}].forEach(function(cl){cy(14);sf(C.canvas);sd(C.border);doc.rect(ml,y,cw,7,'FD');doc.setFont('helvetica','bold');doc.setFontSize(9);sc(C.navy);doc.text(cl.ph.toUpperCase(),ml+3,y+5);y+=11;cl.items.forEach(function(item){cy(7);sd(C.border);doc.rect(ml+1,y-4,4,4);doc.setFont('helvetica','normal');doc.setFontSize(9);sc(C.navy);var il=doc.splitTextToSize(item,cw-10);il.forEach(function(l,li){doc.text(l,ml+8,y);if(li===0)y+=5;else y+=4.5;});y+=2;});y+=6;});ftr();
+
+  doc.save('AIGovNav-'+ref+'-'+new Date().toISOString().slice(0,10)+'.pdf');
 }
 </script>
 </body>
